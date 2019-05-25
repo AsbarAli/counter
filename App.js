@@ -7,8 +7,10 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Dimensions, View} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
+
+const screen = Dimensions.get('window');
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,9 +22,21 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+    const timer = {id: 1,
+      name: 'DF',
+      restTimeMinutes: 3,
+      restTimeSeconds: 3,
+      activeTimeMinutes: 0.11,
+      activeTimeSeconds: 5,
+      sets: 2,
+      createdDate: null,
+      modifiedDate: null};
+
     return (
       <View style={styles.container}>
-        <CustomCounterTimerContainer />
+        <CustomCounterTimerContainer
+          timer={timer}
+        />
       </View>
     );
   }
@@ -30,10 +44,17 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    height: 320,
+    marginTop: 32,
+    paddingHorizontal: 16,
+    // paddingLeft: 12,
+    paddingBottom: 50,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: screen.width - 13,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   welcome: {
     fontSize: 20,

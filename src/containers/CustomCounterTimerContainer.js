@@ -2,20 +2,20 @@
 import React from 'react';
 import {
   View,
-  Image,
+  // Image,
   Text,
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
-import PubSub from 'pubsub-js';
+// import PubSub from 'pubsub-js';
 
-import {CrockfitButton, ActivityTimerComponent, TimerSettingsModal} from '@crock:shared/components';
-import type {TimerModel} from '@crock:storage/realm/models/Timer';
+// import ActivityTimerComponent from '@RNCounterTimer:shared/components/ActivityTimerComponent';
+import ActivityTimerComponent from '../shared/components/ActivityTimerComponent';
+// import type {TimerModel} from '@crock:storage/realm/models/Timer';
 
-import {PUB_SUB_TOPICS, ACTIVE} from '@crock:shared/constants';
+// import {PUB_SUB_TOPICS, ACTIVE} from '@crock:shared/constants';
 import {
   SKIP,
   START,
@@ -23,7 +23,7 @@ import {
   PAUSE,
   RESET,
   COMPLETED,
-} from '@RNCounterTimer:Shared';
+} from '@RNCounterTimer:shared/strings';
 import styles, {
   containerStyleProps,
   gradientColorsRepsDefault,
@@ -34,33 +34,34 @@ import styles, {
   progressColorRest,
   progressColorTimer,
 } from './CustomCounterTimer.styles';
-const soundPlayer = require('react-native-sound');
-import {timerDataActions} from '@crock:app/storage/realm';
+import PrimaryButtonComponent from '../shared/components/primaryButton.component';
+// const soundPlayer = require('react-native-sound');
+// import {timerDataActions} from '@crock:app/storage/realm';
 
 type CustomCounterTimerProps = {
   timer: TimerModel,
 };
 type CustomCounterTimerState = {
   currentRunningSet: number,
-  status: ACTIVITY_STATUS.NOT_STARTED | ACTIVITY_STATUS.IN_PROGRESS | ACTIVITY_STATUS.RESTING | ACTIVITY_STATUS.COMPLETED,
+  // status: ACTIVITY_STATUS.NOT_STARTED | ACTIVITY_STATUS.IN_PROGRESS | ACTIVITY_STATUS.RESTING | ACTIVITY_STATUS.COMPLETED,
   timerRunning: bool,
   restTimerRunning: bool,
 };
 
-const mutedIcon = require('@crock:assets/icons/cf_volume_off_black_24.png');
-const muteIcon = require('@crock:assets/icons/cf_volume_on_black_24.png');
-const settingsIcon = require('@crock:assets/icons/cf_settings_black_24.png');
+// const mutedIcon = require('@crock:assets/icons/cf_volume_off_black_24.png');
+// const muteIcon = require('@crock:assets/icons/cf_volume_on_black_24.png');
+// const settingsIcon = require('@crock:assets/icons/cf_settings_black_24.png');
 const ACTIVITY_STATUS = {
   NOT_STARTED: 10001,
   IN_PROGRESS: 10002,
   REST: 10003,
   COMPLETED: 10004,
 };
-// const PATTERNS = {
-//   numeric: /^\d+$/,
-//   dropsetNumeric: /^(\d)+(\/\d+)+$/,
-// };
-let callDetectionSubscriber = null;
+const PATTERNS = {
+  numeric: /^\d+$/,
+  dropsetNumeric: /^(\d)+(\/\d+)+$/,
+};
+const callDetectionSubscriber = null;
 
 class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimerProps, CustomCounterTimerState> {
   static defaultProps: any
@@ -81,19 +82,19 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   componentWillMount() {
-    callDetectionSubscriber = PubSub.subscribe(PUB_SUB_TOPICS.CALL_DETECT, this.callDetectSubscriber);
+    // callDetectionSubscriber = PubSub.subscribe(PUB_SUB_TOPICS.CALL_DETECT, this.callDetectSubscriber);
 
-    this.restTone = new soundPlayer('beep03rest.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
-      if (error) {
-        // alert(JSON.stringify(error));
-      }
-    });
+    // this.restTone = new soundPlayer('beep03rest.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
+    //   if (error) {
+    //     // alert(JSON.stringify(error));
+    //   }
+    // });
 
-    this.activeTone = new soundPlayer('beep01active.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
-      if (error) {
-        // alert(JSON.stringify(error));
-      }
-    });
+    // this.activeTone = new soundPlayer('beep01active.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
+    //   if (error) {
+    //     // alert(JSON.stringify(error));
+    //   }
+    // });
 
     const {timer} = this.props;
     if (timer) {
@@ -107,30 +108,30 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         sets: timer.sets,
       };
       this.setState({
-        maxTime: timerData,
+        // maxTime: timerData,
         name: timerData.name,
       });
     }
   }
 
   componentWillUnmount() {
-    PubSub.unsubscribe(callDetectionSubscriber);
-    PubSub.unsubscribe(this.callDetectSubscriber);
+    // PubSub.unsubscribe(callDetectionSubscriber);
+    // PubSub.unsubscribe(this.callDetectSubscriber);
   }
 
   restTone = null;
   activeTone = null;
 
-  _timerRef: ActivityTimerComponent;
-  _restTimerRef: ActivityTimerComponent;
+  // _timerRef: ActivityTimerComponent;
+  // _restTimerRef: ActivityTimerComponent;
 
-  callDetectSubscriber = () => {
-    if (this.state.status === ACTIVITY_STATUS.IN_PROGRESS) {
-      this.handlePauseTimerPressed();
-    } else if (this.state.status === ACTIVITY_STATUS.REST) {
-      this.handlePauseRestPressed();
-    }
-  }
+  // callDetectSubscriber = () => {
+  //   if (this.state.status === ACTIVITY_STATUS.IN_PROGRESS) {
+  //     this.handlePauseTimerPressed();
+  //   } else if (this.state.status === ACTIVITY_STATUS.REST) {
+  //     this.handlePauseRestPressed();
+  //   }
+  // }
 
   handleTimeRef = (ref) => {
     this._timerRef = ref;
@@ -371,7 +372,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   handleSettingModal = () => {
     this.setState({
-      isSettingsModalVisible: true,
+      // isSettingsModalVisible: true,
       timerRunning: false,
       restTimerRunning: false,
     });
@@ -379,43 +380,43 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   handleCloseModal = (closeStatus) => {
     this.setState({
-      isSettingsModalVisible: closeStatus,
+      // isSettingsModalVisible: closeStatus,
     });
   }
 
   handleSaveTimerDetails = (settingData) => {
-    const date = new Date();
-    const timer = {
-      id: settingData.id,
-      name: settingData.timerName,
-      restTimeMinutes: settingData.restTimeMinutes,
-      restTimeSeconds: settingData.restTimeSeconds,
-      activeTimeMinutes: settingData.activeTimeMinutes,
-      activeTimeSeconds: settingData.activeTimeSeconds,
-      sets: settingData.sets,
-      modifiedDate: date,
-    };
-    timerDataActions.update(timer);
-    this.handleResetPressed();
-    this.setState({
-      maxTime: settingData,
-      name: settingData.timerName,
-      status: ACTIVITY_STATUS.NOT_STARTED,
-    });
+    // const date = new Date();
+    // const timer = {
+    //   id: settingData.id,
+    //   name: settingData.timerName,
+    //   restTimeMinutes: settingData.restTimeMinutes,
+    //   restTimeSeconds: settingData.restTimeSeconds,
+    //   activeTimeMinutes: settingData.activeTimeMinutes,
+    //   activeTimeSeconds: settingData.activeTimeSeconds,
+    //   sets: settingData.sets,
+    //   modifiedDate: date,
+    // };
+    // timerDataActions.update(timer);
+    // this.handleResetPressed();
+    // this.setState({
+    //   maxTime: settingData,
+    //   name: settingData.timerName,
+    //   status: ACTIVITY_STATUS.NOT_STARTED,
+    // });
   }
 
   renderSettingsModal = () => {
-    return (
-      this.state.isSettingsModalVisible &&
-      <TimerSettingsModal
-        isVisible={this.state.isSettingsModalVisible}
-        maxTime={this.state.maxTime}
-        name={this.state.name}
-        onRequestClose={this.handleCloseModal}
-        onSaveTimerDetails={this.handleSaveTimerDetails}
-        timer={this.state.timer}
-      />
-    );
+    // return (
+    //   this.state.isSettingsModalVisible &&
+    //   <TimerSettingsModal
+    //     isVisible={this.state.isSettingsModalVisible}
+    //     maxTime={this.state.maxTime}
+    //     name={this.state.name}
+    //     onRequestClose={this.handleCloseModal}
+    //     onSaveTimerDetails={this.handleSaveTimerDetails}
+    //     timer={this.state.timer}
+    //   />
+    // );
   }
 
   renderActivityTopItems = (): Array<ReactElement<any>> => {
@@ -426,7 +427,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       statusText = REST;
       statusTextStyle = styles.resetTextStyle;
     } else if (status == ACTIVITY_STATUS.IN_PROGRESS) {
-      statusText = ACTIVE;
+      // statusText = ACTIVE;
       statusTextStyle = styles.activeTextStyle;
     } else {
       statusText = this.state.name.toUpperCase();
@@ -439,10 +440,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
           onPress={this.handleSettingModal}
           style={styles.settingsIconWrapper}
         >
-          <Image
+          {/* <Image
             source={settingsIcon}
             style={styles.settingStyle}
-          />
+          /> */}
+          <Text>sss</Text>
         </TouchableOpacity>
 
         <Text style={[styles.activityStatusText, statusTextStyle]}>
@@ -454,10 +456,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
           onPress={this.handleMuteToggled}
           style={styles.muteIconWrapper}
         >
-          <Image
+          <Text>sss</Text>
+          {/* <Image
             source={isMuted ? mutedIcon : muteIcon}
             style={styles.settingStyle}
-          />
+          /> */}
         </TouchableOpacity>
       </View>
     );
@@ -465,7 +468,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderPrimaryActionButton = (): ReactElement<any> => {
     const {status, restTimerRunning, timerRunning} = this.state;
-    // const {lastActivityOfSession} = this.props;
+    const {lastActivityOfSession} = this.props;
     let buttonText = null;
     let buttonType = null;
     let onButtonPress = null;
@@ -474,25 +477,25 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
       buttonText = START;
-      buttonType = CrockfitButton.TYPE.PRIMARY;
+      buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = this.handleStartTimerPressed;
 
       break;
     case ACTIVITY_STATUS.IN_PROGRESS:
       buttonText = timerRunning ? PAUSE : START;
-      buttonType = timerRunning ? CrockfitButton.TYPE.SECONDARY : CrockfitButton.TYPE.PRIMARY;
+      buttonType = timerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = timerRunning ? this.handlePauseTimerPressed : this.handleContinueTimerPressed;
 
       break;
     case ACTIVITY_STATUS.REST:
       buttonText = restTimerRunning ? PAUSE : START;
-      buttonType = restTimerRunning ? CrockfitButton.TYPE.SECONDARY : CrockfitButton.TYPE.PRIMARY;
+      buttonType = restTimerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = restTimerRunning ? this.handlePauseRestPressed : this.handleStartRestPressed;
 
       break;
     case ACTIVITY_STATUS.COMPLETED:
       buttonText = COMPLETED;
-      buttonType = CrockfitButton.TYPE.PRIMARY;
+      buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = this.handleActivityCompleted;
       isCompleted = true;
 
@@ -500,7 +503,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
 
     return (
-      <CrockfitButton
+      <PrimaryButtonComponent
         disabled={isCompleted}
         onPress={onButtonPress}
         text={buttonText}
@@ -685,7 +688,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   render() {
-    // const controls = this.renderActivityControls();
+    const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
     const containerBorderStyle = this.resolveContainerBorderStyle();
     // const settingsModal = this.renderSettingsModal();
@@ -697,7 +700,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       >
         {/* {settingsModal} */}
         {content}
-        {/* {controls} */}
+        {controls}
       </View>
     );
   }
@@ -720,10 +723,4 @@ CustomCounterTimerContainer.propTypes = {
 CustomCounterTimerContainer.defaultProps = {
 };
 
-const mapStateToProps = (state: any, ownProps: CustomCounterTimerProps) => {
-  return {
-    // TODO: Map additional props here
-  };
-};
-
-export default connect(mapStateToProps)(CustomCounterTimerContainer);
+export default CustomCounterTimerContainer;
