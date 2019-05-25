@@ -7,20 +7,28 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Dimensions, View} from 'react-native';
+import {StyleSheet, Dimensions, View, TouchableOpacity, Text} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
 
 const screen = Dimensions.get('window');
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 type Props = {};
 export default class App extends Component<Props> {
+  renderUpperElement = () => {
+    return (
+      <TouchableOpacity
+        hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
+        onPress={this.handleSettingModal}
+        style={styles.settingsIconWrapper}
+      >
+        {/* <Image
+            source={settingsIcon}
+            style={styles.settingStyle}
+          /> */}
+        <Text>sss</Text>
+      </TouchableOpacity>
+    );
+  }
   render() {
     const timer = {id: 1,
       name: 'DF',
@@ -35,6 +43,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
+          leftUpperElement={this.renderUpperElement()}
           timer={timer}
         />
       </View>
@@ -65,5 +74,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  settingsIconWrapper: {
+    // position: 'absolute',
+    // left: 20,
   },
 });

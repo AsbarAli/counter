@@ -57,12 +57,6 @@ const ACTIVITY_STATUS = {
   REST: 10003,
   COMPLETED: 10004,
 };
-const PATTERNS = {
-  numeric: /^\d+$/,
-  dropsetNumeric: /^(\d)+(\/\d+)+$/,
-};
-const callDetectionSubscriber = null;
-
 class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimerProps, CustomCounterTimerState> {
   static defaultProps: any
 
@@ -82,20 +76,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   componentWillMount() {
-    // callDetectionSubscriber = PubSub.subscribe(PUB_SUB_TOPICS.CALL_DETECT, this.callDetectSubscriber);
-
-    // this.restTone = new soundPlayer('beep03rest.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
-    //   if (error) {
-    //     // alert(JSON.stringify(error));
-    //   }
-    // });
-
-    // this.activeTone = new soundPlayer('beep01active.mp3', soundPlayer.MAIN_BUNDLE, (error) => {
-    //   if (error) {
-    //     // alert(JSON.stringify(error));
-    //   }
-    // });
-
     const {timer} = this.props;
     if (timer) {
       const timerData = {
@@ -115,8 +95,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   componentWillUnmount() {
-    // PubSub.unsubscribe(callDetectionSubscriber);
-    // PubSub.unsubscribe(this.callDetectSubscriber);
   }
 
   restTone = null;
@@ -124,14 +102,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   // _timerRef: ActivityTimerComponent;
   // _restTimerRef: ActivityTimerComponent;
-
-  // callDetectSubscriber = () => {
-  //   if (this.state.status === ACTIVITY_STATUS.IN_PROGRESS) {
-  //     this.handlePauseTimerPressed();
-  //   } else if (this.state.status === ACTIVITY_STATUS.REST) {
-  //     this.handlePauseRestPressed();
-  //   }
-  // }
 
   handleTimeRef = (ref) => {
     this._timerRef = ref;
@@ -372,55 +342,13 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   handleSettingModal = () => {
     this.setState({
-      // isSettingsModalVisible: true,
       timerRunning: false,
       restTimerRunning: false,
     });
   }
 
-  handleCloseModal = (closeStatus) => {
-    this.setState({
-      // isSettingsModalVisible: closeStatus,
-    });
-  }
-
-  handleSaveTimerDetails = (settingData) => {
-    // const date = new Date();
-    // const timer = {
-    //   id: settingData.id,
-    //   name: settingData.timerName,
-    //   restTimeMinutes: settingData.restTimeMinutes,
-    //   restTimeSeconds: settingData.restTimeSeconds,
-    //   activeTimeMinutes: settingData.activeTimeMinutes,
-    //   activeTimeSeconds: settingData.activeTimeSeconds,
-    //   sets: settingData.sets,
-    //   modifiedDate: date,
-    // };
-    // timerDataActions.update(timer);
-    // this.handleResetPressed();
-    // this.setState({
-    //   maxTime: settingData,
-    //   name: settingData.timerName,
-    //   status: ACTIVITY_STATUS.NOT_STARTED,
-    // });
-  }
-
-  renderSettingsModal = () => {
-    // return (
-    //   this.state.isSettingsModalVisible &&
-    //   <TimerSettingsModal
-    //     isVisible={this.state.isSettingsModalVisible}
-    //     maxTime={this.state.maxTime}
-    //     name={this.state.name}
-    //     onRequestClose={this.handleCloseModal}
-    //     onSaveTimerDetails={this.handleSaveTimerDetails}
-    //     timer={this.state.timer}
-    //   />
-    // );
-  }
-
   renderActivityTopItems = (): Array<ReactElement<any>> => {
-    const {isMuted, status} = this.state;
+    const {status} = this.state;
     let statusText = this.state.name.toUpperCase();
     let statusTextStyle = styles.defaultStatusTextStyle;
     if (status == ACTIVITY_STATUS.REST) {
@@ -435,17 +363,9 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     return (
       <View style={styles.topItemsWrapper}>
-        <TouchableOpacity
-          hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
-          onPress={this.handleSettingModal}
-          style={styles.settingsIconWrapper}
-        >
-          {/* <Image
-            source={settingsIcon}
-            style={styles.settingStyle}
-          /> */}
-          <Text>sss</Text>
-        </TouchableOpacity>
+        <View style={styles.settingsIconWrapper}>
+          {this.props.leftUpperElement}
+        </View>
 
         <Text style={[styles.activityStatusText, statusTextStyle]}>
           {statusText}
@@ -468,7 +388,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderPrimaryActionButton = (): ReactElement<any> => {
     const {status, restTimerRunning, timerRunning} = this.state;
-    const {lastActivityOfSession} = this.props;
     let buttonText = null;
     let buttonType = null;
     let onButtonPress = null;
@@ -691,14 +610,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
     const containerBorderStyle = this.resolveContainerBorderStyle();
-    // const settingsModal = this.renderSettingsModal();
 
     return (
       <View
         {...containerStyleProps}
         style={[styles.container, containerBorderStyle]}
       >
-        {/* {settingsModal} */}
         {content}
         {controls}
       </View>
@@ -707,6 +624,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 }
 
 CustomCounterTimerContainer.propTypes = {
+  leftUpperElement: PropTypes.element,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -715,12 +633,13 @@ CustomCounterTimerContainer.propTypes = {
     activeTimeMinutes: PropTypes.number.isRequired,
     activeTimeSeconds: PropTypes.number.isRequired,
     sets: PropTypes.number.isRequired,
-    createdDate: PropTypes.any.isRequired,
-    modifiedDate: PropTypes.any.isRequired,
+    // createdDate: PropTypes.any.isRequired,
+    // modifiedDate: PropTypes.any.isRequired,
   }).isRequired,
 };
 
 CustomCounterTimerContainer.defaultProps = {
+  leftUpperElement: null,
 };
 
 export default CustomCounterTimerContainer;
