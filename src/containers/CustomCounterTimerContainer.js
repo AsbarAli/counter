@@ -5,6 +5,7 @@ import {
   // Image,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
@@ -191,22 +192,31 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   resolveMovingForwardFromRest = (): void => {
+    // TODO:
     if (this.moreSetsAvaileble()) {
+      // TODO:
+      // Alert.alert('if (this.moreSetsAvaileble()) {');
       // There are more sets to go. Moving on to next set
       this.activeSoundPlay();
       this.moveForwardToNextSet();
     } else {
+      // TODO:
+      // Alert.alert('} else {');
       // This is the final rest of the activity. Let's wrap this up
       this.handleActivityCompleted();
     }
   }
 
   handleMuteToggled = (): void => {
-    const {onMuteToggle} = this.props;
+    const {onMuteToggle, onUnMuteToggle} = this.props;
     const {isMuted} = this.state;
 
-    if (onMuteToggle) {
+    if (!isMuted && onMuteToggle) {
       onMuteToggle();
+    }
+
+    if (isMuted && onUnMuteToggle) {
+      onUnMuteToggle();
     }
 
     this.setState({
@@ -689,6 +699,7 @@ CustomCounterTimerContainer.propTypes = {
   onSkipPressed: PropTypes.func,
   onStartRestPressed: PropTypes.func,
   onStartTimerPressed: PropTypes.func,
+  onUnMuteToggle: PropTypes.func,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -714,6 +725,7 @@ CustomCounterTimerContainer.defaultProps = {
   onRestTimeEnd: null,
   onActivityCompleted: null,
   onSkipPressed: null,
+  onUnMuteToggle: null,
 };
 
 export default CustomCounterTimerContainer;

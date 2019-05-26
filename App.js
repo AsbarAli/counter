@@ -76,6 +76,10 @@ export default class App extends Component<Props> {
     Alert.alert('handleSkipPressed');
   }
 
+  handleUnMuteTogglePressed = () => {
+    Alert.alert('handleUnMuteTogglePressed');
+  }
+
   render() {
     const timer = {id: 1,
       name: 'DF',
@@ -102,6 +106,7 @@ export default class App extends Component<Props> {
           onSkipPressed={this.handleSkipPressed}
           onStartRestPressed={this.handleStartRestPressed}
           onStartTimerPressed={this.handleStartTimePressed}
+          onUnMuteToggle={this.handleUnMuteTogglePressed}
           timer={timer}
         />
       </View>
