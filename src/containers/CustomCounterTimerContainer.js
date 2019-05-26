@@ -191,23 +191,45 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   resolveMovingForwardFromRest = (): void => {
+    // TODO:
     if (this.moreSetsAvaileble()) {
+      // TODO:
+      // Alert.alert('if (this.moreSetsAvaileble()) {');
       // There are more sets to go. Moving on to next set
       this.activeSoundPlay();
       this.moveForwardToNextSet();
     } else {
+      // TODO:
+      // Alert.alert('} else {');
       // This is the final rest of the activity. Let's wrap this up
       this.handleActivityCompleted();
     }
   }
 
   handleMuteToggled = (): void => {
+    const {onMuteToggle, onUnMuteToggle} = this.props;
+    const {isMuted} = this.state;
+
+    if (!isMuted && onMuteToggle) {
+      onMuteToggle();
+    }
+
+    if (isMuted && onUnMuteToggle) {
+      onUnMuteToggle();
+    }
+
     this.setState({
-      isMuted: !this.state.isMuted,
+      isMuted: !isMuted,
     });
   }
 
   handleResetPressed = (): void => {
+    const {onResetButtonPressed} = this.props;
+
+    if (onResetButtonPressed) {
+      onResetButtonPressed();
+    }
+
     this.resetTimerRef();
     this.setState({
       currentRunningSet: 0,
@@ -218,6 +240,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleStartTimerPressed = (): void => {
+    const {onStartTimerPressed} = this.props;
+    if (onStartTimerPressed) {
+      onStartTimerPressed();
+    }
     this.activeSoundPlay();
     this.setState({
       status: ACTIVITY_STATUS.IN_PROGRESS,
@@ -249,24 +275,47 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handlePauseRestPressed = (): void => {
+    const {onPauseRestPressed} = this.props;
+
+    if (onPauseRestPressed) {
+      onPauseRestPressed();
+    }
+
     this.setState({
       restTimerRunning: false,
     });
   }
 
   handleStartRestPressed = (): void => {
+    const {onStartRestPressed} = this.props;
+
+    if (onStartRestPressed) {
+      onStartRestPressed();
+    }
+
     this.setState({
       restTimerRunning: true,
     });
   }
 
   handlePauseTimerPressed = (): void => {
+    const {onPauseTimerPressed} = this.props;
+
+    if (onPauseTimerPressed) {
+      onPauseTimerPressed();
+    }
+
     this.setState({
       timerRunning: false,
     });
   }
 
   handleContinueTimerPressed = (): void => {
+    const {onContinueTimerPressed} = this.props;
+
+    if (onContinueTimerPressed) {
+      onContinueTimerPressed();
+    }
     this.setState({
       timerRunning: true,
     });
@@ -284,6 +333,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleActivityCompleted = (): void => {
+    const {onActivityCompleted} = this.props;
+
+    if (onActivityCompleted) {
+      onActivityCompleted();
+    }
+
     const partialState = {
       restTimerRunning: false,
       timerRunning: false,
@@ -294,6 +349,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   handleSkipPressed = (): void => {
     const {status} = this.state;
+    const {onSkipPressed} = this.props;
+
+    if (onSkipPressed) {
+      onSkipPressed();
+    }
 
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
@@ -309,6 +369,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleRestTimeEnd = (): void => {
+    const {onRestTimeEnd} = this.props;
+
+    if (onRestTimeEnd) {
+      onRestTimeEnd();
+    }
+
     this.restSoundPlay();
     this.resolveMovingForwardFromRest();
   }
@@ -340,13 +406,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
   }
 
-  handleSettingModal = () => {
-    this.setState({
-      timerRunning: false,
-      restTimerRunning: false,
-    });
-  }
-
   renderActivityTopItems = (): Array<ReactElement<any>> => {
     const {status} = this.state;
     let statusText = this.state.name.toUpperCase();
@@ -370,6 +429,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         <Text style={[styles.activityStatusText, statusTextStyle]}>
           {statusText}
         </Text>
+
+        <View style={[styles.activityStatusText, statusTextStyle]}>
+          {this.props.middleUpperElement}
+        </View>
 
         <TouchableOpacity
           hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
@@ -495,6 +558,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
+    const {progressColorActive, progressColorRestTime} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -502,11 +566,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
-      progressColor = progressColorTimer;
+      progressColor = progressColorActive;
 
       break;
     case ACTIVITY_STATUS.REST:
-      progressColor = progressColorRest;
+      progressColor = progressColorRestTime;
 
       break;
     }
@@ -528,17 +592,18 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
+    const {progressColorActive, progressColorRestTime} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
     const restTime = this.getTimerDuration(restTimeMinutes, restTimeSeconds);
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
-      progressColor = progressColorTimer;
+      progressColor = progressColorActive;
 
       break;
     case ACTIVITY_STATUS.REST:
-      progressColor = progressColorRest;
+      progressColor = progressColorRestTime;
 
       break;
     }
@@ -567,6 +632,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderCounterContent = (): ReactElement<any> => {
     const {status, restTimerRunning} = this.state;
+    const {gradientColorsRepsInactive, gradientColorsRepsActive, gradientColorsRestActive, gradientColorsRestInactive} = this.props;
     let counter = null;
     let gradientColors = gradientColorsRepsDefault;
     let borderStyle = {
@@ -624,7 +690,24 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 }
 
 CustomCounterTimerContainer.propTypes = {
+  gradientColorsRepsActive: PropTypes.array,
+  gradientColorsRepsInactive: PropTypes.array,
+  gradientColorsRestActive: PropTypes.array,
+  gradientColorsRestInactive: PropTypes.array,
   leftUpperElement: PropTypes.element,
+  onActivityCompleted: PropTypes.func,
+  onContinueTimerPressed: PropTypes.func,
+  onMuteToggle: PropTypes.func,
+  onPauseRestPressed: PropTypes.func,
+  onPauseTimerPressed: PropTypes.func,
+  onResetButtonPressed: PropTypes.func,
+  onRestTimeEnd: PropTypes.func,
+  onSkipPressed: PropTypes.func,
+  onStartRestPressed: PropTypes.func,
+  onStartTimerPressed: PropTypes.func,
+  onUnMuteToggle: PropTypes.func,
+  progressColorActive: PropTypes.string,
+  progressColorRestTime: PropTypes.string,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -640,6 +723,23 @@ CustomCounterTimerContainer.propTypes = {
 
 CustomCounterTimerContainer.defaultProps = {
   leftUpperElement: null,
+  onMuteToggle: null,
+  onPauseTimerPressed: null,
+  onStartTimerPressed: null,
+  onResetButtonPressed: null,
+  onStartRestPressed: null,
+  onPauseRestPressed: null,
+  onContinueTimerPressed: null,
+  onRestTimeEnd: null,
+  onActivityCompleted: null,
+  onSkipPressed: null,
+  onUnMuteToggle: null,
+  progressColorRestTime: progressColorRest,
+  progressColorActive: progressColorTimer,
+  gradientColorsRepsInactive: gradientColorsRepsInactive,
+  gradientColorsRepsActive: gradientColorsRepsActive,
+  gradientColorsRestActive: gradientColorsRestActive,
+  gradientColorsRestInactive: gradientColorsRestInactive,
 };
 
 export default CustomCounterTimerContainer;
