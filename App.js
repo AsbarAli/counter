@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, Dimensions, Alert, View, TouchableOpacity, Text} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
 
 const screen = Dimensions.get('window');
@@ -29,13 +29,60 @@ export default class App extends Component<Props> {
       </TouchableOpacity>
     );
   }
+
+  renderMiddleElement = () => {
+    return (
+      <Text>Something</Text>
+    );
+  }
+
+  handleMuteToggle = () => {
+    Alert.alert('mute');
+  }
+
+  handleStartTimePressed = () => {
+    Alert.alert('start');
+  }
+
+  handleResetButtonPressed = () => {
+    Alert.alert('handleResetButtonPressed');
+  }
+
+  handleStartRestPressed = () => {
+    Alert.alert('handleStartRestPressed');
+  }
+
+  handlePauseRestPressed = () => {
+    Alert.alert('handlePauseRestPressed');
+  }
+
+  handleContinueTimerPressed = () => {
+    Alert.alert('handleContinueTimerPressed');
+  }
+
+  handleRestTimeEnd = () => {
+    Alert.alert('handleRestTimeEnd');
+  }
+
+  handleTimerPressed = () => {
+    Alert.alert('handleTimerPressed');
+  }
+
+  handleActivityCompleted = () => {
+    Alert.alert('handleActivityCompleted');
+  }
+
+  handleSkipPressed = () => {
+    Alert.alert('handleSkipPressed');
+  }
+
   render() {
     const timer = {id: 1,
       name: 'DF',
-      restTimeMinutes: 3,
-      restTimeSeconds: 3,
+      restTimeMinutes: 0,
+      restTimeSeconds: 0.3,
       activeTimeMinutes: 0.11,
-      activeTimeSeconds: 5,
+      activeTimeSeconds: 0.02,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -44,6 +91,17 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <CustomCounterTimerContainer
           leftUpperElement={this.renderUpperElement()}
+          middleUpperElement={this.renderMiddleElement()}
+          onActivityCompleted={this.handleActivityCompleted}
+          onContinueTimerPressed={this.handleContinueTimerPressed}
+          onMuteToggle={this.handleMuteToggle}
+          onPauseRestPressed={this.handlePauseRestPressed}
+          onPauseTimerPressed={this.handleTimerPressed}
+          onResetButtonPressed={this.handleResetButtonPressed}
+          onRestTimeEnd={this.handleRestTimeEnd}
+          onSkipPressed={this.handleSkipPressed}
+          onStartRestPressed={this.handleStartRestPressed}
+          onStartTimerPressed={this.handleStartTimePressed}
           timer={timer}
         />
       </View>
@@ -64,16 +122,6 @@ const styles = StyleSheet.create({
     width: screen.width - 13,
     marginLeft: 'auto',
     marginRight: 'auto',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
   settingsIconWrapper: {
     // position: 'absolute',

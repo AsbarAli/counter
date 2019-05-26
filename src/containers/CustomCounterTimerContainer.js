@@ -202,12 +202,25 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleMuteToggled = (): void => {
+    const {onMuteToggle} = this.props;
+    const {isMuted} = this.state;
+
+    if (onMuteToggle) {
+      onMuteToggle();
+    }
+
     this.setState({
-      isMuted: !this.state.isMuted,
+      isMuted: !isMuted,
     });
   }
 
   handleResetPressed = (): void => {
+    const {onResetButtonPressed} = this.props;
+
+    if (onResetButtonPressed) {
+      onResetButtonPressed();
+    }
+
     this.resetTimerRef();
     this.setState({
       currentRunningSet: 0,
@@ -218,6 +231,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleStartTimerPressed = (): void => {
+    const {onStartTimerPressed} = this.props;
+    if (onStartTimerPressed) {
+      onStartTimerPressed();
+    }
     this.activeSoundPlay();
     this.setState({
       status: ACTIVITY_STATUS.IN_PROGRESS,
@@ -249,24 +266,47 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handlePauseRestPressed = (): void => {
+    const {onPauseRestPressed} = this.props;
+
+    if (onPauseRestPressed) {
+      onPauseRestPressed();
+    }
+
     this.setState({
       restTimerRunning: false,
     });
   }
 
   handleStartRestPressed = (): void => {
+    const {onStartRestPressed} = this.props;
+
+    if (onStartRestPressed) {
+      onStartRestPressed();
+    }
+
     this.setState({
       restTimerRunning: true,
     });
   }
 
   handlePauseTimerPressed = (): void => {
+    const {onPauseTimerPressed} = this.props;
+
+    if (onPauseTimerPressed) {
+      onPauseTimerPressed();
+    }
+
     this.setState({
       timerRunning: false,
     });
   }
 
   handleContinueTimerPressed = (): void => {
+    const {onContinueTimerPressed} = this.props;
+
+    if (onContinueTimerPressed) {
+      onContinueTimerPressed();
+    }
     this.setState({
       timerRunning: true,
     });
@@ -284,6 +324,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleActivityCompleted = (): void => {
+    const {onActivityCompleted} = this.props;
+
+    if (onActivityCompleted) {
+      onActivityCompleted();
+    }
+
     const partialState = {
       restTimerRunning: false,
       timerRunning: false,
@@ -294,6 +340,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   handleSkipPressed = (): void => {
     const {status} = this.state;
+    const {onSkipPressed} = this.props;
+
+    if (onSkipPressed) {
+      onSkipPressed();
+    }
 
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
@@ -309,6 +360,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleRestTimeEnd = (): void => {
+    const {onRestTimeEnd} = this.props;
+
+    if (onRestTimeEnd) {
+      onRestTimeEnd();
+    }
+
     this.restSoundPlay();
     this.resolveMovingForwardFromRest();
   }
@@ -340,13 +397,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
   }
 
-  handleSettingModal = () => {
-    this.setState({
-      timerRunning: false,
-      restTimerRunning: false,
-    });
-  }
-
   renderActivityTopItems = (): Array<ReactElement<any>> => {
     const {status} = this.state;
     let statusText = this.state.name.toUpperCase();
@@ -370,6 +420,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         <Text style={[styles.activityStatusText, statusTextStyle]}>
           {statusText}
         </Text>
+
+        <View style={[styles.activityStatusText, statusTextStyle]}>
+          {this.props.middleUpperElement}
+        </View>
 
         <TouchableOpacity
           hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
@@ -625,6 +679,16 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
 CustomCounterTimerContainer.propTypes = {
   leftUpperElement: PropTypes.element,
+  onActivityCompleted: PropTypes.func,
+  onContinueTimerPressed: PropTypes.func,
+  onMuteToggle: PropTypes.func,
+  onPauseRestPressed: PropTypes.func,
+  onPauseTimerPressed: PropTypes.func,
+  onResetButtonPressed: PropTypes.func,
+  onRestTimeEnd: PropTypes.func,
+  onSkipPressed: PropTypes.func,
+  onStartRestPressed: PropTypes.func,
+  onStartTimerPressed: PropTypes.func,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -640,6 +704,16 @@ CustomCounterTimerContainer.propTypes = {
 
 CustomCounterTimerContainer.defaultProps = {
   leftUpperElement: null,
+  onMuteToggle: null,
+  onPauseTimerPressed: null,
+  onStartTimerPressed: null,
+  onResetButtonPressed: null,
+  onStartRestPressed: null,
+  onPauseRestPressed: null,
+  onContinueTimerPressed: null,
+  onRestTimeEnd: null,
+  onActivityCompleted: null,
+  onSkipPressed: null,
 };
 
 export default CustomCounterTimerContainer;
