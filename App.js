@@ -94,19 +94,22 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
+          // gradientColorsRepsActive={['red', 'blue']}
           leftUpperElement={this.renderUpperElement()}
+          // onActivityCompleted={this.handleActivityCompleted}
+          // onContinueTimerPressed={this.handleContinueTimerPressed}
+          // onMuteToggle={this.handleMuteToggle}
+          // onPauseRestPressed={this.handlePauseRestPressed}
+          // onPauseTimerPressed={this.handleTimerPressed}
+          // onResetButtonPressed={this.handleResetButtonPressed}
+          // onRestTimeEnd={this.handleRestTimeEnd}
+          // onSkipPressed={this.handleSkipPressed}
+          // onStartRestPressed={this.handleStartRestPressed}
+          // onStartTimerPressed={this.handleStartTimePressed}
+          // onUnMuteToggle={this.handleUnMuteTogglePressed}
+          // progressColorActive="red"
+          // progressColorRestTime="blue"
           middleUpperElement={this.renderMiddleElement()}
-          onActivityCompleted={this.handleActivityCompleted}
-          onContinueTimerPressed={this.handleContinueTimerPressed}
-          onMuteToggle={this.handleMuteToggle}
-          onPauseRestPressed={this.handlePauseRestPressed}
-          onPauseTimerPressed={this.handleTimerPressed}
-          onResetButtonPressed={this.handleResetButtonPressed}
-          onRestTimeEnd={this.handleRestTimeEnd}
-          onSkipPressed={this.handleSkipPressed}
-          onStartRestPressed={this.handleStartRestPressed}
-          onStartTimerPressed={this.handleStartTimePressed}
-          onUnMuteToggle={this.handleUnMuteTogglePressed}
           timer={timer}
         />
       </View>
