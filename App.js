@@ -110,6 +110,10 @@ export default class App extends Component<Props> {
           // progressColorActive="red"
           // progressColorRestTime="blue"
           middleUpperElement={this.renderMiddleElement()}
+          // showCounterTimer={false}
+          // showMaxTime={false}
+          // showSets={false}
+          // setText="SEtss"
           timer={timer}
         />
       </View>

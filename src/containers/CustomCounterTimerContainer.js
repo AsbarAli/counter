@@ -135,12 +135,13 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   formatSetLabel = (): string | null => {
-    const {timer: {sets}} = this.state;
-    const {currentRunningSet} = this.state;
+    const {timer: {sets}, currentRunningSet} = this.state;
+    const {setText} = this.props;
+
     let result = null;
 
     if (sets > 1) {
-      result = `Set ${currentRunningSet + 1}/${sets}`;
+      result = `${setText} ${currentRunningSet + 1}/${sets}`;
     }
 
     return result;
@@ -558,7 +559,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, setText} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -582,6 +583,9 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onCountFinish={this.handleTimeEnd}
         progressColor={progressColor}
         ref={this.handleTimeRef}
+        showCounterTimer={showCounterTimer}
+        showMaxTime={showMaxTime}
+        showSets={showSets}
         started={this.state.timerRunning}
         timeToRun={duration}
         type={ActivityTimerComponent.COUNT_TYPE.COUNTDOWN}
@@ -592,7 +596,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, setText} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -615,6 +619,9 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onCountFinish={this.handleRestTimeEnd}
         progressColor={progressColor}
         ref={this.handleRestTimeRef}
+        showCounterTimer={showCounterTimer}
+        showMaxTime={showMaxTime}
+        showSets={showSets}
         started={this.state.restTimerRunning}
         timeToRun={restTime}
         type={ActivityTimerComponent.COUNT_TYPE.COUNTDOWN}
@@ -708,6 +715,10 @@ CustomCounterTimerContainer.propTypes = {
   onUnMuteToggle: PropTypes.func,
   progressColorActive: PropTypes.string,
   progressColorRestTime: PropTypes.string,
+  setText: PropTypes.string,
+  showCounterTimer: PropTypes.bool,
+  showMaxTime: PropTypes.bool,
+  showSets: PropTypes.bool,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -740,6 +751,10 @@ CustomCounterTimerContainer.defaultProps = {
   gradientColorsRepsActive: gradientColorsRepsActive,
   gradientColorsRestActive: gradientColorsRestActive,
   gradientColorsRestInactive: gradientColorsRestInactive,
+  showCounterTimer: true,
+  showMaxTime: true,
+  showSets: true,
+  setText: 'Set',
 };
 
 export default CustomCounterTimerContainer;

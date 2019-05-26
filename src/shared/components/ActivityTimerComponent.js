@@ -135,10 +135,9 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     this.props.onCountFinish();
   }
 
-  renderLabelsInsideProgressCircle = (): ReactElement<any> => {
+  renderCounterTimer = () => {
     const {type} = this.props;
     const {elapsedTime, totalTime} = this.state;
-    const totalTimeToDisplay = this.formatSecondsValueForDisplay(totalTime);
     let timeToDisplay = {minutes: '--', seconds: '--'};
 
     if (type === ActivityTimerComponent.COUNT_TYPE.COUNTUP) {
@@ -148,34 +147,59 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     }
 
     return (
-      <View style={styles.progressLabelsContainer}>
-        <View style={styles.timeTextWrapper}>
-          <Text style={[styles.totalTimeText, styles.timeMinutesRightAlignText]}>
-            {totalTimeToDisplay.minutes}
-          </Text>
-          <Text style={styles.totalTimeColon}>
-            {`:`}
-          </Text>
-          <Text style={styles.totalTimeText}>
-            {totalTimeToDisplay.seconds}
-          </Text>
-        </View>
-
-        <View style={styles.timeTextWrapper}>
-          <Text style={[styles.elapsedTimeText, styles.timeMinutesRightAlignText]}>
-            {timeToDisplay.minutes}
-          </Text>
-          <Text style={styles.elapsedTimeColon}>
-            {`:`}
-          </Text>
-          <Text style={styles.elapsedTimeText}>
-            {timeToDisplay.seconds}
-          </Text>
-        </View>
-
-        <Text style={styles.labelText}>
-          {this.props.label}
+      <View style={styles.timeTextWrapper}>
+        <Text style={[styles.elapsedTimeText, styles.timeMinutesRightAlignText]}>
+          {timeToDisplay.minutes}
         </Text>
+        <Text style={styles.elapsedTimeColon}>
+          {`:`}
+        </Text>
+        <Text style={styles.elapsedTimeText}>
+          {timeToDisplay.seconds}
+        </Text>
+      </View>
+
+    );
+  }
+
+  renderMaxTime = () => {
+    const {totalTime} = this.state;
+    const totalTimeToDisplay = this.formatSecondsValueForDisplay(totalTime);
+
+    return (
+      <View style={styles.timeTextWrapper}>
+        <Text style={[styles.totalTimeText, styles.timeMinutesRightAlignText]}>
+          {totalTimeToDisplay.minutes}
+        </Text>
+        <Text style={styles.totalTimeColon}>
+          {`:`}
+        </Text>
+        <Text style={styles.totalTimeText}>
+          {totalTimeToDisplay.seconds}
+        </Text>
+      </View>
+    );
+  }
+
+  renderShowSets = () => {
+    return (
+      <Text style={styles.labelText}>
+        {this.props.label}
+      </Text>
+    );
+  }
+
+  renderLabelsInsideProgressCircle = (): ReactElement<any> => {
+    const {showCounterTimer, showMaxTime, showSets} = this.props;
+    const timer = showCounterTimer ? this.renderCounterTimer() : null;
+    const maxTime = showMaxTime ? this.renderMaxTime() : null;
+    const sets = showSets ? this.renderShowSets() : null;
+
+    return (
+      <View style={styles.progressLabelsContainer}>
+        {maxTime}
+        {timer}
+        {sets}
       </View>
     );
   }
@@ -222,6 +246,9 @@ ActivityTimerComponent.propTypes = {
   label: PropTypes.string,
   onCountFinish: PropTypes.func.isRequired,
   progressColor: PropTypes.string,
+  showCounterTimer: PropTypes.bool,
+  showMaxTime: PropTypes.bool,
+  showSets: PropTypes.bool,
   started: PropTypes.bool,
   timeToRun: PropTypes.number.isRequired,
   type: PropTypes.oneOf([ActivityTimerComponent.COUNT_TYPE.COUNTDOWN, ActivityTimerComponent.COUNT_TYPE.COUNTUP]),
@@ -233,6 +260,9 @@ ActivityTimerComponent.defaultProps = {
   progressColor: 'black', // Do we need a default color? Maybe there's a default color to the component itself?
   started: false,
   type: ActivityTimerComponent.COUNT_TYPE.COUNTUP,
+  showCounterTimer: true,
+  showMaxTime: true,
+  showSets: true,
 };
 
 export default ActivityTimerComponent;
