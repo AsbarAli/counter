@@ -205,7 +205,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderContent = (): ReactElement<any> => {
-    const {type} = this.props;
+    const {type, circularProgressAnimate} = this.props;
     const {elapsedTime, totalTime} = this.state;
     const elapsedTimePercentage = elapsedTime / totalTime;
     let progress = 0;
@@ -222,7 +222,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
       <View style={styles.container}>
         <CircularProgress
           {...progressCircleDefaultStyleProps}
-          animated
+          animated={circularProgressAnimate}
           color={color}
           direction="counter-clockwise"
           progress={progress}
@@ -243,6 +243,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
 ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
+  circularProgressAnimate: PropTypes.bool,
   label: PropTypes.string,
   onCountFinish: PropTypes.func.isRequired,
   progressColor: PropTypes.string,
@@ -255,6 +256,7 @@ ActivityTimerComponent.propTypes = {
 };
 
 ActivityTimerComponent.defaultProps = {
+  circularProgressAnimate: true,
   autoStartOnMount: false,
   label: ' ',
   progressColor: 'black', // Do we need a default color? Maybe there's a default color to the component itself?

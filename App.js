@@ -95,7 +95,7 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <CustomCounterTimerContainer
           // gradientColorsRepsActive={['red', 'blue']}
-          leftUpperElement={this.renderUpperElement()}
+          // circularProgressAnimate={false}
           // onActivityCompleted={this.handleActivityCompleted}
           // onContinueTimerPressed={this.handleContinueTimerPressed}
           // onMuteToggle={this.handleMuteToggle}
@@ -109,11 +109,16 @@ export default class App extends Component<Props> {
           // onUnMuteToggle={this.handleUnMuteTogglePressed}
           // progressColorActive="red"
           // progressColorRestTime="blue"
-          middleUpperElement={this.renderMiddleElement()}
+          leftUpperElement={this.renderUpperElement()}
           // showCounterTimer={false}
           // showMaxTime={false}
           // showSets={false}
           // setText="SEtss"
+          middleUpperElement={this.renderMiddleElement()}
+          // showPrimaryActionButton={false}
+          // showResetButton={false}
+          // showSkipButton={false}
+          // showMuteElement={false}
           timer={timer}
         />
       </View>

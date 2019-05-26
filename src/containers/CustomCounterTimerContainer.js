@@ -407,10 +407,30 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
   }
 
+  renderMuteIcon = () => {
+    return (
+      <TouchableOpacity
+        hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
+        onPress={this.handleMuteToggled}
+        style={styles.muteIconWrapper}
+      >
+        <Text>sss</Text>
+        {/* <Image
+            source={isMuted ? mutedIcon : muteIcon}
+            style={styles.settingStyle}
+          /> */}
+      </TouchableOpacity>
+    );
+  }
+
   renderActivityTopItems = (): Array<ReactElement<any>> => {
     const {status} = this.state;
+    const {showMuteElement} = this.props;
+
     let statusText = this.state.name.toUpperCase();
     let statusTextStyle = styles.defaultStatusTextStyle;
+    const muteIcon = showMuteElement ? this.renderMuteIcon() : null;
+
     if (status == ACTIVITY_STATUS.REST) {
       statusText = REST;
       statusTextStyle = styles.resetTextStyle;
@@ -434,18 +454,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         <View style={[styles.activityStatusText, statusTextStyle]}>
           {this.props.middleUpperElement}
         </View>
-
-        <TouchableOpacity
-          hitSlop={{top: 15, bottom: 15, left: 15, right: 15}}
-          onPress={this.handleMuteToggled}
-          style={styles.muteIconWrapper}
-        >
-          <Text>sss</Text>
-          {/* <Image
-            source={isMuted ? mutedIcon : muteIcon}
-            style={styles.settingStyle}
-          /> */}
-        </TouchableOpacity>
+        {muteIcon}
       </View>
     );
   }
@@ -542,11 +551,17 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderActivityControls = (): ReactElement<any> => {
+    const {showSkipButton, showResetButton, showPrimaryActionButton} = this.props;
+
+    const resetButton = showResetButton ? this.renderResetButton() : null;
+    const primaryActionButton = showPrimaryActionButton ? this.renderPrimaryActionButton() : null;
+    const skipButton = showSkipButton ? this.renderSkipButton() : null;
+
     return (
       <View style={styles.controlsWrapper}>
-        {this.renderResetButton()}
-        {this.renderPrimaryActionButton()}
-        {this.renderSkipButton()}
+        {resetButton}
+        {primaryActionButton}
+        {skipButton}
       </View>
     );
   }
@@ -559,7 +574,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, setText} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -578,6 +593,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     return (
       <ActivityTimerComponent
+        circularProgressAnimate={circularProgressAnimate}
         key={timerKey}
         label={this.formatSetLabel()}
         onCountFinish={this.handleTimeEnd}
@@ -596,7 +612,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, setText} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -614,6 +630,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     return (
       <ActivityTimerComponent
+        circularProgressAnimate={circularProgressAnimate}
         key={timerKey}
         label={this.formatSetLabel()}
         onCountFinish={this.handleRestTimeEnd}
@@ -697,6 +714,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 }
 
 CustomCounterTimerContainer.propTypes = {
+  circularProgressAnimate: PropTypes.bool,
   gradientColorsRepsActive: PropTypes.array,
   gradientColorsRepsInactive: PropTypes.array,
   gradientColorsRestActive: PropTypes.array,
@@ -718,7 +736,11 @@ CustomCounterTimerContainer.propTypes = {
   setText: PropTypes.string,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
+  showMuteElement: PropTypes.bool,
+  showPrimaryActionButton: PropTypes.bool,
+  showResetButton: PropTypes.bool,
   showSets: PropTypes.bool,
+  showSkipButton: PropTypes.bool,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -733,6 +755,7 @@ CustomCounterTimerContainer.propTypes = {
 };
 
 CustomCounterTimerContainer.defaultProps = {
+  circularProgressAnimate: true,
   leftUpperElement: null,
   onMuteToggle: null,
   onPauseTimerPressed: null,
@@ -755,6 +778,10 @@ CustomCounterTimerContainer.defaultProps = {
   showMaxTime: true,
   showSets: true,
   setText: 'Set',
+  showSkipButton: true,
+  showResetButton: true,
+  showPrimaryActionButton: true,
+  showMuteElement: true,
 };
 
 export default CustomCounterTimerContainer;
