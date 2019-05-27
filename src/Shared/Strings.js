@@ -1,7 +1,7 @@
 export const WEEKS = 'WEEKS';
 export const SESSIONS = 'SESSIONS';
 export const VERSION = 'Version';
-export const SKIP = 'SKIP';
+export const SKIP = ' SKIP ';
 export const RESET = 'RESET';
 export const START = 'START';
 export const PAUSE = 'PAUSE';

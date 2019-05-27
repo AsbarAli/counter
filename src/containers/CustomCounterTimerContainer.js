@@ -529,6 +529,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
+    const {skip} = this.props;
     const textStyles = [styles.skipContainer];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
 
@@ -544,7 +545,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         style={styles.skipWrapper}
       >
         <Text style={textStyles}>
-          {SKIP}
+          {skip}
         </Text>
       </TouchableOpacity>
     );
@@ -698,7 +699,22 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     );
   }
 
-  render() {
+  renderWithoutBoxContainer = () => {
+    const controls = this.renderActivityControls();
+    const content = this.renderCounterContent();
+
+    return (
+      <View
+        {...containerStyleProps}
+        style={[styles.containerWithoutBox]}
+      >
+        {content}
+        {controls}
+      </View>
+    );
+  }
+
+  renderBoxContainer = () => {
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
     const containerBorderStyle = this.resolveContainerBorderStyle();
@@ -712,6 +728,14 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         {controls}
       </View>
     );
+  }
+
+  render() {
+    const {showBoxContainer} = this.props;
+
+    const container = showBoxContainer ? this.renderBoxContainer() : this.renderWithoutBoxContainer();
+
+    return container;
   }
 }
 
@@ -736,6 +760,7 @@ CustomCounterTimerContainer.propTypes = {
   progressColorActive: PropTypes.string,
   progressColorRestTime: PropTypes.string,
   setText: PropTypes.string,
+  showBoxContainer: PropTypes.bool,
   showCircularProgress: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
@@ -744,6 +769,7 @@ CustomCounterTimerContainer.propTypes = {
   showResetButton: PropTypes.bool,
   showSets: PropTypes.bool,
   showSkipButton: PropTypes.bool,
+  skip: PropTypes.string,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -786,6 +812,8 @@ CustomCounterTimerContainer.defaultProps = {
   showPrimaryActionButton: true,
   showMuteElement: true,
   showCircularProgress: true,
+  skip: `${SKIP}`,
+  showBoxContainer: true,
 };
 
 export default CustomCounterTimerContainer;

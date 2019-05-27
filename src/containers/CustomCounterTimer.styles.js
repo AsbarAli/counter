@@ -24,6 +24,11 @@ const style = StyleSheet.create({
     shadowOpacity: 0.25,
     borderRadius: 8,
   },
+  containerWithoutBox: {
+    flex: 1,
+    borderColor: colors.activity.borderDefault,
+    backgroundColor: colors.activity.white,
+  },
   borderGreen: {
     borderColor: colors.activity.borderGreen,
     borderRadius: 8,
