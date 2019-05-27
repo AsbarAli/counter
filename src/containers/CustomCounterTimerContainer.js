@@ -574,7 +574,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate, showCircularProgress} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -599,6 +599,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onCountFinish={this.handleTimeEnd}
         progressColor={progressColor}
         ref={this.handleTimeRef}
+        showCircularProgress={showCircularProgress}
         showCounterTimer={showCounterTimer}
         showMaxTime={showMaxTime}
         showSets={showSets}
@@ -612,7 +613,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate} = this.props;
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, circularProgressAnimate, showCircularProgress} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -636,6 +637,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onCountFinish={this.handleRestTimeEnd}
         progressColor={progressColor}
         ref={this.handleRestTimeRef}
+        showCircularProgress={showCircularProgress}
         showCounterTimer={showCounterTimer}
         showMaxTime={showMaxTime}
         showSets={showSets}
@@ -734,6 +736,7 @@ CustomCounterTimerContainer.propTypes = {
   progressColorActive: PropTypes.string,
   progressColorRestTime: PropTypes.string,
   setText: PropTypes.string,
+  showCircularProgress: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
   showMuteElement: PropTypes.bool,
@@ -782,6 +785,7 @@ CustomCounterTimerContainer.defaultProps = {
   showResetButton: true,
   showPrimaryActionButton: true,
   showMuteElement: true,
+  showCircularProgress: true,
 };
 
 export default CustomCounterTimerContainer;

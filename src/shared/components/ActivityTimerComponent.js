@@ -204,7 +204,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     );
   }
 
-  renderContent = (): ReactElement<any> => {
+  renderCirucularProgress = () => {
     const {type, circularProgressAnimate} = this.props;
     const {elapsedTime, totalTime} = this.state;
     const elapsedTimePercentage = elapsedTime / totalTime;
@@ -232,12 +232,23 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
         </CircularProgress>
       </View>
     );
-  }
+  };
+
+  renderLabelWithoutCircularProgress = () => {
+    const labelInsideProgress = this.renderLabelsInsideProgressCircle();
+
+    return (
+      <View style={styles.container}>
+        {labelInsideProgress}
+      </View>);
+  };
 
   render() {
-    const content = this.renderContent();
+    const {showCircularProgress} = this.props;
 
-    return content;
+    const circularProgress = showCircularProgress ? this.renderCirucularProgress() : this.renderLabelWithoutCircularProgress();
+
+    return circularProgress;
   }
 }
 
@@ -247,6 +258,7 @@ ActivityTimerComponent.propTypes = {
   label: PropTypes.string,
   onCountFinish: PropTypes.func.isRequired,
   progressColor: PropTypes.string,
+  showCircularProgress: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
   showSets: PropTypes.bool,
@@ -265,6 +277,7 @@ ActivityTimerComponent.defaultProps = {
   showCounterTimer: true,
   showMaxTime: true,
   showSets: true,
+  showCircularProgress: true,
 };
 
 export default ActivityTimerComponent;

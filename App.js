@@ -25,7 +25,7 @@ export default class App extends Component<Props> {
             source={settingsIcon}
             style={styles.settingStyle}
           /> */}
-        <Text>sss</Text>
+        <Text>Text</Text>
       </TouchableOpacity>
     );
   }
@@ -84,9 +84,9 @@ export default class App extends Component<Props> {
     const timer = {id: 1,
       name: 'DF',
       restTimeMinutes: 0,
-      restTimeSeconds: 0.3,
-      activeTimeMinutes: 0.11,
-      activeTimeSeconds: 0.02,
+      restTimeSeconds: 4,
+      activeTimeMinutes: 0,
+      activeTimeSeconds: 9,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -109,16 +109,17 @@ export default class App extends Component<Props> {
           // onUnMuteToggle={this.handleUnMuteTogglePressed}
           // progressColorActive="red"
           // progressColorRestTime="blue"
-          leftUpperElement={this.renderUpperElement()}
+          // leftUpperElement={this.renderUpperElement()}
           // showCounterTimer={false}
           // showMaxTime={false}
           // showSets={false}
           // setText="SEtss"
-          middleUpperElement={this.renderMiddleElement()}
+          // middleUpperElement={this.renderMiddleElement()}
+          // showCircularProgress={false}
+          // showMuteElement={false}
           // showPrimaryActionButton={false}
           // showResetButton={false}
           // showSkipButton={false}
-          // showMuteElement={false}
           timer={timer}
         />
       </View>
