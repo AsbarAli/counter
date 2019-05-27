@@ -121,6 +121,7 @@ export default class App extends Component<Props> {
           // showResetButton={false}
           // showSkipButton={false}
           // showBoxContainer={false}
+          // skipText="BRR"
           timer={timer}
         />
       </View>

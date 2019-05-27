@@ -529,7 +529,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
-    const {skip} = this.props;
+    const {skipText} = this.props;
     const textStyles = [styles.skipContainer];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
 
@@ -545,7 +545,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         style={styles.skipWrapper}
       >
         <Text style={textStyles}>
-          {skip}
+          {skipText}
         </Text>
       </TouchableOpacity>
     );
@@ -769,7 +769,7 @@ CustomCounterTimerContainer.propTypes = {
   showResetButton: PropTypes.bool,
   showSets: PropTypes.bool,
   showSkipButton: PropTypes.bool,
-  skip: PropTypes.string,
+  skipText: PropTypes.string,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -812,7 +812,7 @@ CustomCounterTimerContainer.defaultProps = {
   showPrimaryActionButton: true,
   showMuteElement: true,
   showCircularProgress: true,
-  skip: `${SKIP}`,
+  skipText: `${SKIP}`,
   showBoxContainer: true,
 };
 

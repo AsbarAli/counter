@@ -9,8 +9,9 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // flex: 1,
-    // marginTop: 20,
-    height: 180,
+    marginTop: 20,
+    marginBottom: 20,
+    // height: 280,
   },
 
   circularProgress: {
