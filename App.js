@@ -124,6 +124,7 @@ export default class App extends Component<Props> {
           //   justifyContent: 'space-between',
           // }}
           controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
+          // controlPosition="TOP"
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}

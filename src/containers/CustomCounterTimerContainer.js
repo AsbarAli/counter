@@ -712,11 +712,18 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderBoxContainer = () => {
+    const {controlPosition} = this.props;
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
-    const containerBorderStyle = this.resolveContainerBorderStyle();
-
-    return (
+    const elements = controlPosition == 'TOP' ? (
+      <View
+        {...containerStyleProps}
+        style={[containerBorderStyle]}
+      >
+        {controls}
+        {content}
+      </View>
+    ) : (
       <View
         {...containerStyleProps}
         style={[containerBorderStyle]}
@@ -724,6 +731,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         {content}
         {controls}
       </View>
+    );
+
+    const containerBorderStyle = this.resolveContainerBorderStyle();
+
+    return (
+      elements
     );
   }
 
@@ -736,6 +749,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
 CustomCounterTimerContainer.propTypes = {
   circularProgressAnimate: PropTypes.bool,
+  controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
   controlsWrapperStyle: PropTypes.any,
   gradientColorsRepsActive: PropTypes.array,
@@ -818,6 +832,7 @@ CustomCounterTimerContainer.defaultProps = {
     alignSelf: 'stretch',
   },
   controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
+  controlPosition: 'BOTTOM',
 
 };
 
