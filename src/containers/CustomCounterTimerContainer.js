@@ -495,12 +495,14 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
 
     return (
-      <PrimaryButtonComponent
-        disabled={isCompleted}
-        onPress={onButtonPress}
-        text={buttonText}
-        type={buttonType}
-      />
+      <View style={{flex: 1}}>
+        <PrimaryButtonComponent
+          disabled={isCompleted}
+          onPress={onButtonPress}
+          text={buttonText}
+          type={buttonType}
+        />
+      </View>
     );
   }
 
@@ -522,7 +524,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleResetPressed}
-        style={controllerResetButtonStyle}
+        style={[controllerResetButtonStyle, {flex: 1}]}
       >
         <Text style={textStyles}>
           {controllerResetText}
@@ -549,7 +551,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleSkipPressed}
-        style={controllerSkipButtonStyle}
+        style={[controllerSkipButtonStyle, {flex: 1}]}
       >
         <Text style={textStyles}>
           {controllerSkipButtonText}
@@ -713,7 +715,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         colors={gradientColors}
         style={[styles.contentWrapper, borderStyle]}
       >
-        {this.renderActivityTopItems()}
+        {/* {this.renderActivityTopItems()} */}
         <View style={timerContentWrapperStyle}>
           {counter}
         </View>
@@ -850,7 +852,10 @@ CustomCounterTimerContainer.defaultProps = {
   controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
   controlPosition: BOTTOM,
   controllerResetText: RESET,
-  controllerResetButtonStyle: {paddingTop: 10},
+  controllerResetButtonStyle: {
+    paddingTop: 10,
+    alignItems: 'center',
+  },
   controllerDisabledResetButtonTextStyle: null,
   controllerResetButtonTextStyle: {
     color: colors.background.blueCrock,
@@ -864,6 +869,7 @@ CustomCounterTimerContainer.defaultProps = {
   },
   controllerSkipButtonStyle: {
     paddingTop: 10,
+    alignItems: 'center',
   },
 };
 
