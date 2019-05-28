@@ -66,11 +66,6 @@ const style = StyleSheet.create({
     paddingTop: 10,
     // width: 60,
   },
-  skipContainer: {
-    // ...typeFace,
-    color: colors.background.blueCrock,
-    fontSize: 16,
-  },
   textDisabled: {
     color: colors.background.disabledBlue,
   },

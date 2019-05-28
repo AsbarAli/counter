@@ -136,6 +136,9 @@ export default class App extends Component<Props> {
           //   padding: 10,
           // }}
           // controllerSkipButtonText="skipText"
+          // controllerDisabledSkipButtonText={{color: 'green'}}
+          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
+
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}

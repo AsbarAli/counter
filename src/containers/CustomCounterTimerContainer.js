@@ -533,12 +533,15 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
-    const {controllerSkipButtonText} = this.props;
-    const textStyles = [styles.skipContainer];
+    const {controllerSkipButtonText, controllerDisabledSkipButtonText, controllerSkipButtonTextStyle, controllerSkipButtonStyle} = this.props;
+    const textStyles = [controllerSkipButtonTextStyle];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
+      if (controllerDisabledSkipButtonText) {
+        textStyles.push(controllerDisabledSkipButtonText);
+      }
     }
 
     return (
@@ -546,7 +549,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleSkipPressed}
-        style={styles.skipWrapper}
+        style={controllerSkipButtonStyle}
       >
         <Text style={textStyles}>
           {controllerSkipButtonText}
@@ -759,10 +762,13 @@ CustomCounterTimerContainer.propTypes = {
   controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
   controllerDisabledResetButtonTextStyle: PropTypes.any,
+  controllerDisabledSkipButtonText: PropTypes.any,
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
+  controllerSkipButtonStyle: PropTypes.any,
   controllerSkipButtonText: PropTypes.string,
+  controllerSkipButtonTextStyle: PropTypes.any,
   controlsWrapperStyle: PropTypes.any,
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
@@ -851,6 +857,14 @@ CustomCounterTimerContainer.defaultProps = {
     fontSize: 16,
   },
   controllerSkipButtonText: SKIP,
+  controllerDisabledSkipButtonText: null,
+  controllerSkipButtonTextStyle: {
+    color: colors.background.blueCrock,
+    fontSize: 16,
+  },
+  controllerSkipButtonStyle: {
+    paddingTop: 10,
+  },
 };
 
 export default CustomCounterTimerContainer;
