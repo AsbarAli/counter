@@ -125,19 +125,19 @@ export default class App extends Component<Props> {
           // =========Controllers==========
           // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
           // controllerDisabledResetButtonTextStyle={{color: 'red'}}
+          // controllerDisabledSkipButtonText={{color: 'green'}}
           // controllerResetButtonStyle={{paddingTop: 10}}
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetButtonTextStyle={{color: 'green'}}
           // controllerResetText="RESET"
+          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
+          // controllerSkipButtonText="skipText"
           // controlPosition="TOP"
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
-          // controllerSkipButtonText="skipText"
-          // controllerDisabledSkipButtonText={{color: 'green'}}
-          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
 
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
