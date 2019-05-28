@@ -6,11 +6,11 @@ import colors from '@RNCounterTimer:theme/colors';
 
 const style = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     // flex: 1,
-    marginTop: 20,
-    marginBottom: 20,
+    // marginTop: 20,
+    // marginBottom: 20,
     // height: 280,
   },
 

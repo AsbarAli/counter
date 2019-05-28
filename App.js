@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Dimensions, Alert, View, TouchableOpacity, Text} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
+import colors from '@RNCounterTimer:theme/colors';
 
 const screen = Dimensions.get('window');
 
@@ -110,17 +111,16 @@ export default class App extends Component<Props> {
           // progressColorActive="red"
           // progressColorRestTime="blue"
           // leftUpperElement={this.renderUpperElement()}
-          // showCounterTimer={false}
           // showMaxTime={false}
           // showSets={false}
           // setText="SEtss"
           // middleUpperElement={this.renderMiddleElement()}
-          // showCircularProgress={false}
+          // showCircularProgress={false} // TODO:
           // showMuteElement={false}
           // showPrimaryActionButton={false}
+          // showCounterTimer={false}
           // showResetButton={false}
           // showSkipButton={false}
-          // showBoxContainer={false}
           // skipText="BRR"
           timer={timer}
         />
@@ -131,17 +131,31 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    height: 320,
+    // height: 320,
     marginTop: 32,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     // paddingLeft: 12,
-    paddingBottom: 50,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: screen.width - 13,
+    // alignItems: 'flex-start',
+    // flexDirection: 'row',
+    // justifyContent: 'flex-start',
+    // width: screen.width - 13,
     marginLeft: 'auto',
     marginRight: 'auto',
+    // flexDirection: 'column',
+    // justifyContent: 'flex-start',
+    borderWidth: 2,
+    borderColor: colors.activity.borderDefault,
+    // borderColor: colors.activity.borderGreen,
+    backgroundColor: colors.activity.white,
+    // marginRight: 20,
+    shadowColor: colors.activity.black,
+    shadowRadius: 4,
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+    shadowOpacity: 0.25,
+    borderRadius: 8,
   },
   settingsIconWrapper: {
     // position: 'absolute',

@@ -7,27 +7,8 @@ import colors from '@RNCounterTimer:theme/colors';
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: colors.activity.borderDefault,
-    // borderColor: colors.activity.borderGreen,
-    backgroundColor: colors.activity.white,
-    // marginRight: 20,
-    shadowColor: colors.activity.black,
-    shadowRadius: 4,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    borderRadius: 8,
-  },
-  containerWithoutBox: {
-    flex: 1,
-    borderColor: colors.activity.borderDefault,
-    backgroundColor: colors.activity.white,
+    // flex: 1,
+
   },
   borderGreen: {
     borderColor: colors.activity.borderGreen,
@@ -38,21 +19,23 @@ const style = StyleSheet.create({
     borderRadius: 8,
   },
   controlsWrapper: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     // marginTop: 50,
   },
 
   timerContent: {
-    paddingTop: 30,
+    // paddingTop: 30,
   },
 
   topItemsWrapper: {
-    position: 'absolute',
-    top: 10,
-    left: 0,
-    right: 0,
+    width: '100%',
+    justifyContent: 'space-between',
+    // position: 'absolute',
+    // top: 10,
+    // left: 0,
+    // right: 0,
     // paddingBottom: 80,
   },
   activityStatusWrapper: {

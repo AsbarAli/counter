@@ -450,10 +450,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         <Text style={[styles.activityStatusText, statusTextStyle]}>
           {statusText}
         </Text>
-
-        <View style={[styles.activityStatusText, statusTextStyle]}>
-          {this.props.middleUpperElement}
-        </View>
         {muteIcon}
       </View>
     );
@@ -699,21 +695,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     );
   }
 
-  renderWithoutBoxContainer = () => {
-    const controls = this.renderActivityControls();
-    const content = this.renderCounterContent();
-
-    return (
-      <View
-        {...containerStyleProps}
-        style={[styles.containerWithoutBox]}
-      >
-        {content}
-        {controls}
-      </View>
-    );
-  }
-
   renderBoxContainer = () => {
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
@@ -731,9 +712,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   render() {
-    const {showBoxContainer} = this.props;
-
-    const container = showBoxContainer ? this.renderBoxContainer() : this.renderWithoutBoxContainer();
+    const container = this.renderBoxContainer();
 
     return container;
   }
@@ -760,7 +739,6 @@ CustomCounterTimerContainer.propTypes = {
   progressColorActive: PropTypes.string,
   progressColorRestTime: PropTypes.string,
   setText: PropTypes.string,
-  showBoxContainer: PropTypes.bool,
   showCircularProgress: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
@@ -813,7 +791,6 @@ CustomCounterTimerContainer.defaultProps = {
   showMuteElement: true,
   showCircularProgress: true,
   skipText: `${SKIP}`,
-  showBoxContainer: true,
 };
 
 export default CustomCounterTimerContainer;
