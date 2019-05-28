@@ -24,6 +24,8 @@ import {
   RESET,
   COMPLETED,
   PRIMARY_ACTION,
+  TOP,
+  BOTTOM,
 } from '@RNCounterTimer:shared/strings';
 import styles, {
   containerStyleProps,
@@ -715,7 +717,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {controlPosition} = this.props;
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
-    const elements = controlPosition == 'TOP' ? (
+    const elements = controlPosition == TOP ? (
       <View
         {...containerStyleProps}
         style={[containerBorderStyle]}
@@ -832,7 +834,7 @@ CustomCounterTimerContainer.defaultProps = {
     alignSelf: 'stretch',
   },
   controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
-  controlPosition: 'BOTTOM',
+  controlPosition: BOTTOM,
 
 };
 
