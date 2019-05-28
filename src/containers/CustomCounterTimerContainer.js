@@ -30,9 +30,8 @@ import {
 import styles, {
   containerStyleProps,
   gradientColorsRepsDefault,
-  gradientColorsRepsInactive,
+  gradientColorsDefault,
   gradientColorsRepsActive,
-  gradientColorsRestInactive,
   gradientColorsRestActive,
   progressColorRest,
   progressColorTimer,
@@ -672,8 +671,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderCounterContent = (): ReactElement<any> => {
-    const {status, restTimerRunning} = this.state;
-    const {gradientColorsRepsInactive, gradientColorsRepsActive, gradientColorsRestActive, gradientColorsRestInactive, timerContentWrapperStyle} = this.props;
+    const {status} = this.state;
+    const {gradientColorsRepsActive, gradientColorsRestActive, timerContentWrapperStyle} = this.props;
     let counter = null;
     let gradientColors = gradientColorsRepsDefault;
     let borderStyle = {
@@ -682,7 +681,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
-      gradientColors = gradientColorsRepsInactive;
+      gradientColors = gradientColorsDefault;
       counter = this.renderTimerContent();
       break;
     case ACTIVITY_STATUS.IN_PROGRESS:
@@ -691,7 +690,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       counter = this.renderTimerContent();
       break;
     case ACTIVITY_STATUS.REST:
-      gradientColors = restTimerRunning ? gradientColorsRestActive : gradientColorsRestInactive;
+      gradientColors = gradientColorsRestActive;
       borderStyle = styles.borderOrange;
       counter = this.renderRestContent();
       break;
@@ -754,10 +753,9 @@ CustomCounterTimerContainer.propTypes = {
   controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
   controlsWrapperStyle: PropTypes.any,
+  gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
-  gradientColorsRepsInactive: PropTypes.array,
   gradientColorsRestActive: PropTypes.array,
-  gradientColorsRestInactive: PropTypes.array,
   leftUpperElement: PropTypes.element,
   onActivityCompleted: PropTypes.func,
   onContinueTimerPressed: PropTypes.func,
@@ -810,10 +808,9 @@ CustomCounterTimerContainer.defaultProps = {
   onUnMuteToggle: null,
   progressColorRestTime: progressColorRest,
   progressColorActive: progressColorTimer,
-  gradientColorsRepsInactive: gradientColorsRepsInactive,
+  gradientColorsDefault: gradientColorsDefault,
   gradientColorsRepsActive: gradientColorsRepsActive,
   gradientColorsRestActive: gradientColorsRestActive,
-  gradientColorsRestInactive: gradientColorsRestInactive,
   showCounterTimer: true,
   showMaxTime: true,
   showSets: true,

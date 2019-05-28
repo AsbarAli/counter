@@ -96,6 +96,8 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <CustomCounterTimerContainer
           // gradientColorsRepsActive={['red', 'blue']}
+          // gradientColorsDefault={['red', 'blue']}
+          // gradientColorsRestActive={['red', 'blue']}
           // circularProgressAnimate={false}
           // onActivityCompleted={this.handleActivityCompleted}
           // onContinueTimerPressed={this.handleContinueTimerPressed}
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
   container: {
     // height: 320,
     marginTop: 32,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     // paddingLeft: 12,
     // alignItems: 'flex-start',
     // flexDirection: 'row',
