@@ -6,28 +6,12 @@ import colors from '@RNCounterTimer:theme/colors';
 
 const style = StyleSheet.create({
   container: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // flex: 1,
-    // marginTop: 20,
-    // marginBottom: 20,
-    // height: 280,
   },
 
   circularProgress: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  progressLabelsContainer: {
-    position: 'absolute',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // marginTop: 20,
-    height: 100,
-    width: 130,
-  },
-
   timeTextWrapper: {
     flexDirection: 'row',
     alignItems: 'center',

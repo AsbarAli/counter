@@ -703,7 +703,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     return (
       <View
         {...containerStyleProps}
-        style={[styles.container, containerBorderStyle]}
+        style={[containerBorderStyle]}
       >
         {content}
         {controls}

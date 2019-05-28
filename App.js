@@ -115,7 +115,7 @@ export default class App extends Component<Props> {
           // showSets={false}
           // setText="SEtss"
           // middleUpperElement={this.renderMiddleElement()}
-          // showCircularProgress={false} // TODO:
+          // showCircularProgress={false}
           // showMuteElement={false}
           // showPrimaryActionButton={false}
           // showCounterTimer={false}
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // justifyContent: 'flex-start',
     // width: screen.width - 13,
+    // paddingVertical: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
     // flexDirection: 'column',

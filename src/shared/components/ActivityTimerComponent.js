@@ -190,13 +190,15 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderLabelsInsideProgressCircle = (): ReactElement<any> => {
-    const {showCounterTimer, showMaxTime, showSets} = this.props;
+    const {showCounterTimer, showMaxTime, showSets, showCircularProgress, labelsWithStyle, labelsWithoutProgreessStyle} = this.props;
     const timer = showCounterTimer ? this.renderCounterTimer() : null;
     const maxTime = showMaxTime ? this.renderMaxTime() : null;
     const sets = showSets ? this.renderShowSets() : null;
 
+    const labelStyle = showCircularProgress ? labelsWithStyle : labelsWithoutProgreessStyle;
+
     return (
-      <View style={styles.progressLabelsContainer}>
+      <View style={labelStyle}>
         {maxTime}
         {timer}
         {sets}
@@ -256,6 +258,8 @@ ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
   circularProgressAnimate: PropTypes.bool,
   label: PropTypes.string,
+  labelsWithStyle: PropTypes.any,
+  labelsWithoutProgreessStyle: PropTypes.any,
   onCountFinish: PropTypes.func.isRequired,
   progressColor: PropTypes.string,
   showCircularProgress: PropTypes.bool,
@@ -278,6 +282,18 @@ ActivityTimerComponent.defaultProps = {
   showMaxTime: true,
   showSets: true,
   showCircularProgress: true,
+  labelsWithStyle: {
+    position: 'absolute',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+    width: 130,
+  },
+  labelsWithoutProgreessStyle: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 };
 
 export default ActivityTimerComponent;
