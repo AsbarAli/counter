@@ -117,12 +117,16 @@ export default class App extends Component<Props> {
           // middleUpperElement={this.renderMiddleElement()}
           // showCircularProgress={false}
           // showMuteElement={false}
-          // showPrimaryActionButton={false}
           // showCounterTimer={false}
-          // showResetButton={false}
-          // showSkipButton={false}
           // skipText="BRR"
+          // controlsWrapperStyle={{
+          //   flexDirection: 'row',
+          //   justifyContent: 'space-between',
+          // }}
+          controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
           timer={timer}
+          // timerContentWrapperStyle={{paddingTop: 30}}
+          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
         />
       </View>
     );

@@ -23,6 +23,7 @@ import {
   PAUSE,
   RESET,
   COMPLETED,
+  PRIMARY_ACTION,
 } from '@RNCounterTimer:shared/strings';
 import styles, {
   containerStyleProps,
@@ -425,7 +426,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderActivityTopItems = (): Array<ReactElement<any>> => {
     const {status} = this.state;
-    const {showMuteElement} = this.props;
+    const {showMuteElement, topItemsWrapperStyle} = this.props;
 
     let statusText = this.state.name.toUpperCase();
     let statusTextStyle = styles.defaultStatusTextStyle;
@@ -442,7 +443,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
 
     return (
-      <View style={styles.topItemsWrapper}>
+      <View style={topItemsWrapperStyle}>
         <View style={styles.settingsIconWrapper}>
           {this.props.leftUpperElement}
         </View>
@@ -548,17 +549,32 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderActivityControls = (): ReactElement<any> => {
-    const {showSkipButton, showResetButton, showPrimaryActionButton} = this.props;
+    const {controlsWrapperStyle, controllerButtons} = this.props;
 
-    const resetButton = showResetButton ? this.renderResetButton() : null;
-    const primaryActionButton = showPrimaryActionButton ? this.renderPrimaryActionButton() : null;
-    const skipButton = showSkipButton ? this.renderSkipButton() : null;
+    const resetButton = this.renderResetButton();
+    const primaryActionButton = this.renderPrimaryActionButton();
+    const skipButton = this.renderSkipButton();
+    const content = [];
+
+    controllerButtons.forEach((element) => {
+      switch (element) {
+      case RESET:
+        content.push(resetButton);
+        break;
+
+      case PRIMARY_ACTION:
+        content.push(primaryActionButton);
+        break;
+
+      case SKIP:
+        content.push(skipButton);
+        break;
+      }
+    });
 
     return (
-      <View style={styles.controlsWrapper}>
-        {resetButton}
-        {primaryActionButton}
-        {skipButton}
+      <View style={controlsWrapperStyle}>
+        {content}
       </View>
     );
   }
@@ -655,7 +671,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderCounterContent = (): ReactElement<any> => {
     const {status, restTimerRunning} = this.state;
-    const {gradientColorsRepsInactive, gradientColorsRepsActive, gradientColorsRestActive, gradientColorsRestInactive} = this.props;
+    const {gradientColorsRepsInactive, gradientColorsRepsActive, gradientColorsRestActive, gradientColorsRestInactive, timerContentWrapperStyle} = this.props;
     let counter = null;
     let gradientColors = gradientColorsRepsDefault;
     let borderStyle = {
@@ -688,7 +704,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         style={[styles.contentWrapper, borderStyle]}
       >
         {this.renderActivityTopItems()}
-        <View style={styles.timerContent}>
+        <View style={timerContentWrapperStyle}>
           {counter}
         </View>
       </LinearGradient>
@@ -720,6 +736,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
 CustomCounterTimerContainer.propTypes = {
   circularProgressAnimate: PropTypes.bool,
+  controllerButtons: PropTypes.any,
+  controlsWrapperStyle: PropTypes.any,
   gradientColorsRepsActive: PropTypes.array,
   gradientColorsRepsInactive: PropTypes.array,
   gradientColorsRestActive: PropTypes.array,
@@ -743,10 +761,7 @@ CustomCounterTimerContainer.propTypes = {
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
   showMuteElement: PropTypes.bool,
-  showPrimaryActionButton: PropTypes.bool,
-  showResetButton: PropTypes.bool,
   showSets: PropTypes.bool,
-  showSkipButton: PropTypes.bool,
   skipText: PropTypes.string,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -759,6 +774,8 @@ CustomCounterTimerContainer.propTypes = {
     // createdDate: PropTypes.any.isRequired,
     // modifiedDate: PropTypes.any.isRequired,
   }).isRequired,
+  timerContentWrapperStyle: PropTypes.any,
+  topItemsWrapperStyle: PropTypes.any,
 };
 
 CustomCounterTimerContainer.defaultProps = {
@@ -785,12 +802,23 @@ CustomCounterTimerContainer.defaultProps = {
   showMaxTime: true,
   showSets: true,
   setText: 'Set',
-  showSkipButton: true,
-  showResetButton: true,
-  showPrimaryActionButton: true,
   showMuteElement: true,
   showCircularProgress: true,
   skipText: `${SKIP}`,
+  controlsWrapperStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  timerContentWrapperStyle: {
+    paddingTop: 30,
+  },
+  topItemsWrapperStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch',
+  },
+  controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
+
 };
 
 export default CustomCounterTimerContainer;
