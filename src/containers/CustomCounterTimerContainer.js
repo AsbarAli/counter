@@ -824,6 +824,8 @@ CustomCounterTimerContainer.defaultProps = {
   controlsWrapperStyle: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   timerContentWrapperStyle: {
     paddingTop: 30,

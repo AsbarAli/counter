@@ -122,8 +122,9 @@ export default class App extends Component<Props> {
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
+          //   padding: 10,
           // }}
-          controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
+          // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
           // controlPosition="TOP"
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
@@ -138,12 +139,12 @@ const styles = StyleSheet.create({
   container: {
     // height: 320,
     marginTop: 32,
-    // paddingHorizontal: 16,
+    paddingHorizontal: 16,
     // paddingLeft: 12,
     // alignItems: 'flex-start',
     // flexDirection: 'row',
     // justifyContent: 'flex-start',
-    // width: screen.width - 13,
+    width: screen.width - 13,
     // paddingVertical: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
