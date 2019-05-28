@@ -141,6 +141,9 @@ export default class App extends Component<Props> {
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
 
+          // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
+          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
+          // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}

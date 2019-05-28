@@ -461,36 +461,42 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderPrimaryActionButton = (): ReactElement<any> => {
     const {status, restTimerRunning, timerRunning} = this.state;
+    const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerSecondPrimaryActionButtonStyle} = this.props;
+
     let buttonText = null;
     let buttonType = null;
     let onButtonPress = null;
     let isCompleted = false;
+    let userDefinedButtonStyle = null;
 
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
       buttonText = START;
       buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = this.handleStartTimerPressed;
-
+      userDefinedButtonStyle = controllerMainPrimaryActionButtonStyle;
       break;
+
     case ACTIVITY_STATUS.IN_PROGRESS:
       buttonText = timerRunning ? PAUSE : START;
       buttonType = timerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = timerRunning ? this.handlePauseTimerPressed : this.handleContinueTimerPressed;
-
+      userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       break;
+
     case ACTIVITY_STATUS.REST:
       buttonText = restTimerRunning ? PAUSE : START;
       buttonType = restTimerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = restTimerRunning ? this.handlePauseRestPressed : this.handleStartRestPressed;
-
+      userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       break;
+
     case ACTIVITY_STATUS.COMPLETED:
       buttonText = COMPLETED;
       buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = this.handleActivityCompleted;
       isCompleted = true;
-
+      userDefinedButtonStyle = controllerMainPrimaryActionDisabledButtonStyle;
       break;
     }
 
@@ -501,6 +507,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
           onPress={onButtonPress}
           text={buttonText}
           type={buttonType}
+          userDefinedButtonStyle={userDefinedButtonStyle}
         />
       </View>
     );
@@ -777,9 +784,12 @@ CustomCounterTimerContainer.propTypes = {
   controllerDisabledResetButtonTextStyle: PropTypes.any,
   controllerDisabledSkipButtonStyle: PropTypes.any,
   controllerDisabledSkipButtonTextStyle: PropTypes.any,
+  controllerMainPrimaryActionButtonStyle: PropTypes.any,
+  controllerMainPrimaryActionDisabledButtonStyle: PropTypes.any,
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
+  controllerSecondPrimaryActionButtonStyle: PropTypes.any,
   controllerSkipButtonStyle: PropTypes.any,
   controllerSkipButtonText: PropTypes.string,
   controllerSkipButtonTextStyle: PropTypes.any,
@@ -887,6 +897,9 @@ CustomCounterTimerContainer.defaultProps = {
   },
   controllerDisabledSkipButtonStyle: null,
   controllerDisabledResetButtonStyle: null,
+  controllerMainPrimaryActionButtonStyle: null,
+  controllerMainPrimaryActionDisabledButtonStyle: null,
+  controllerSecondPrimaryActionButtonStyle: null,
 };
 
 export default CustomCounterTimerContainer;
