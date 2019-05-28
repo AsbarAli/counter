@@ -57,12 +57,6 @@ const style = StyleSheet.create({
     paddingTop: 10,
     // width: 60,
   },
-  resetContainer: {
-    // ...typeFace,
-
-    color: colors.background.blueCrock,
-    fontSize: 16,
-  },
   resetContainerDisabled: {
     // ...typeFace,
     color: colors.background.disableBlueCrock,

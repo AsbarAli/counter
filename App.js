@@ -121,13 +121,20 @@ export default class App extends Component<Props> {
           // showMuteElement={false}
           // showCounterTimer={false}
           // skipText="BRR"
+
+          // =========Controllers==========
+          // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
+          // controllerDisabledResetButtonTextStyle={{color: 'red'}}
+          // controllerResetButtonStyle={{paddingTop: 10}}
+          // controllerResetButtonTextStyle={{color: 'red'}}
+          // controllerResetButtonTextStyle={{color: 'green'}}
+          // controllerResetText="RESET"
+          // controlPosition="TOP"
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
-          // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
-          // controlPosition="TOP"
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}

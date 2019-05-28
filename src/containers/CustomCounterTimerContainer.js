@@ -40,6 +40,8 @@ import PrimaryButtonComponent from '../shared/components/primaryButton.component
 // const soundPlayer = require('react-native-sound');
 // import {timerDataActions} from '@crock:app/storage/realm';
 
+import colors from '@RNCounterTimer:theme/colors';
+
 type CustomCounterTimerProps = {
   timer: TimerModel,
 };
@@ -504,11 +506,15 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderResetButton = (): ReactElement<any> => {
     const {status, currentRunningSet} = this.state;
-    const textStyles = [styles.resetContainer];
+    const {controllerResetText, controllerResetButtonStyle, controllerDisabledResetButtonTextStyle, controllerResetButtonTextStyle} = this.props;
+    const textStyles = [controllerResetButtonTextStyle];
     const disabled = currentRunningSet === 0 && status === ACTIVITY_STATUS.NOT_STARTED;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
+      if (controllerDisabledResetButtonTextStyle) {
+        textStyles.push(controllerDisabledResetButtonTextStyle);
+      }
     }
 
     return (
@@ -516,10 +522,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleResetPressed}
-        style={styles.resetWrapper}
+        style={controllerResetButtonStyle}
       >
         <Text style={textStyles}>
-          {RESET}
+          {controllerResetText}
         </Text>
       </TouchableOpacity>
     );
@@ -752,6 +758,10 @@ CustomCounterTimerContainer.propTypes = {
   circularProgressAnimate: PropTypes.bool,
   controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
+  controllerDisabledResetButtonTextStyle: PropTypes.any,
+  controllerResetButtonStyle: PropTypes.any,
+  controllerResetButtonTextStyle: PropTypes.any,
+  controllerResetText: PropTypes.string,
   controlsWrapperStyle: PropTypes.any,
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
@@ -834,7 +844,13 @@ CustomCounterTimerContainer.defaultProps = {
   },
   controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
   controlPosition: BOTTOM,
-
+  controllerResetText: RESET,
+  controllerResetButtonStyle: {paddingTop: 10},
+  controllerDisabledResetButtonTextStyle: null,
+  controllerResetButtonTextStyle: {
+    color: colors.background.blueCrock,
+    fontSize: 16,
+  },
 };
 
 export default CustomCounterTimerContainer;
