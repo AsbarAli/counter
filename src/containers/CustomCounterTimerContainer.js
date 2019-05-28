@@ -508,14 +508,19 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderResetButton = (): ReactElement<any> => {
     const {status, currentRunningSet} = this.state;
-    const {controllerResetText, controllerResetButtonStyle, controllerDisabledResetButtonTextStyle, controllerResetButtonTextStyle} = this.props;
+    const {controllerResetText, controllerResetButtonStyle, controllerDisabledResetButtonTextStyle,
+      controllerDisabledResetButtonStyle, controllerResetButtonTextStyle} = this.props;
     const textStyles = [controllerResetButtonTextStyle];
+    const buttonStyle = [controllerResetButtonStyle];
     const disabled = currentRunningSet === 0 && status === ACTIVITY_STATUS.NOT_STARTED;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
       if (controllerDisabledResetButtonTextStyle) {
         textStyles.push(controllerDisabledResetButtonTextStyle);
+      }
+      if (controllerDisabledResetButtonStyle) {
+        buttonStyle.push(controllerDisabledResetButtonStyle);
       }
     }
 
@@ -524,7 +529,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleResetPressed}
-        style={[controllerResetButtonStyle, {flex: 1}]}
+        style={buttonStyle}
       >
         <Text style={textStyles}>
           {controllerResetText}
@@ -535,14 +540,19 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
-    const {controllerSkipButtonText, controllerDisabledSkipButtonText, controllerSkipButtonTextStyle, controllerSkipButtonStyle} = this.props;
+    const {controllerSkipButtonText, controllerDisabledSkipButtonTextStyle, controllerSkipButtonTextStyle,
+      controllerSkipButtonStyle, controllerDisabledSkipButtonStyle} = this.props;
     const textStyles = [controllerSkipButtonTextStyle];
+    const buttonStyle = [controllerSkipButtonStyle];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
-      if (controllerDisabledSkipButtonText) {
-        textStyles.push(controllerDisabledSkipButtonText);
+      if (controllerDisabledSkipButtonTextStyle) {
+        textStyles.push(controllerDisabledSkipButtonTextStyle);
+      }
+      if (controllerDisabledSkipButtonStyle) {
+        buttonStyle.push(controllerDisabledSkipButtonStyle);
       }
     }
 
@@ -551,7 +561,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         disabled={disabled}
         hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleSkipPressed}
-        style={[controllerSkipButtonStyle, {flex: 1}]}
+        style={buttonStyle}
       >
         <Text style={textStyles}>
           {controllerSkipButtonText}
@@ -763,8 +773,10 @@ CustomCounterTimerContainer.propTypes = {
   circularProgressAnimate: PropTypes.bool,
   controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
+  controllerDisabledResetButtonStyle: PropTypes.any,
   controllerDisabledResetButtonTextStyle: PropTypes.any,
-  controllerDisabledSkipButtonText: PropTypes.any,
+  controllerDisabledSkipButtonStyle: PropTypes.any,
+  controllerDisabledSkipButtonTextStyle: PropTypes.any,
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
@@ -855,6 +867,7 @@ CustomCounterTimerContainer.defaultProps = {
   controllerResetButtonStyle: {
     paddingTop: 10,
     alignItems: 'center',
+    flex: 1,
   },
   controllerDisabledResetButtonTextStyle: null,
   controllerResetButtonTextStyle: {
@@ -862,7 +875,7 @@ CustomCounterTimerContainer.defaultProps = {
     fontSize: 16,
   },
   controllerSkipButtonText: SKIP,
-  controllerDisabledSkipButtonText: null,
+  controllerDisabledSkipButtonTextStyle: null,
   controllerSkipButtonTextStyle: {
     color: colors.background.blueCrock,
     fontSize: 16,
@@ -870,7 +883,10 @@ CustomCounterTimerContainer.defaultProps = {
   controllerSkipButtonStyle: {
     paddingTop: 10,
     alignItems: 'center',
+    flex: 1,
   },
+  controllerDisabledSkipButtonStyle: null,
+  controllerDisabledResetButtonStyle: null,
 };
 
 export default CustomCounterTimerContainer;
