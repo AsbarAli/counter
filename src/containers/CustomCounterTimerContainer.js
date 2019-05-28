@@ -533,7 +533,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
-    const {skipText} = this.props;
+    const {controllerSkipButtonText} = this.props;
     const textStyles = [styles.skipContainer];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
 
@@ -549,7 +549,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         style={styles.skipWrapper}
       >
         <Text style={textStyles}>
-          {skipText}
+          {controllerSkipButtonText}
         </Text>
       </TouchableOpacity>
     );
@@ -762,6 +762,7 @@ CustomCounterTimerContainer.propTypes = {
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
+  controllerSkipButtonText: PropTypes.string,
   controlsWrapperStyle: PropTypes.any,
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
@@ -786,7 +787,6 @@ CustomCounterTimerContainer.propTypes = {
   showMaxTime: PropTypes.bool,
   showMuteElement: PropTypes.bool,
   showSets: PropTypes.bool,
-  skipText: PropTypes.string,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -827,7 +827,6 @@ CustomCounterTimerContainer.defaultProps = {
   setText: 'Set',
   showMuteElement: true,
   showCircularProgress: true,
-  skipText: `${SKIP}`,
   controlsWrapperStyle: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -851,6 +850,7 @@ CustomCounterTimerContainer.defaultProps = {
     color: colors.background.blueCrock,
     fontSize: 16,
   },
+  controllerSkipButtonText: SKIP,
 };
 
 export default CustomCounterTimerContainer;

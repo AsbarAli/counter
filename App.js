@@ -135,6 +135,7 @@ export default class App extends Component<Props> {
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
+          // controllerSkipButtonText="skipText"
           timer={timer}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
