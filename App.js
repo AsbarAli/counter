@@ -114,9 +114,6 @@ export default class App extends Component<Props> {
           // progressColorActive="red"
           // progressColorRestTime="blue"
           // leftUpperElement={this.renderUpperElement()}
-          // showMaxTime={false}
-          // showSets={false}
-          // setText="SEtss"
           // middleUpperElement={this.renderMiddleElement()}
           // showMuteElement={false}
           // showCounterTimer={false}
@@ -143,7 +140,10 @@ export default class App extends Component<Props> {
           //   padding: 10,
           // }}
 
+          // counterSetText="Setss"
           // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
+          // counterSetSeperatorText="-"
+          counterSetTextWrapperStyle={{color: 'blue'}}
 
           // =========== Progress================
           // progressAnimation={false}

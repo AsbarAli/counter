@@ -188,8 +188,15 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderShowSets = () => {
+    const setStyle = [styles.labelText];
+    const {counterSetTextWrapperStyle} = this.props;
+
+    if (counterSetTextWrapperStyle) {
+      setStyle.push(counterSetTextWrapperStyle);
+    }
+
     return (
-      <Text style={styles.labelText}>
+      <Text style={setStyle}>
         {this.props.label}
       </Text>
     );
@@ -278,6 +285,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
 ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
+  counterSetTextWrapperStyle: PropTypes.any,
   counterTexts: PropTypes.any,
   label: PropTypes.string,
   labelsWithStyle: PropTypes.any,
@@ -325,6 +333,11 @@ ActivityTimerComponent.defaultProps = {
     justifyContent: 'center',
   },
   counterTexts: [MAX_TIME, TIMER, SET],
+  counterSetTextWrapperStyle: {
+    fontSize: 20,
+    color: colors.background.black,
+  },
+
 };
 
 export default ActivityTimerComponent;

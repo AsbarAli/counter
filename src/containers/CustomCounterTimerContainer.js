@@ -143,12 +143,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   formatSetLabel = (): string | null => {
     const {timer: {sets}, currentRunningSet} = this.state;
-    const {setText} = this.props;
+    const {counterSetText, counterSetSeperatorText} = this.props;
 
     let result = null;
 
     if (sets > 1) {
-      result = `${setText} ${currentRunningSet + 1}/${sets}`;
+      result = `${counterSetText} ${currentRunningSet + 1}${counterSetSeperatorText}${sets}`;
     }
 
     return result;
@@ -620,7 +620,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
-      progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts} = this.props;
+      progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts,
+      counterSetTextWrapperStyle} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -639,6 +640,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     return (
       <ActivityTimerComponent
+        counterSetTextWrapperStyle={counterSetTextWrapperStyle}
         counterTexts={counterTexts}
         key={timerKey}
         label={this.formatSetLabel()}
@@ -664,7 +666,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
-      progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts} = this.props;
+      progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle,
+      counterTexts, counterSetTextWrapperStyle} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -682,6 +685,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     return (
       <ActivityTimerComponent
+        counterSetTextWrapperStyle={counterSetTextWrapperStyle}
         counterTexts={counterTexts}
         key={timerKey}
         label={this.formatSetLabel()}
@@ -806,6 +810,9 @@ CustomCounterTimerContainer.propTypes = {
   controllerSkipButtonText: PropTypes.string,
   controllerSkipButtonTextStyle: PropTypes.any,
   controlsWrapperStyle: PropTypes.any,
+  counterSetSeperatorText: PropTypes.string,
+  counterSetText: PropTypes.string,
+  counterSetTextWrapperStyle: PropTypes.any,
   counterTexts: PropTypes.any,
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
@@ -832,7 +839,6 @@ CustomCounterTimerContainer.propTypes = {
   progressThickness: PropTypes.number,
   progressVisible: PropTypes.bool,
   progressWrapper: PropTypes.any,
-  setText: PropTypes.string,
   showMuteElement: PropTypes.bool,
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -866,7 +872,7 @@ CustomCounterTimerContainer.defaultProps = {
   gradientColorsDefault: gradientColorsDefault,
   gradientColorsRepsActive: gradientColorsRepsActive,
   gradientColorsRestActive: gradientColorsRestActive,
-  setText: 'Set',
+  counterSetText: 'Set',
   showMuteElement: true,
   progressVisible: true,
   controlsWrapperStyle: {
@@ -923,6 +929,11 @@ CustomCounterTimerContainer.defaultProps = {
     justifyContent: 'center',
   },
   counterTexts: [MAX_TIME, TIMER, SET],
+  counterSetSeperatorText: '/',
+  counterSetTextWrapperStyle: {
+    fontSize: 20,
+    color: colors.background.black,
+  },
 };
 
 export default CustomCounterTimerContainer;
