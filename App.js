@@ -140,10 +140,10 @@ export default class App extends Component<Props> {
           //   padding: 10,
           // }}
 
-          // counterSetText="Setss"
-          // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
           // counterSetSeperatorText="-"
-          counterSetTextWrapperStyle={{color: 'blue'}}
+          // counterSetText="Setss"
+          // counterSetTextWrapperStyle={{color: 'blue'}}
+          // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
 
           // =========== Progress================
           // progressAnimation={false}
@@ -155,8 +155,8 @@ export default class App extends Component<Props> {
           // progressVisible={false}
           // progressWrapper={{paddingTop: 0, backgroundColor: 'blue'}}
 
-          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
           timer={timer}
+          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
         />
       </View>
     );
