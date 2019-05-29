@@ -8,6 +8,11 @@ import {Circle as CircularProgress} from 'react-native-progress';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
 
+import {
+  MAX_TIME,
+  TIMER,
+  SET,
+} from '@RNCounterTimer:shared/strings';
 import colors from '@RNCounterTimer:theme/colors';
 import styles, {
   progressCircleDefaultStyleProps,
@@ -191,18 +196,31 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderLabelsInsideProgressCircle = (): ReactElement<any> => {
-    const {showCounterTimer, showMaxTime, showSets, progressVisible, labelsWithStyle, labelsWithoutProgreessStyle} = this.props;
-    const timer = showCounterTimer ? this.renderCounterTimer() : null;
-    const maxTime = showMaxTime ? this.renderMaxTime() : null;
-    const sets = showSets ? this.renderShowSets() : null;
+    const {progressVisible, labelsWithStyle, labelsWithoutProgreessStyle, counterTexts} = this.props;
+    const timer = this.renderCounterTimer();
+    const maxTime = this.renderMaxTime();
+    const sets = this.renderShowSets();
+
+    const content = [];
+
+    counterTexts.forEach((element) => {
+      switch (element) {
+      case MAX_TIME:
+        content.push(maxTime);
+        break;
+      case TIMER:
+        content.push(timer);
+        break;
+      case SET:
+        content.push(sets);
+      }
+    });
 
     const labelStyle = progressVisible ? labelsWithStyle : labelsWithoutProgreessStyle;
 
     return (
       <View style={labelStyle}>
-        {maxTime}
-        {timer}
-        {sets}
+        {content}
       </View>
     );
   }
@@ -260,6 +278,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
 ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
+  counterTexts: PropTypes.any,
   label: PropTypes.string,
   labelsWithStyle: PropTypes.any,
   labelsWithoutProgreessStyle: PropTypes.any,
@@ -272,9 +291,6 @@ ActivityTimerComponent.propTypes = {
   progressStyle: PropTypes.any,
   progressThickness: PropTypes.number,
   progressVisible: PropTypes.bool,
-  showCounterTimer: PropTypes.bool,
-  showMaxTime: PropTypes.bool,
-  showSets: PropTypes.bool,
   started: PropTypes.bool,
   timeToRun: PropTypes.number.isRequired,
   type: PropTypes.oneOf([ActivityTimerComponent.COUNT_TYPE.COUNTDOWN, ActivityTimerComponent.COUNT_TYPE.COUNTUP]),
@@ -286,9 +302,6 @@ ActivityTimerComponent.defaultProps = {
   progressColor: 'black', // Do we need a default color? Maybe there's a default color to the component itself?
   started: false,
   type: ActivityTimerComponent.COUNT_TYPE.COUNTUP,
-  showCounterTimer: true,
-  showMaxTime: true,
-  showSets: true,
   progressVisible: true,
   labelsWithStyle: {
     position: 'absolute',
@@ -311,6 +324,7 @@ ActivityTimerComponent.defaultProps = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  counterTexts: [MAX_TIME, TIMER, SET],
 };
 
 export default ActivityTimerComponent;

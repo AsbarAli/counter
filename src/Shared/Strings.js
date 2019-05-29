@@ -18,4 +18,6 @@ export const STOP = 'STOP';
 export const PRIMARY_ACTION = 'PRIMARY_ACTION';
 export const TOP = 'TOP';
 export const BOTTOM = 'BOTTOM';
+export const MAX_TIME = 'MAX_TIME';
+export const SET = 'SET';
 

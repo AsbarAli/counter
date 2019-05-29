@@ -135,7 +135,6 @@ export default class App extends Component<Props> {
           // controllerResetText="RESET"
           // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
-
           // controllerSkipButtonText="skipText"
           // controlPosition="TOP"
           // controlsWrapperStyle={{
@@ -143,6 +142,8 @@ export default class App extends Component<Props> {
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
+
+          // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
 
           // =========== Progress================
           // progressAnimation={false}
