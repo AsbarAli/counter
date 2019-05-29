@@ -86,10 +86,12 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {timer} = this.props;
     if (timer) {
       const timerData = {
+        activiTimeHours: timer.activiTimeHours,
         activeTimeMinutes: timer.activeTimeMinutes,
         activeTimeSeconds: timer.activeTimeSeconds,
         id: timer.id,
         name: timer.name,
+        restTimeHours: timer.restTimeHours,
         restTimeMinutes: timer.restTimeMinutes,
         restTimeSeconds: timer.restTimeSeconds,
         sets: timer.sets,
@@ -537,7 +539,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     return (
       <TouchableOpacity
         disabled={disabled}
-        hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
+        // hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleResetPressed}
         style={buttonStyle}
       >
@@ -569,7 +571,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     return (
       <TouchableOpacity
         disabled={disabled}
-        hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
+        // hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
         onPress={this.handleSkipPressed}
         style={buttonStyle}
       >
@@ -610,14 +612,14 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       </View>
     );
   }
-  getTimerDuration = (minutes, seconds): number => {
-    const duration = (minutes * 60) + seconds;
+  getTimerDuration = (hours, minutes, seconds): number => {
+    const duration = (hours * 3600) + (minutes * 60) + seconds;
 
     return duration;
   }
 
   renderTimerContent = (): ReactElement<any> => {
-    const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
+    const {timer: {activeTimeMinutes, activeTimeSeconds, activiTimeHours}} = this.state;
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts,
@@ -625,7 +627,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
-    const duration = this.getTimerDuration(activeTimeMinutes, activeTimeSeconds);
+    const duration = this.getTimerDuration(activiTimeHours, activeTimeMinutes, activeTimeSeconds);
 
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
@@ -663,7 +665,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderRestContent = (): ReactElement<any> => {
-    const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
+    const {timer: {restTimeMinutes, restTimeSeconds, restTimeHours}} = this.state;
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle,
@@ -671,7 +673,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
-    const restTime = this.getTimerDuration(restTimeMinutes, restTimeSeconds);
+    const restTime = this.getTimerDuration(restTimeHours, restTimeMinutes, restTimeSeconds);
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
       progressColor = progressColorActive;

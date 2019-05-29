@@ -84,10 +84,12 @@ export default class App extends Component<Props> {
   render() {
     const timer = {id: 1,
       name: 'DF',
+      restTimeHours: 1,
       restTimeMinutes: 0,
       restTimeSeconds: 4,
-      activeTimeMinutes: 0,
-      activeTimeSeconds: 9,
+      activiTimeHours: 0,
+      activeTimeMinutes: 3,
+      activeTimeSeconds: 15,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -149,7 +151,7 @@ export default class App extends Component<Props> {
           // progressAnimation={false}
           // progressBorderWidth={5}
           // progressDirection="clockwise"
-          // progressSize={98}
+          progressSize={188}
           // progressStyle={{backgroundColor: 'red'}}
           // progressThickness={23}
           // progressVisible={false}

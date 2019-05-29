@@ -126,15 +126,16 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     });
   }
 
-  formatSecondsValueForDisplay = (totalTimeInSeconds: number): {minutes: string, seconds: string} => {
+  formatSecondsValueForDisplay = (totalTimeInSeconds: number): {hours: string, minutes: string, seconds: string} => {
     // When the app returns from background, we are adding 0.00001 to it to force render the circle
     // So we need to convert this back to an integer.
     const timeInInt = Math.ceil(totalTimeInSeconds);
     // Append a "0" at the beginning and substring the last two digits. This means we will always get a double digit value
-    const minutes = `0${Math.floor(timeInInt / 60)}`.substr(-2);
+    const hours = `0${Math.floor(timeInInt / 3600)}`.substr(-2);
+    const minutes = `0${Math.floor(timeInInt / 60) % 60}`.substr(-2);
     const seconds = `0${timeInInt % 60}`.substr(-2);
 
-    return {minutes, seconds};
+    return {hours, minutes, seconds};
   }
 
   handleCountFinished = (): void => {
@@ -155,6 +156,12 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     return (
       <View style={styles.timeTextWrapper}>
         <Text style={[styles.elapsedTimeText, styles.timeMinutesRightAlignText]}>
+          {timeToDisplay.hours}
+        </Text>
+        <Text style={styles.elapsedTimeColon}>
+          {`:`}
+        </Text>
+        <Text style={styles.elapsedTimeText}>
           {timeToDisplay.minutes}
         </Text>
         <Text style={styles.elapsedTimeColon}>
