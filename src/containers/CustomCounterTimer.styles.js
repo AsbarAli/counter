@@ -6,24 +6,6 @@ import colors from '@RNCounterTimer:theme/colors';
 // import colors from './../../theme/colors';
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: colors.activity.borderDefault,
-    // borderColor: colors.activity.borderGreen,
-    backgroundColor: colors.activity.white,
-    // marginRight: 20,
-    shadowColor: colors.activity.black,
-    shadowRadius: 4,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    borderRadius: 8,
-  },
   borderGreen: {
     borderColor: colors.activity.borderGreen,
     borderRadius: 8,
@@ -31,24 +13,6 @@ const style = StyleSheet.create({
   borderOrange: {
     borderColor: colors.activity.borderOrange,
     borderRadius: 8,
-  },
-  controlsWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    // marginTop: 50,
-  },
-
-  timerContent: {
-    paddingTop: 30,
-  },
-
-  topItemsWrapper: {
-    position: 'absolute',
-    top: 10,
-    left: 0,
-    right: 0,
-    // paddingBottom: 80,
   },
   activityStatusWrapper: {
     position: 'absolute',
@@ -64,18 +28,18 @@ const style = StyleSheet.create({
     color: colors.background.black,
     fontSize: 16,
 
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    // marginLeft: 'auto',
+    // marginRight: 'auto',
   },
   muteIconWrapper: {
-    position: 'absolute',
+    // position: 'absolute',
     // top: 10,
-    right: 20,
+    // right: 20,
   },
 
   settingsIconWrapper: {
-    position: 'absolute',
-    left: 20,
+    // position: 'absolute',
+    // left: 20,
   },
 
   muteIcon: {
@@ -93,12 +57,6 @@ const style = StyleSheet.create({
     paddingTop: 10,
     // width: 60,
   },
-  resetContainer: {
-    // ...typeFace,
-
-    color: colors.background.blueCrock,
-    fontSize: 16,
-  },
   resetContainerDisabled: {
     // ...typeFace,
     color: colors.background.disableBlueCrock,
@@ -107,11 +65,6 @@ const style = StyleSheet.create({
   skipWrapper: {
     paddingTop: 10,
     // width: 60,
-  },
-  skipContainer: {
-    // ...typeFace,
-    color: colors.background.blueCrock,
-    fontSize: 16,
   },
   textDisabled: {
     color: colors.background.disabledBlue,
@@ -176,7 +129,7 @@ export const containerStyleProps = {
 };
 
 export const gradientColorsRepsDefault = [colors.activity.white, colors.activity.white];
-export const gradientColorsRepsInactive = gradientColorsRepsDefault;
+export const gradientColorsDefault = gradientColorsRepsDefault;
 export const gradientColorsRepsActive = [colors.activity.backgroundGreen, colors.activity.white];
 export const gradientColorsRestInactive = [colors.activity.backgroundOrange, colors.activity.white];
 export const gradientColorsRestActive = [colors.activity.backgroundOrange, colors.activity.white];

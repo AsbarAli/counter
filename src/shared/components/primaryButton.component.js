@@ -46,7 +46,7 @@ class PrimaryButtonComponent extends React.PureComponent<PrimaryButtonProps, Pri
   }
 
   renderContent = (): ReactElement<any> => {
-    const {text, type, onPress, disabled, buttonStyle, textStyle} = this.props;
+    const {text, type, onPress, disabled, buttonStyle, textStyle, userDefinedButtonStyle} = this.props;
     const buttonStyles = [styles.button, this._buttonStyleMap[type]];
     const buttonTextStyles = [styles.text, this._buttonTextStyleMap[type]];
 
@@ -56,11 +56,16 @@ class PrimaryButtonComponent extends React.PureComponent<PrimaryButtonProps, Pri
     }
 
     if (buttonStyle) {
-      buttonStyles.push(buttonStyle);
+      buttonStyles.push({buttonStyle});
     }
 
     if (textStyle) {
       buttonTextStyles.push(textStyle);
+    }
+
+    // Should give priority for user define styles
+    if (userDefinedButtonStyle) {
+      buttonStyles.push(userDefinedButtonStyle);
     }
 
     return (
@@ -90,12 +95,14 @@ PrimaryButtonComponent.propTypes = {
   text: PropTypes.string.isRequired,
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   type: PropTypes.oneOf([PrimaryButtonComponent.TYPE.PRIMARY, PrimaryButtonComponent.TYPE.SECONDARY]).isRequired,
+  userDefinedButtonStyle: PropTypes.any,
 };
 
 PrimaryButtonComponent.defaultProps = {
   buttonStyle: null,
   disabled: false,
   textStyle: null,
+  userDefinedButtonStyle: null,
 };
 
 export default PrimaryButtonComponent;

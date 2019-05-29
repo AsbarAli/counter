@@ -15,3 +15,7 @@ export const NOT_STARTED = 'NOT STARTED';
 export const DONE = 'DONE';
 export const PLAYING = 'PLAYING';
 export const STOP = 'STOP';
+export const PRIMARY_ACTION = 'PRIMARY_ACTION';
+export const TOP = 'TOP';
+export const BOTTOM = 'BOTTOM';
+

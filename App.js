@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Dimensions, Alert, View, TouchableOpacity, Text} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
+import colors from '@RNCounterTimer:theme/colors';
 
 const screen = Dimensions.get('window');
 
@@ -25,7 +26,7 @@ export default class App extends Component<Props> {
             source={settingsIcon}
             style={styles.settingStyle}
           /> */}
-        <Text>sss</Text>
+        <Text>Text</Text>
       </TouchableOpacity>
     );
   }
@@ -84,9 +85,9 @@ export default class App extends Component<Props> {
     const timer = {id: 1,
       name: 'DF',
       restTimeMinutes: 0,
-      restTimeSeconds: 0.3,
-      activeTimeMinutes: 0.11,
-      activeTimeSeconds: 0.02,
+      restTimeSeconds: 4,
+      activeTimeMinutes: 0,
+      activeTimeSeconds: 9,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -94,8 +95,11 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
+          // ===========Gradients==========
+          // gradientColorsDefault={['red', 'blue']}
           // gradientColorsRepsActive={['red', 'blue']}
-          // circularProgressAnimate={false}
+          // gradientColorsRestActive={['red', 'blue']}
+
           // onActivityCompleted={this.handleActivityCompleted}
           // onContinueTimerPressed={this.handleContinueTimerPressed}
           // onMuteToggle={this.handleMuteToggle}
@@ -109,16 +113,47 @@ export default class App extends Component<Props> {
           // onUnMuteToggle={this.handleUnMuteTogglePressed}
           // progressColorActive="red"
           // progressColorRestTime="blue"
-          leftUpperElement={this.renderUpperElement()}
-          // showCounterTimer={false}
+          // leftUpperElement={this.renderUpperElement()}
           // showMaxTime={false}
           // showSets={false}
           // setText="SEtss"
-          middleUpperElement={this.renderMiddleElement()}
-          // showPrimaryActionButton={false}
-          // showResetButton={false}
-          // showSkipButton={false}
+          // middleUpperElement={this.renderMiddleElement()}
           // showMuteElement={false}
+          // showCounterTimer={false}
+
+          // =========Controllers==========
+          // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
+          // controllerDisabledResetButtonStyle={{backgroundColor: 'yellow'}}
+          // controllerDisabledResetButtonTextStyle={{color: 'red'}}
+          // controllerDisabledSkipButtonStyle={{backgroundColor: 'green'}}
+          // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
+          // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
+          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
+          // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
+          // controllerResetButtonTextStyle={{color: 'green'}}
+          // controllerResetButtonTextStyle={{color: 'red'}}
+          // controllerResetText="RESET"
+          // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
+          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
+
+          // controllerSkipButtonText="skipText"
+          // controlPosition="TOP"
+          // controlsWrapperStyle={{
+          //   flexDirection: 'row',
+          //   justifyContent: 'space-between',
+          //   padding: 10,
+          // }}
+
+          // =========== Progress================
+          // progressAnimation={false}
+          // progressBorderWidth={5}
+          // progressDirection="clockwise"
+          // progressSize={98}
+          // progressStyle={{backgroundColor: 'red'}}
+          // progressThickness={23}
+          // progressVisible={false}
+          // timerContentWrapperStyle={{paddingTop: 30}}
+          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
           timer={timer}
         />
       </View>
@@ -128,17 +163,32 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    height: 320,
+    // height: 320,
     marginTop: 32,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     // paddingLeft: 12,
-    paddingBottom: 50,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    // alignItems: 'flex-start',
+    // flexDirection: 'row',
+    // justifyContent: 'flex-start',
     width: screen.width - 13,
+    // paddingVertical: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
+    // flexDirection: 'column',
+    // justifyContent: 'flex-start',
+    borderWidth: 2,
+    borderColor: colors.activity.borderDefault,
+    // borderColor: colors.activity.borderGreen,
+    backgroundColor: colors.activity.white,
+    // marginRight: 20,
+    shadowColor: colors.activity.black,
+    shadowRadius: 4,
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+    shadowOpacity: 0.25,
+    borderRadius: 8,
   },
   settingsIconWrapper: {
     // position: 'absolute',
