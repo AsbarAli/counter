@@ -152,7 +152,8 @@ export default class App extends Component<Props> {
           // progressStyle={{backgroundColor: 'red'}}
           // progressThickness={23}
           // progressVisible={false}
-          // timerContentWrapperStyle={{paddingTop: 30}}
+          // progressWrapper={{paddingTop: 0, backgroundColor: 'blue'}}
+
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
           timer={timer}
         />

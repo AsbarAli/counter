@@ -714,7 +714,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderCounterContent = (): ReactElement<any> => {
     const {status} = this.state;
-    const {gradientColorsRepsActive, gradientColorsRestActive, timerContentWrapperStyle, gradientColorsDefault} = this.props;
+    const {gradientColorsRepsActive, gradientColorsRestActive, progressWrapper, gradientColorsDefault} = this.props;
     let counter = null;
     let gradientColors = gradientColorsRepsDefault;
     let borderStyle = {
@@ -747,7 +747,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         style={[styles.contentWrapper, borderStyle]}
       >
         {/* {this.renderActivityTopItems()} */}
-        <View style={timerContentWrapperStyle}>
+        <View style={progressWrapper}>
           {counter}
         </View>
       </LinearGradient>
@@ -847,7 +847,7 @@ CustomCounterTimerContainer.propTypes = {
     // createdDate: PropTypes.any.isRequired,
     // modifiedDate: PropTypes.any.isRequired,
   }).isRequired,
-  timerContentWrapperStyle: PropTypes.any,
+  progressWrapper: PropTypes.any,
   topItemsWrapperStyle: PropTypes.any,
 };
 
@@ -881,7 +881,7 @@ CustomCounterTimerContainer.defaultProps = {
     paddingBottom: 10,
     paddingTop: 10,
   },
-  timerContentWrapperStyle: {
+  progressWrapper: {
     paddingTop: 30,
   },
   topItemsWrapperStyle: {
