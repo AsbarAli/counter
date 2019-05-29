@@ -15,7 +15,7 @@ const style = StyleSheet.create({
   },
   totalTimeText: {
     // ...typeFace,
-    flex: 1,
+    // flex: 1,
     fontSize: 16,
     color: colors.font.weightColor,
   },

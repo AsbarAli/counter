@@ -182,6 +182,12 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     return (
       <View style={styles.timeTextWrapper}>
         <Text style={[styles.totalTimeText, styles.timeMinutesRightAlignText]}>
+          {totalTimeToDisplay.hours}
+        </Text>
+        <Text style={styles.totalTimeColon}>
+          {`:`}
+        </Text>
+        <Text style={styles.totalTimeText}>
           {totalTimeToDisplay.minutes}
         </Text>
         <Text style={styles.totalTimeColon}>
