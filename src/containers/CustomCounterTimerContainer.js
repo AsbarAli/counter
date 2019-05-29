@@ -714,7 +714,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderCounterContent = (): ReactElement<any> => {
     const {status} = this.state;
-    const {gradientColorsRepsActive, gradientColorsRestActive, timerContentWrapperStyle} = this.props;
+    const {gradientColorsRepsActive, gradientColorsRestActive, timerContentWrapperStyle, gradientColorsDefault} = this.props;
     let counter = null;
     let gradientColors = gradientColorsRepsDefault;
     let borderStyle = {

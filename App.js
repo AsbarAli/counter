@@ -95,9 +95,11 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
-          // gradientColorsRepsActive={['red', 'blue']}
+          // ===========Gradients==========
           // gradientColorsDefault={['red', 'blue']}
+          // gradientColorsRepsActive={['red', 'blue']}
           // gradientColorsRestActive={['red', 'blue']}
+
           // onActivityCompleted={this.handleActivityCompleted}
           // onContinueTimerPressed={this.handleContinueTimerPressed}
           // onMuteToggle={this.handleMuteToggle}
