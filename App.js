@@ -118,7 +118,6 @@ export default class App extends Component<Props> {
           // showSets={false}
           // setText="SEtss"
           // middleUpperElement={this.renderMiddleElement()}
-          // showCircularProgress={false}
           // showMuteElement={false}
           // showCounterTimer={false}
 
@@ -152,6 +151,7 @@ export default class App extends Component<Props> {
           // progressSize={98}
           // progressStyle={{backgroundColor: 'red'}}
           // progressThickness={23}
+          // progressVisible={false}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
           timer={timer}

@@ -616,7 +616,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, showCircularProgress,
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
@@ -647,8 +647,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         progressStyle={progressStyle}
         progressThickness={progressThickness}
         progressUnfilledColor={progressUnfilledColor}
+        progressVisible={progressVisible}
         ref={this.handleTimeRef}
-        showCircularProgress={showCircularProgress}
         showCounterTimer={showCounterTimer}
         showMaxTime={showMaxTime}
         showSets={showSets}
@@ -662,7 +662,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, showCircularProgress,
+    const {progressColorActive, progressColorRestTime, showCounterTimer, showMaxTime, showSets, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
@@ -692,8 +692,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         progressStyle={progressStyle}
         progressThickness={progressThickness}
         progressUnfilledColor={progressUnfilledColor}
+        progressVisible={progressVisible}
         ref={this.handleRestTimeRef}
-        showCircularProgress={showCircularProgress}
         showCounterTimer={showCounterTimer}
         showMaxTime={showMaxTime}
         showSets={showSets}
@@ -831,7 +831,7 @@ CustomCounterTimerContainer.propTypes = {
   progressStyle: PropTypes.any,
   progressThickness: PropTypes.number,
   setText: PropTypes.string,
-  showCircularProgress: PropTypes.bool,
+  progressVisible: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
   showMuteElement: PropTypes.bool,
@@ -874,7 +874,7 @@ CustomCounterTimerContainer.defaultProps = {
   showSets: true,
   setText: 'Set',
   showMuteElement: true,
-  showCircularProgress: true,
+  progressVisible: true,
   controlsWrapperStyle: {
     flexDirection: 'row',
     justifyContent: 'space-around',

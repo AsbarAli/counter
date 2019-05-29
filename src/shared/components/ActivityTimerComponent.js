@@ -191,12 +191,12 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderLabelsInsideProgressCircle = (): ReactElement<any> => {
-    const {showCounterTimer, showMaxTime, showSets, showCircularProgress, labelsWithStyle, labelsWithoutProgreessStyle} = this.props;
+    const {showCounterTimer, showMaxTime, showSets, progressVisible, labelsWithStyle, labelsWithoutProgreessStyle} = this.props;
     const timer = showCounterTimer ? this.renderCounterTimer() : null;
     const maxTime = showMaxTime ? this.renderMaxTime() : null;
     const sets = showSets ? this.renderShowSets() : null;
 
-    const labelStyle = showCircularProgress ? labelsWithStyle : labelsWithoutProgreessStyle;
+    const labelStyle = progressVisible ? labelsWithStyle : labelsWithoutProgreessStyle;
 
     return (
       <View style={labelStyle}>
@@ -250,9 +250,9 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   };
 
   render() {
-    const {showCircularProgress} = this.props;
+    const {progressVisible} = this.props;
 
-    const circularProgress = showCircularProgress ? this.renderCirucularProgress() : this.renderLabelWithoutCircularProgress();
+    const circularProgress = progressVisible ? this.renderCirucularProgress() : this.renderLabelWithoutCircularProgress();
 
     return circularProgress;
   }
@@ -271,7 +271,7 @@ ActivityTimerComponent.propTypes = {
   progressSize: PropTypes.number,
   progressStyle: PropTypes.any,
   progressThickness: PropTypes.number,
-  showCircularProgress: PropTypes.bool,
+  progressVisible: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
   showSets: PropTypes.bool,
@@ -289,7 +289,7 @@ ActivityTimerComponent.defaultProps = {
   showCounterTimer: true,
   showMaxTime: true,
   showSets: true,
-  showCircularProgress: true,
+  progressVisible: true,
   labelsWithStyle: {
     position: 'absolute',
     flexDirection: 'column',
