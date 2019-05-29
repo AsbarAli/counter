@@ -7,11 +7,6 @@ import colors from '@RNCounterTimer:theme/colors';
 const style = StyleSheet.create({
   container: {
   },
-
-  circularProgress: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   timeTextWrapper: {
     flexDirection: 'row',
     alignItems: 'center',

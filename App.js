@@ -98,7 +98,6 @@ export default class App extends Component<Props> {
           // gradientColorsRepsActive={['red', 'blue']}
           // gradientColorsDefault={['red', 'blue']}
           // gradientColorsRestActive={['red', 'blue']}
-          // circularProgressAnimate={false}
           // onActivityCompleted={this.handleActivityCompleted}
           // onContinueTimerPressed={this.handleContinueTimerPressed}
           // onMuteToggle={this.handleMuteToggle}
@@ -120,17 +119,22 @@ export default class App extends Component<Props> {
           // showCircularProgress={false}
           // showMuteElement={false}
           // showCounterTimer={false}
-          // skipText="BRR"
 
           // =========Controllers==========
           // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
-          // controllerDisabledResetButtonTextStyle={{color: 'red'}}
-          // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
           // controllerDisabledResetButtonStyle={{backgroundColor: 'yellow'}}
+          // controllerDisabledResetButtonTextStyle={{color: 'red'}}
+          // controllerDisabledSkipButtonStyle={{backgroundColor: 'green'}}
+          // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
+          // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
+          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
           // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
           // controllerResetButtonTextStyle={{color: 'green'}}
+          // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
-          // controllerDisabledSkipButtonStyle={{backgroundColor: 'green'}}
+          // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
+          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
+
           // controllerSkipButtonText="skipText"
           // controlPosition="TOP"
           // controlsWrapperStyle={{
@@ -138,15 +142,17 @@ export default class App extends Component<Props> {
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
-          // controllerResetButtonTextStyle={{color: 'red'}}
-          // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
 
-          // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
-          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
-          // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
-          timer={timer}
+          // =========== Progress================
+          // progressAnimation={false}
+          // progressBorderWidth={5}
+          // progressDirection="clockwise"
+          // progressSize={98}
+          // progressStyle={{backgroundColor: 'red'}}
+          // progressThickness={23}
           // timerContentWrapperStyle={{paddingTop: 30}}
           // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
+          timer={timer}
         />
       </View>
     );

@@ -8,6 +8,7 @@ import {Circle as CircularProgress} from 'react-native-progress';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
 
+import colors from '@RNCounterTimer:theme/colors';
 import styles, {
   progressCircleDefaultStyleProps,
 } from './ActivityTimer.styles';
@@ -207,7 +208,7 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderCirucularProgress = () => {
-    const {type, circularProgressAnimate} = this.props;
+    const {type, progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle} = this.props;
     const {elapsedTime, totalTime} = this.state;
     const elapsedTimePercentage = elapsedTime / totalTime;
     let progress = 0;
@@ -223,12 +224,15 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     return (
       <View style={styles.container}>
         <CircularProgress
-          {...progressCircleDefaultStyleProps}
-          animated={circularProgressAnimate}
+          animated={progressAnimation}
+          borderWidth={progressBorderWidth}
           color={color}
-          direction="counter-clockwise"
+          direction={progressDirection}
           progress={progress}
-          style={styles.circularProgress}
+          size={progressSize}
+          style={progressStyle}
+          thickness={progressThickness}
+          unfilledColor={colors.activity.progressBackground}
         >
           {this.renderLabelsInsideProgressCircle()}
         </CircularProgress>
@@ -256,12 +260,17 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
 ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
-  circularProgressAnimate: PropTypes.bool,
   label: PropTypes.string,
   labelsWithStyle: PropTypes.any,
   labelsWithoutProgreessStyle: PropTypes.any,
   onCountFinish: PropTypes.func.isRequired,
+  progressAnimation: PropTypes.bool,
+  progressBorderWidth: PropTypes.number,
   progressColor: PropTypes.string,
+  progressDirection: PropTypes.string,
+  progressSize: PropTypes.number,
+  progressStyle: PropTypes.any,
+  progressThickness: PropTypes.number,
   showCircularProgress: PropTypes.bool,
   showCounterTimer: PropTypes.bool,
   showMaxTime: PropTypes.bool,
@@ -272,7 +281,6 @@ ActivityTimerComponent.propTypes = {
 };
 
 ActivityTimerComponent.defaultProps = {
-  circularProgressAnimate: true,
   autoStartOnMount: false,
   label: ' ',
   progressColor: 'black', // Do we need a default color? Maybe there's a default color to the component itself?
@@ -293,6 +301,15 @@ ActivityTimerComponent.defaultProps = {
   labelsWithoutProgreessStyle: {
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  progressBorderWidth: 0,
+  progressSize: 140,
+  progressThickness: 4,
+  progressAnimation: true,
+  progressDirection: 'counter-clockwise',
+  progressStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 
