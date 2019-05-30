@@ -14,7 +14,7 @@
 |controllerMainPrimaryActionButtonStyle         | Object | null |
 |controllerMainPrimaryActionDisabledButtonStyle | Object | null |
 |controllerResetButtonStyle                     | Object | {paddingTop: 10,alignItems: 'center',flex: 1}| 
-|controllerResetButtonTextStyle                 | Object | {color: colors.background.blueCrock,fontSize: 16}|
+|controllerResetButtonTextStyle                 | Object | {color: '#0086C6',fontSize: 16}|
 |controllerResetText                            | String | 'RESET'|
 |controllerSecondPrimaryActionButtonStyle       | Object | null |
 |controllerSkipButtonStyle                      | Object | {paddingTop: 10,alignItems: 'center',flex: 1,}|
@@ -41,7 +41,7 @@
 |------------|---------------|----------------|
 | counterSetSeperatorText | String | '/' |
 | counterSetText          | String | 'Set' |
-| counterSetTextWrapperStyle | Object | {fontSize: 20, color: colors.background.black} |
+| counterSetTextWrapperStyle | Object | {fontSize: 20, color: 'black'} |
 | counterTexts | Array | ['MAX_TIME', 'TIMER', 'SET'] } |
 | counterTimer | Array | ['HOURS', 'MINUITES', 'SECONDS'] |
 
