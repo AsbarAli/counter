@@ -15,7 +15,7 @@ const style = StyleSheet.create({
   },
   totalTimeText: {
     // ...typeFace,
-    flex: 1,
+    // flex: 1,
     fontSize: 16,
     color: colors.font.weightColor,
   },
@@ -25,10 +25,10 @@ const style = StyleSheet.create({
   },
   elapsedTimeText: {
     // ...typeFace,
-    flex: 1,
     fontSize: 38,
     color: colors.background.black,
-    // width: 40,
+    width: 50,
+    textAlign: 'center',
   },
   timeMinutesRightAlignText: {
     // justifyContent: 'flex-end',
@@ -40,6 +40,7 @@ const style = StyleSheet.create({
     // ...typeFace,
     fontSize: 38,
     color: colors.background.black,
+    marginBottom: 8,
   },
   labelText: {
     // ...typeFace,

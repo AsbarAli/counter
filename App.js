@@ -84,10 +84,12 @@ export default class App extends Component<Props> {
   render() {
     const timer = {id: 1,
       name: 'DF',
+      restTimeHours: 1,
       restTimeMinutes: 0,
       restTimeSeconds: 4,
-      activeTimeMinutes: 0,
-      activeTimeSeconds: 9,
+      activiTimeHours: 0,
+      activeTimeMinutes: 3,
+      activeTimeSeconds: 15,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -114,9 +116,6 @@ export default class App extends Component<Props> {
           // progressColorActive="red"
           // progressColorRestTime="blue"
           // leftUpperElement={this.renderUpperElement()}
-          // showMaxTime={false}
-          // showSets={false}
-          // setText="SEtss"
           // middleUpperElement={this.renderMiddleElement()}
           // showMuteElement={false}
           // showCounterTimer={false}
@@ -130,31 +129,36 @@ export default class App extends Component<Props> {
           // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
           // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
           // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
-          // controllerResetButtonTextStyle={{color: 'green'}}
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
           // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
-
           // controllerSkipButtonText="skipText"
-          // controlPosition="TOP"
+          // controllerPosition="TOP"
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
 
+          // counterSetSeperatorText="-"
+          // counterSetText="Setss"
+          // counterSetTextWrapperStyle={{color: 'blue'}}
+          // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
+          // counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
+
           // =========== Progress================
           // progressAnimation={false}
           // progressBorderWidth={5}
           // progressDirection="clockwise"
-          // progressSize={98}
+          progressSize={188}
           // progressStyle={{backgroundColor: 'red'}}
           // progressThickness={23}
           // progressVisible={false}
-          // timerContentWrapperStyle={{paddingTop: 30}}
-          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
+          // progressWrapper={{paddingTop: 0, backgroundColor: 'blue'}}
+
           timer={timer}
+          // topItemsWrapperStyle={{flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch'}}
         />
       </View>
     );

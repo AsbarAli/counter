@@ -8,6 +8,14 @@ import {Circle as CircularProgress} from 'react-native-progress';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
 
+import {
+  MAX_TIME,
+  TIMER,
+  SET,
+  HOURS,
+  MINUITES,
+  SECONDS,
+} from '@RNCounterTimer:shared/strings';
 import colors from '@RNCounterTimer:theme/colors';
 import styles, {
   progressCircleDefaultStyleProps,
@@ -121,15 +129,16 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
     });
   }
 
-  formatSecondsValueForDisplay = (totalTimeInSeconds: number): {minutes: string, seconds: string} => {
+  formatSecondsValueForDisplay = (totalTimeInSeconds: number): {hours: string, minutes: string, seconds: string} => {
     // When the app returns from background, we are adding 0.00001 to it to force render the circle
     // So we need to convert this back to an integer.
     const timeInInt = Math.ceil(totalTimeInSeconds);
     // Append a "0" at the beginning and substring the last two digits. This means we will always get a double digit value
-    const minutes = `0${Math.floor(timeInInt / 60)}`.substr(-2);
+    const hours = `0${Math.floor(timeInInt / 3600)}`.substr(-2);
+    const minutes = `0${Math.floor(timeInInt / 60) % 60}`.substr(-2);
     const seconds = `0${timeInInt % 60}`.substr(-2);
 
-    return {minutes, seconds};
+    return {hours, minutes, seconds};
   }
 
   handleCountFinished = (): void => {
@@ -137,9 +146,10 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderCounterTimer = () => {
-    const {type} = this.props;
+    const {type, counterTimer} = this.props;
     const {elapsedTime, totalTime} = this.state;
     let timeToDisplay = {minutes: '--', seconds: '--'};
+    const content = [];
 
     if (type === ActivityTimerComponent.COUNT_TYPE.COUNTUP) {
       timeToDisplay = this.formatSecondsValueForDisplay(elapsedTime);
@@ -147,17 +157,44 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
       timeToDisplay = this.formatSecondsValueForDisplay(totalTime - elapsedTime);
     }
 
+    counterTimer.forEach((element, index) => {
+      if (index != 0) {
+        content.push(
+          <Text style={styles.elapsedTimeColon}>
+            {`:`}
+          </Text>
+        );
+      }
+
+      switch (element) {
+      case HOURS:
+        content.push(
+          <Text style={[styles.elapsedTimeText]}>
+            {timeToDisplay.hours}
+          </Text>
+        );
+        break;
+
+      case MINUITES:
+        content.push(
+          <Text style={styles.elapsedTimeText}>
+            {timeToDisplay.minutes}
+          </Text>
+        );
+        break;
+
+      case SECONDS:
+        content.push(
+          <Text style={styles.elapsedTimeText}>
+            {timeToDisplay.seconds}
+          </Text>
+        );
+      }
+    });
+
     return (
       <View style={styles.timeTextWrapper}>
-        <Text style={[styles.elapsedTimeText, styles.timeMinutesRightAlignText]}>
-          {timeToDisplay.minutes}
-        </Text>
-        <Text style={styles.elapsedTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.elapsedTimeText}>
-          {timeToDisplay.seconds}
-        </Text>
+        {content}
       </View>
 
     );
@@ -165,44 +202,93 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
   renderMaxTime = () => {
     const {totalTime} = this.state;
+    const {counterTimer} = this.props;
     const totalTimeToDisplay = this.formatSecondsValueForDisplay(totalTime);
+    const content = [];
+
+    counterTimer.forEach((element, index) => {
+      if (index != 0) {
+        content.push(
+          <Text style={styles.totalTimeColon}>
+            {`:`}
+          </Text>
+        );
+      }
+
+      switch (element) {
+      case HOURS:
+        content.push(
+          <Text style={[styles.totalTimeText]}>
+            {totalTimeToDisplay.hours}
+          </Text>
+        );
+        break;
+
+      case MINUITES:
+        content.push(
+          <Text style={styles.totalTimeText}>
+            {totalTimeToDisplay.minutes}
+          </Text>
+        );
+        break;
+
+      case SECONDS:
+        content.push(
+          <Text style={styles.totalTimeText}>
+            {totalTimeToDisplay.seconds}
+          </Text>
+        );
+      }
+    });
 
     return (
       <View style={styles.timeTextWrapper}>
-        <Text style={[styles.totalTimeText, styles.timeMinutesRightAlignText]}>
-          {totalTimeToDisplay.minutes}
-        </Text>
-        <Text style={styles.totalTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.totalTimeText}>
-          {totalTimeToDisplay.seconds}
-        </Text>
+        {content}
       </View>
     );
   }
 
   renderShowSets = () => {
+    const setStyle = [styles.labelText];
+    const {counterSetTextWrapperStyle} = this.props;
+
+    if (counterSetTextWrapperStyle) {
+      setStyle.push(counterSetTextWrapperStyle);
+    }
+
     return (
-      <Text style={styles.labelText}>
+      <Text style={setStyle}>
         {this.props.label}
       </Text>
     );
   }
 
   renderLabelsInsideProgressCircle = (): ReactElement<any> => {
-    const {showCounterTimer, showMaxTime, showSets, progressVisible, labelsWithStyle, labelsWithoutProgreessStyle} = this.props;
-    const timer = showCounterTimer ? this.renderCounterTimer() : null;
-    const maxTime = showMaxTime ? this.renderMaxTime() : null;
-    const sets = showSets ? this.renderShowSets() : null;
+    const {progressVisible, labelsWithStyle, labelsWithoutProgreessStyle, counterTexts} = this.props;
+    const maxTime = this.renderMaxTime();
+    const timer = this.renderCounterTimer();
+    const sets = this.renderShowSets();
+
+    const content = [];
+
+    counterTexts.forEach((element) => {
+      switch (element) {
+      case MAX_TIME:
+        content.push(maxTime);
+        break;
+      case TIMER:
+        content.push(timer);
+        break;
+      case SET:
+        content.push(sets);
+      }
+    });
 
     const labelStyle = progressVisible ? labelsWithStyle : labelsWithoutProgreessStyle;
 
     return (
       <View style={labelStyle}>
-        {maxTime}
-        {timer}
-        {sets}
+        {content}
       </View>
     );
   }
@@ -260,6 +346,8 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
 ActivityTimerComponent.propTypes = {
   autoStartOnMount: PropTypes.bool,
+  counterSetTextWrapperStyle: PropTypes.any,
+  counterTexts: PropTypes.any,
   label: PropTypes.string,
   labelsWithStyle: PropTypes.any,
   labelsWithoutProgreessStyle: PropTypes.any,
@@ -272,9 +360,6 @@ ActivityTimerComponent.propTypes = {
   progressStyle: PropTypes.any,
   progressThickness: PropTypes.number,
   progressVisible: PropTypes.bool,
-  showCounterTimer: PropTypes.bool,
-  showMaxTime: PropTypes.bool,
-  showSets: PropTypes.bool,
   started: PropTypes.bool,
   timeToRun: PropTypes.number.isRequired,
   type: PropTypes.oneOf([ActivityTimerComponent.COUNT_TYPE.COUNTDOWN, ActivityTimerComponent.COUNT_TYPE.COUNTUP]),
@@ -286,9 +371,6 @@ ActivityTimerComponent.defaultProps = {
   progressColor: 'black', // Do we need a default color? Maybe there's a default color to the component itself?
   started: false,
   type: ActivityTimerComponent.COUNT_TYPE.COUNTUP,
-  showCounterTimer: true,
-  showMaxTime: true,
-  showSets: true,
   progressVisible: true,
   labelsWithStyle: {
     position: 'absolute',
@@ -311,6 +393,12 @@ ActivityTimerComponent.defaultProps = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  counterTexts: [MAX_TIME, TIMER, SET],
+  counterSetTextWrapperStyle: {
+    fontSize: 20,
+    color: colors.background.black,
+  },
+
 };
 
 export default ActivityTimerComponent;
