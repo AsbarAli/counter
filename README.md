@@ -2,7 +2,7 @@
 
 ## Props
 
-### Controller Props
+### Controller
 
 | Props | Type | Default Values |
 | ------------- | ------------- |----|
@@ -22,7 +22,7 @@
 |controllerPosition                             | String | 'BOTTOM'|
 |controlsWrapperStyle                           | Object | {flexDirection: 'row',justifyContent: 'space-around',paddingBottom: 10,paddingTop: 10,}|
 
-### Progress Props
+### Progress
 
 | Props | Type | Default Values |
 |------------|---------------|----------------|
@@ -35,7 +35,7 @@
 | progressSize            | Number | 140                                              |
 | progressWrapper         | Object | { paddingTop: 30}                                |
 
-### Counter Props
+### Counter
 
 | Props | Type | Default Values |
 |------------|---------------|----------------|
@@ -44,3 +44,11 @@
 | counterSetTextWrapperStyle | Object | {fontSize: 20, color: colors.background.black} |
 | counterTexts | Array | ['MAX_TIME', 'TIMER', 'SET'] } |
 | counterTimer | Array | ['HOURS', 'MINUITES', 'SECONDS'] |
+
+
+### Gradient Color
+| Props | Type | Default Values |
+|------------|---------------|----------------|
+| gradientColorsDefault | Object ||
+| gradientColorsRepsActive | Object ||
+| gradientColorsRestActive | Object ||
