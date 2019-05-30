@@ -30,8 +30,9 @@
 | progressBorderWidth     | Number | 0                                                |
 | progressDirection       | String | 'clockwise'                                      |
 | progressStyle           | Object | {alignItems: 'center',justifyContent: 'center',} |
-| progressThickness       | Number | 140                                              |
+| progressThickness       | Number | 4                                                |
 | progressVisible         | bool   | true                                             |
+| progressSize            | Number | 140                                              |
 | progressWrapper         | Object | { paddingTop: 30}                                |
 
 ### Counter Props
