@@ -287,7 +287,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
   }
 
-  handlePauseRestPressed = (): void => {
+  handleSecondaryModePausePressed = (): void => {
     const {onSecondaryModePausePressed} = this.props;
 
     if (onSecondaryModePausePressed) {
@@ -299,7 +299,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     });
   }
 
-  handleStartRestPressed = (): void => {
+  handleSecondaryModeStartPressed = (): void => {
     const {onSecondaryModeStartPressed} = this.props;
 
     if (onSecondaryModeStartPressed) {
@@ -311,7 +311,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     });
   }
 
-  handlePauseTimerPressed = (): void => {
+  handlePrimaryModePausePressed = (): void => {
     const {onPrimaryModePausePressed} = this.props;
 
     if (onPrimaryModePausePressed) {
@@ -323,7 +323,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     });
   }
 
-  handleContinueTimerPressed = (): void => {
+  handlePrimaryModeStartPressed = (): void => {
     const {onPrimaryModeStartPressed} = this.props;
 
     if (onPrimaryModeStartPressed) {
@@ -381,7 +381,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     }
   }
 
-  handleRestTimeEnd = (): void => {
+  handleSecondaryModeEnd = (): void => {
     const {onSecondaryModeEnd} = this.props;
 
     if (onSecondaryModeEnd) {
@@ -488,14 +488,14 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     case ACTIVITY_STATUS.IN_PROGRESS:
       buttonText = timerRunning ? PAUSE : START;
       buttonType = timerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = timerRunning ? this.handlePauseTimerPressed : this.handleContinueTimerPressed;
+      onButtonPress = timerRunning ? this.handlePrimaryModePausePressed : this.handlePrimaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       break;
 
     case ACTIVITY_STATUS.REST:
       buttonText = restTimerRunning ? PAUSE : START;
       buttonType = restTimerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = restTimerRunning ? this.handlePauseRestPressed : this.handleStartRestPressed;
+      onButtonPress = restTimerRunning ? this.handleSecondaryModePausePressed : this.handleSecondaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       break;
 
@@ -696,7 +696,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         counterTimer={counterTimer}
         key={timerKey}
         label={this.formatSetLabel()}
-        onCountFinish={this.handleRestTimeEnd}
+        onCountFinish={this.handleSecondaryModeEnd}
         progressAnimation={progressAnimation}
         progressBorderWidth={progressBorderWidth}
         progressColor={progressColor}
