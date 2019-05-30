@@ -57,7 +57,7 @@
 
 | Props | Description | Default Values |
 |------------|---------------|----------------|
-| onActivityCompleted | Invoke when complete the timer| null |
+| onActivityCompleted | Invoke after completed the timer| null |
 | onContinueTimerPressed ||null |
 | onPauseRestPressed||null |
 | onPauseTimerPressed||null |
