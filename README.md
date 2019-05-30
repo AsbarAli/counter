@@ -26,10 +26,20 @@
 
 | Props | Type | Default Values |
 |------------|---------------|----------------|
-| progressAnimation | bool | true
-| progressBorderWidth | Number | 0 |
-| progressDirection | String | 'clockwise' |
-| progressStyle | Object | {alignItems: 'center',justifyContent: 'center',} |
-| progressThickness | Number | 140 |
-| progressVisible | bool | true |
-| progressWrapper | Object | { paddingTop: 30} |
+| progressAnimation       | bool   | true                                             |
+| progressBorderWidth     | Number | 0                                                |
+| progressDirection       | String | 'clockwise'                                      |
+| progressStyle           | Object | {alignItems: 'center',justifyContent: 'center',} |
+| progressThickness       | Number | 140                                              |
+| progressVisible         | bool   | true                                             |
+| progressWrapper         | Object | { paddingTop: 30}                                |
+
+### Counter Props
+
+| Props | Type | Default Values |
+|------------|---------------|----------------|
+| counterSetSeperatorText | String | '/' |
+| counterSetText          | String | 'Set' |
+| counterSetTextWrapperStyle | Object | counterSetTextWrapperStyle: {fontSize: 20, color: colors.background.black} |
+| counterTexts | Array | ['MAX_TIME', 'TIMER', 'SET'] } |
+| counterTimer | Array | ['HOURS', 'MINUITES', 'SECONDS'] |
