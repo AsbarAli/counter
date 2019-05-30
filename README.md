@@ -52,3 +52,18 @@
 | gradientColorsDefault | Object ||
 | gradientColorsRepsActive | Object ||
 | gradientColorsRestActive | Object ||
+
+### Events
+
+| Props | Description | Default Values |
+|------------|---------------|----------------|
+| onActivityCompleted || null |
+| onContinueTimerPressed ||null |
+| onPauseRestPressed||null |
+| onPauseTimerPressed||null |
+| onResetButtonPressed||null |
+| onRestTimeEnd||null |
+| onSkipPressed||null |
+| onStartRestPressed||null |
+| onStartTimerPressed||null |
+
