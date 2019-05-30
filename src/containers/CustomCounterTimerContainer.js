@@ -29,6 +29,9 @@ import {
   MAX_TIME,
   TIMER,
   SET,
+  HOURS,
+  MINUITES,
+  SECONDS,
 } from '@RNCounterTimer:shared/strings';
 import styles, {
   containerStyleProps,
@@ -623,7 +626,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts,
-      counterSetTextWrapperStyle} = this.props;
+      counterSetTextWrapperStyle, counterTimer} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -644,6 +647,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       <ActivityTimerComponent
         counterSetTextWrapperStyle={counterSetTextWrapperStyle}
         counterTexts={counterTexts}
+        counterTimer={counterTimer}
         key={timerKey}
         label={this.formatSetLabel()}
         onCountFinish={this.handleTimeEnd}
@@ -669,7 +673,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {status, currentRunningSet} = this.state;
     const {progressColorActive, progressColorRestTime, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle,
-      counterTexts, counterSetTextWrapperStyle} = this.props;
+      counterTexts, counterSetTextWrapperStyle, counterTimer} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
     let progressColor = null;
 
@@ -689,6 +693,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       <ActivityTimerComponent
         counterSetTextWrapperStyle={counterSetTextWrapperStyle}
         counterTexts={counterTexts}
+        counterTimer={counterTimer}
         key={timerKey}
         label={this.formatSetLabel()}
         onCountFinish={this.handleRestTimeEnd}
@@ -760,10 +765,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   renderBoxContainer = () => {
-    const {controlPosition} = this.props;
+    const {controllerPosition} = this.props;
     const controls = this.renderActivityControls();
     const content = this.renderCounterContent();
-    const elements = controlPosition == TOP ? (
+    const elements = controllerPosition == TOP ? (
       <View
         {...containerStyleProps}
         style={[containerBorderStyle]}
@@ -796,7 +801,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 }
 
 CustomCounterTimerContainer.propTypes = {
-  controlPosition: PropTypes.string,
   controllerButtons: PropTypes.any,
   controllerDisabledResetButtonStyle: PropTypes.any,
   controllerDisabledResetButtonTextStyle: PropTypes.any,
@@ -804,6 +808,7 @@ CustomCounterTimerContainer.propTypes = {
   controllerDisabledSkipButtonTextStyle: PropTypes.any,
   controllerMainPrimaryActionButtonStyle: PropTypes.any,
   controllerMainPrimaryActionDisabledButtonStyle: PropTypes.any,
+  controllerPosition: PropTypes.string,
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
@@ -816,6 +821,7 @@ CustomCounterTimerContainer.propTypes = {
   counterSetText: PropTypes.string,
   counterSetTextWrapperStyle: PropTypes.any,
   counterTexts: PropTypes.any,
+  counterTimer: PropTypes.any,
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
   gradientColorsRestActive: PropTypes.array,
@@ -892,7 +898,7 @@ CustomCounterTimerContainer.defaultProps = {
     alignSelf: 'stretch',
   },
   controllerButtons: [RESET, PRIMARY_ACTION, SKIP],
-  controlPosition: BOTTOM,
+  controllerPosition: BOTTOM,
   controllerResetText: RESET,
   controllerResetButtonStyle: {
     paddingTop: 10,
@@ -936,6 +942,7 @@ CustomCounterTimerContainer.defaultProps = {
     fontSize: 20,
     color: colors.background.black,
   },
+  counterTimer: [HOURS, MINUITES, SECONDS],
 };
 
 export default CustomCounterTimerContainer;

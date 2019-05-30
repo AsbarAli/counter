@@ -129,13 +129,12 @@ export default class App extends Component<Props> {
           // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
           // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
           // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
-          // controllerResetButtonTextStyle={{color: 'green'}}
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
           // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonText="skipText"
-          // controlPosition="TOP"
+          // controllerPosition="TOP"
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
@@ -146,6 +145,7 @@ export default class App extends Component<Props> {
           // counterSetText="Setss"
           // counterSetTextWrapperStyle={{color: 'blue'}}
           // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
+          // counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
 
           // =========== Progress================
           // progressAnimation={false}

@@ -20,4 +20,6 @@ export const TOP = 'TOP';
 export const BOTTOM = 'BOTTOM';
 export const MAX_TIME = 'MAX_TIME';
 export const SET = 'SET';
-
+export const HOURS = 'HOURS';
+export const MINUITES = 'MINUITES';
+export const SECONDS = 'SECONDS';

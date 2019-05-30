@@ -12,6 +12,9 @@ import {
   MAX_TIME,
   TIMER,
   SET,
+  HOURS,
+  MINUITES,
+  SECONDS,
 } from '@RNCounterTimer:shared/strings';
 import colors from '@RNCounterTimer:theme/colors';
 import styles, {
@@ -143,9 +146,10 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
   }
 
   renderCounterTimer = () => {
-    const {type} = this.props;
+    const {type, counterTimer} = this.props;
     const {elapsedTime, totalTime} = this.state;
     let timeToDisplay = {minutes: '--', seconds: '--'};
+    const content = [];
 
     if (type === ActivityTimerComponent.COUNT_TYPE.COUNTUP) {
       timeToDisplay = this.formatSecondsValueForDisplay(elapsedTime);
@@ -153,23 +157,44 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
       timeToDisplay = this.formatSecondsValueForDisplay(totalTime - elapsedTime);
     }
 
+    counterTimer.forEach((element, index) => {
+      if (index != 0) {
+        content.push(
+          <Text style={styles.elapsedTimeColon}>
+            {`:`}
+          </Text>
+        );
+      }
+
+      switch (element) {
+      case HOURS:
+        content.push(
+          <Text style={[styles.elapsedTimeText]}>
+            {timeToDisplay.hours}
+          </Text>
+        );
+        break;
+
+      case MINUITES:
+        content.push(
+          <Text style={styles.elapsedTimeText}>
+            {timeToDisplay.minutes}
+          </Text>
+        );
+        break;
+
+      case SECONDS:
+        content.push(
+          <Text style={styles.elapsedTimeText}>
+            {timeToDisplay.seconds}
+          </Text>
+        );
+      }
+    });
+
     return (
       <View style={styles.timeTextWrapper}>
-        <Text style={[styles.elapsedTimeText, styles.timeMinutesRightAlignText]}>
-          {timeToDisplay.hours}
-        </Text>
-        <Text style={styles.elapsedTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.elapsedTimeText}>
-          {timeToDisplay.minutes}
-        </Text>
-        <Text style={styles.elapsedTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.elapsedTimeText}>
-          {timeToDisplay.seconds}
-        </Text>
+        {content}
       </View>
 
     );
@@ -177,25 +202,48 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
   renderMaxTime = () => {
     const {totalTime} = this.state;
+    const {counterTimer} = this.props;
     const totalTimeToDisplay = this.formatSecondsValueForDisplay(totalTime);
+    const content = [];
+
+    counterTimer.forEach((element, index) => {
+      if (index != 0) {
+        content.push(
+          <Text style={styles.totalTimeColon}>
+            {`:`}
+          </Text>
+        );
+      }
+
+      switch (element) {
+      case HOURS:
+        content.push(
+          <Text style={[styles.totalTimeText]}>
+            {totalTimeToDisplay.hours}
+          </Text>
+        );
+        break;
+
+      case MINUITES:
+        content.push(
+          <Text style={styles.totalTimeText}>
+            {totalTimeToDisplay.minutes}
+          </Text>
+        );
+        break;
+
+      case SECONDS:
+        content.push(
+          <Text style={styles.totalTimeText}>
+            {totalTimeToDisplay.seconds}
+          </Text>
+        );
+      }
+    });
 
     return (
       <View style={styles.timeTextWrapper}>
-        <Text style={[styles.totalTimeText, styles.timeMinutesRightAlignText]}>
-          {totalTimeToDisplay.hours}
-        </Text>
-        <Text style={styles.totalTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.totalTimeText}>
-          {totalTimeToDisplay.minutes}
-        </Text>
-        <Text style={styles.totalTimeColon}>
-          {`:`}
-        </Text>
-        <Text style={styles.totalTimeText}>
-          {totalTimeToDisplay.seconds}
-        </Text>
+        {content}
       </View>
     );
   }
@@ -217,8 +265,8 @@ class ActivityTimerComponent extends React.PureComponent<ActivityTimerProps, Act
 
   renderLabelsInsideProgressCircle = (): ReactElement<any> => {
     const {progressVisible, labelsWithStyle, labelsWithoutProgreessStyle, counterTexts} = this.props;
-    const timer = this.renderCounterTimer();
     const maxTime = this.renderMaxTime();
+    const timer = this.renderCounterTimer();
     const sets = this.renderShowSets();
 
     const content = [];
