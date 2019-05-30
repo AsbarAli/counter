@@ -41,6 +41,6 @@
 |------------|---------------|----------------|
 | counterSetSeperatorText | String | '/' |
 | counterSetText          | String | 'Set' |
-| counterSetTextWrapperStyle | Object | counterSetTextWrapperStyle: {fontSize: 20, color: colors.background.black} |
+| counterSetTextWrapperStyle | Object | {fontSize: 20, color: colors.background.black} |
 | counterTexts | Array | ['MAX_TIME', 'TIMER', 'SET'] } |
 | counterTimer | Array | ['HOURS', 'MINUITES', 'SECONDS'] |
