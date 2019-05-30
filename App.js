@@ -49,23 +49,23 @@ export default class App extends Component<Props> {
     Alert.alert('handleResetButtonPressed');
   }
 
-  handleStartRestPressed = () => {
+  handleSecondaryModeStartPressed = () => {
     Alert.alert('handleStartRestPressed');
   }
 
-  handlePauseRestPressed = () => {
+  handleSecondaryModePausePressed = () => {
     Alert.alert('handlePauseRestPressed');
   }
 
-  handleContinueTimerPressed = () => {
+  handlePrimaryModeStartPressed = () => {
     Alert.alert('handleContinueTimerPressed');
   }
 
-  handleRestTimeEnd = () => {
+  handleSecondaryModeEnd = () => {
     Alert.alert('handleRestTimeEnd');
   }
 
-  handleTimerPressed = () => {
+  handlePrimaryModePausePressed = () => {
     Alert.alert('handleTimerPressed');
   }
 
@@ -84,12 +84,12 @@ export default class App extends Component<Props> {
   render() {
     const timer = {id: 1,
       name: 'DF',
-      restTimeHours: 1,
+      restTimeHours: 0,
       restTimeMinutes: 0,
-      restTimeSeconds: 4,
+      restTimeSeconds: 14,
       activiTimeHours: 0,
-      activeTimeMinutes: 3,
-      activeTimeSeconds: 15,
+      activeTimeMinutes: 0,
+      activeTimeSeconds: 13,
       sets: 2,
       createdDate: null,
       modifiedDate: null};
@@ -97,28 +97,6 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
-          // ===========Gradients==========
-          // gradientColorsDefault={['red', 'blue']}
-          // gradientColorsRepsActive={['red', 'blue']}
-          // gradientColorsRestActive={['red', 'blue']}
-
-          // onActivityCompleted={this.handleActivityCompleted}
-          // onContinueTimerPressed={this.handleContinueTimerPressed}
-          // onMuteToggle={this.handleMuteToggle}
-          // onPauseRestPressed={this.handlePauseRestPressed}
-          // onPauseTimerPressed={this.handleTimerPressed}
-          // onResetButtonPressed={this.handleResetButtonPressed}
-          // onRestTimeEnd={this.handleRestTimeEnd}
-          // onSkipPressed={this.handleSkipPressed}
-          // onStartRestPressed={this.handleStartRestPressed}
-          // onStartTimerPressed={this.handleStartTimePressed}
-          // onUnMuteToggle={this.handleUnMuteTogglePressed}
-          // progressColorActive="red"
-          // progressColorRestTime="blue"
-          // leftUpperElement={this.renderUpperElement()}
-          // middleUpperElement={this.renderMiddleElement()}
-          // showMuteElement={false}
-          // showCounterTimer={false}
 
           // =========Controllers==========
           // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
@@ -128,24 +106,49 @@ export default class App extends Component<Props> {
           // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
           // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
           // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
+          // controllerPosition="TOP"
           // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
           // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonText="skipText"
-          // controllerPosition="TOP"
           // controlsWrapperStyle={{
           //   flexDirection: 'row',
           //   justifyContent: 'space-between',
           //   padding: 10,
           // }}
+          // counterTimer={['MINUITES', 'SECONDS']}
 
           // counterSetSeperatorText="-"
           // counterSetText="Setss"
           // counterSetTextWrapperStyle={{color: 'blue'}}
           // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
-          // counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
+          // onStartTimerPressed={this.handleStartTimePressed}
+
+          // ===========Gradients==========
+          // gradientColorsDefault={['red', 'blue']}
+          // gradientColorsRepsActive={['red', 'blue']}
+          // gradientColorsRestActive={['red', 'blue']}
+
+          // ========== Events =======================
+          // onActivityCompleted={this.handleActivityCompleted}
+          // onPrimaryModeStartPressed={this.handlePrimaryModeStartPressed}
+          // onSecondaryModePausePressed={this.handleSecondaryModePausePressed}
+          // onPrimaryModePausePressed={this.handlePrimaryModePausePressed}
+          // onSecondaryModeEnd={this.handleSecondaryModeEnd}
+          // onSecondaryModeStartPressed={this.handleSecondaryModeStartPressed}
+          // onMuteToggle={this.handleMuteToggle}
+          // onResetButtonPressed={this.handleResetButtonPressed}
+          // onSkipPressed={this.handleSkipPressed}
+          // onUnMuteToggle={this.handleUnMuteTogglePressed}
+
+          // progressColorActive="red"
+          // progressColorRestTime="blue"
+          // leftUpperElement={this.renderUpperElement()}
+          // middleUpperElement={this.renderMiddleElement()}
+          // showMuteElement={false}
+          // showCounterTimer={false}
 
           // =========== Progress================
           // progressAnimation={false}

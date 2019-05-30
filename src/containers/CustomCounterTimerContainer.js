@@ -288,10 +288,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handlePauseRestPressed = (): void => {
-    const {onPauseRestPressed} = this.props;
+    const {onSecondaryModePausePressed} = this.props;
 
-    if (onPauseRestPressed) {
-      onPauseRestPressed();
+    if (onSecondaryModePausePressed) {
+      onSecondaryModePausePressed();
     }
 
     this.setState({
@@ -300,10 +300,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleStartRestPressed = (): void => {
-    const {onStartRestPressed} = this.props;
+    const {onSecondaryModeStartPressed} = this.props;
 
-    if (onStartRestPressed) {
-      onStartRestPressed();
+    if (onSecondaryModeStartPressed) {
+      onSecondaryModeStartPressed();
     }
 
     this.setState({
@@ -312,10 +312,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handlePauseTimerPressed = (): void => {
-    const {onPauseTimerPressed} = this.props;
+    const {onPrimaryModePausePressed} = this.props;
 
-    if (onPauseTimerPressed) {
-      onPauseTimerPressed();
+    if (onPrimaryModePausePressed) {
+      onPrimaryModePausePressed();
     }
 
     this.setState({
@@ -324,10 +324,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleContinueTimerPressed = (): void => {
-    const {onContinueTimerPressed} = this.props;
+    const {onPrimaryModeStartPressed} = this.props;
 
-    if (onContinueTimerPressed) {
-      onContinueTimerPressed();
+    if (onPrimaryModeStartPressed) {
+      onPrimaryModeStartPressed();
     }
     this.setState({
       timerRunning: true,
@@ -382,10 +382,10 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   }
 
   handleRestTimeEnd = (): void => {
-    const {onRestTimeEnd} = this.props;
+    const {onSecondaryModeEnd} = this.props;
 
-    if (onRestTimeEnd) {
-      onRestTimeEnd();
+    if (onSecondaryModeEnd) {
+      onSecondaryModeEnd();
     }
 
     this.restSoundPlay();
@@ -827,14 +827,14 @@ CustomCounterTimerContainer.propTypes = {
   gradientColorsRestActive: PropTypes.array,
   leftUpperElement: PropTypes.element,
   onActivityCompleted: PropTypes.func,
-  onContinueTimerPressed: PropTypes.func,
+  onPrimaryModeStartPressed: PropTypes.func,
   onMuteToggle: PropTypes.func,
-  onPauseRestPressed: PropTypes.func,
-  onPauseTimerPressed: PropTypes.func,
+  onSecondaryModePausePressed: PropTypes.func,
+  onPrimaryModePausePressed: PropTypes.func,
   onResetButtonPressed: PropTypes.func,
-  onRestTimeEnd: PropTypes.func,
+  onSecondaryModeEnd: PropTypes.func,
   onSkipPressed: PropTypes.func,
-  onStartRestPressed: PropTypes.func,
+  onSecondaryModeStartPressed: PropTypes.func,
   onStartTimerPressed: PropTypes.func,
   onUnMuteToggle: PropTypes.func,
   progressAnimation: PropTypes.bool,
@@ -865,13 +865,13 @@ CustomCounterTimerContainer.propTypes = {
 CustomCounterTimerContainer.defaultProps = {
   leftUpperElement: null,
   onMuteToggle: null,
-  onPauseTimerPressed: null,
+  onPrimaryModePausePressed: null,
   onStartTimerPressed: null,
   onResetButtonPressed: null,
-  onStartRestPressed: null,
-  onPauseRestPressed: null,
-  onContinueTimerPressed: null,
-  onRestTimeEnd: null,
+  onSecondaryModeStartPressed: null,
+  onSecondaryModePausePressed: null,
+  onPrimaryModeStartPressed: null,
+  onSecondaryModeEnd: null,
   onActivityCompleted: null,
   onSkipPressed: null,
   onUnMuteToggle: null,
