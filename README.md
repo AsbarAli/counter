@@ -21,3 +21,15 @@
 |controllerSkipButtonText                       | String | 'SKIP'|
 |controllerPosition                             | String | 'BOTTOM'|
 |controlsWrapperStyle                           | Object | {flexDirection: 'row',justifyContent: 'space-around',paddingBottom: 10,paddingTop: 10,}|
+
+### Progress Props
+
+| Props | Type | Default Values |
+|------------|---------------|----------------|
+| progressAnimation | bool | true
+| progressBorderWidth | Number | 0 |
+| progressDirection | String | 'clockwise' |
+| progressStyle | Object | {alignItems: 'center',justifyContent: 'center',} |
+| progressThickness | Number | 140 |
+| progressVisible | bool | true |
+| progressWrapper | Object | { paddingTop: 30} |
