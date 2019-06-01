@@ -17,18 +17,18 @@ const styles = StyleSheet.create({
 
   // Button types
   primaryButton: {
-    backgroundColor: colors.background.blueCrock,
-    borderColor: colors.background.blueCrock,
+    backgroundColor: colors.background.greenCrock,
+    borderColor: colors.background.greenCrock,
     borderWidth: Platform.OS == 'ios' ? 1.5 : 0,
   },
   primaryDisabledButton: {
-    backgroundColor: colors.background.disabledBlue,
-    borderColor: colors.background.disabledBlue,
+    backgroundColor: colors.background.disbaledGreenCrock,
+    borderColor: colors.background.disbaledGreenCrock,
     borderWidth: Platform.OS == 'ios' ? 1.5 : 0,
   },
   secondaryButton: {
     backgroundColor: colors.background.white,
-    borderColor: colors.background.blueCrock,
+    borderColor: colors.background.greenCrock,
   },
   secondaryDisabledButton: {
     backgroundColor: colors.background.white,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     color: colors.background.white,
   },
   secondaryText: {
-    color: colors.background.blueCrock,
+    color: colors.background.greenCrock,
   },
   secondaryDisabledText: {
     color: colors.background.disabledBlue,
