@@ -624,7 +624,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderTimerContent = (): ReactElement<any> => {
     const {timer: {activeTimeMinutes, activeTimeSeconds, activiTimeHours}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, progressVisible,
+    const {progressPrimaryStatusColor, progressSecondaryStatusColor, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle, counterTexts,
       counterSetTextWrapperStyle, counterTimer} = this.props;
     const timerKey = `workoutTimer${currentRunningSet}`;
@@ -634,11 +634,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
-      progressColor = progressColorActive;
+      progressColor = progressPrimaryStatusColor;
 
       break;
     case ACTIVITY_STATUS.REST:
-      progressColor = progressColorRestTime;
+      progressColor = progressSecondaryStatusColor;
 
       break;
     }
@@ -671,7 +671,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderRestContent = (): ReactElement<any> => {
     const {timer: {restTimeMinutes, restTimeSeconds, restTimeHours}} = this.state;
     const {status, currentRunningSet} = this.state;
-    const {progressColorActive, progressColorRestTime, progressVisible,
+    const {progressPrimaryStatusColor, progressSecondaryStatusColor, progressVisible,
       progressBorderWidth, progressSize, progressThickness, progressUnfilledColor, progressAnimation, progressDirection, progressStyle,
       counterTexts, counterSetTextWrapperStyle, counterTimer} = this.props;
     const timerKey = `restTimer${currentRunningSet}`;
@@ -680,11 +680,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const restTime = this.getTimerDuration(restTimeHours, restTimeMinutes, restTimeSeconds);
     switch (status) {
     case ACTIVITY_STATUS.IN_PROGRESS:
-      progressColor = progressColorActive;
+      progressColor = progressPrimaryStatusColor;
 
       break;
     case ACTIVITY_STATUS.REST:
-      progressColor = progressColorRestTime;
+      progressColor = progressSecondaryStatusColor;
 
       break;
     }
@@ -839,8 +839,8 @@ CustomCounterTimerContainer.propTypes = {
   onUnMuteToggle: PropTypes.func,
   progressAnimation: PropTypes.bool,
   progressBorderWidth: PropTypes.number,
-  progressColorActive: PropTypes.string,
-  progressColorRestTime: PropTypes.string,
+  progressPrimaryStatusColor: PropTypes.string,
+  progressSecondaryStatusColor: PropTypes.string,
   progressDirection: PropTypes.string,
   progressSize: PropTypes.number,
   progressStyle: PropTypes.any,
@@ -875,8 +875,8 @@ CustomCounterTimerContainer.defaultProps = {
   onActivityCompleted: null,
   onSkipPressed: null,
   onUnMuteToggle: null,
-  progressColorRestTime: progressColorRest,
-  progressColorActive: progressColorTimer,
+  progressSecondaryStatusColor: progressColorRest,
+  progressPrimaryStatusColor: progressColorTimer,
   gradientColorsDefault: gradientColorsDefault,
   gradientColorsRepsActive: gradientColorsRepsActive,
   gradientColorsRestActive: gradientColorsRestActive,
