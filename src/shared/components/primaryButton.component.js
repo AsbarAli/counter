@@ -46,7 +46,7 @@ class PrimaryButtonComponent extends React.PureComponent<PrimaryButtonProps, Pri
   }
 
   renderContent = (): ReactElement<any> => {
-    const {text, type, onPress, disabled, buttonStyle, textStyle, userDefinedButtonStyle} = this.props;
+    const {text, type, onPress, disabled, buttonStyle, textStyle, userDefinedButtonStyle, userDefinedTextStyle, renderActionElement} = this.props;
     const buttonStyles = [styles.button, this._buttonStyleMap[type]];
     const buttonTextStyles = [styles.text, this._buttonTextStyleMap[type]];
 
@@ -68,15 +68,19 @@ class PrimaryButtonComponent extends React.PureComponent<PrimaryButtonProps, Pri
       buttonStyles.push(userDefinedButtonStyle);
     }
 
+    if (userDefinedTextStyle) {
+      buttonTextStyles.push(userDefinedTextStyle);
+    }
+
+    const primaryButtonElement = renderActionElement ? renderActionElement : (<Text style={buttonTextStyles}>{text}</Text>);
+
     return (
       <TouchableOpacity
         disabled={disabled}
         onPress={onPress}
         style={buttonStyles}
       >
-        <Text style={buttonTextStyles}>
-          {text}
-        </Text>
+        {primaryButtonElement}
       </TouchableOpacity>
     );
   }

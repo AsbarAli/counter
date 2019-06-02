@@ -468,13 +468,16 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
   renderPrimaryActionButton = (): ReactElement<any> => {
     const {status, restTimerRunning, timerRunning} = this.state;
-    const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerSecondPrimaryActionButtonStyle} = this.props;
+    const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerMainPrimaryActionButtonElement,
+      controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle, controlleSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
 
     let buttonText = null;
     let buttonType = null;
     let onButtonPress = null;
     let isCompleted = false;
     let userDefinedButtonStyle = null;
+    let userDefinedTextStyle = null;
+    let renderActionElement = null;
 
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
@@ -482,6 +485,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = this.handleStartTimerPressed;
       userDefinedButtonStyle = controllerMainPrimaryActionButtonStyle;
+      userDefinedTextStyle = controllerMainPrimaryActionButtonTextStyle;
+      renderActionElement = controllerMainPrimaryActionButtonElement;
       break;
 
     case ACTIVITY_STATUS.IN_PROGRESS:
@@ -489,6 +494,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       buttonType = timerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = timerRunning ? this.handlePrimaryModePausePressed : this.handlePrimaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
+      userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
+      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
       break;
 
     case ACTIVITY_STATUS.REST:
@@ -496,6 +503,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       buttonType = restTimerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
       onButtonPress = restTimerRunning ? this.handleSecondaryModePausePressed : this.handleSecondaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
+      userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
+      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
       break;
 
     case ACTIVITY_STATUS.COMPLETED:
@@ -504,6 +513,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       onButtonPress = this.handleActivityCompleted;
       isCompleted = true;
       userDefinedButtonStyle = controllerMainPrimaryActionDisabledButtonStyle;
+      userDefinedTextStyle = controllerMainPrimaryActionButtonTextStyle;
       break;
     }
 
@@ -512,9 +522,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         <PrimaryButtonComponent
           disabled={isCompleted}
           onPress={onButtonPress}
+          renderActionElement={renderActionElement}
           text={buttonText}
           type={buttonType}
           userDefinedButtonStyle={userDefinedButtonStyle}
+          userDefinedTextStyle={userDefinedTextStyle}
         />
       </View>
     );
@@ -523,10 +535,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderResetButton = (): ReactElement<any> => {
     const {status, currentRunningSet} = this.state;
     const {controllerResetText, controllerResetButtonStyle, controllerDisabledResetButtonTextStyle,
-      controllerDisabledResetButtonStyle, controllerResetButtonTextStyle} = this.props;
+      controllerDisabledResetButtonStyle, controllerResetButtonTextStyle, controllerResetButtonElement, controllerDisabledResetButtonElement} = this.props;
     const textStyles = [controllerResetButtonTextStyle];
     const buttonStyle = [controllerResetButtonStyle];
     const disabled = currentRunningSet === 0 && status === ACTIVITY_STATUS.NOT_STARTED;
+    let resetButtonElement = controllerResetButtonElement;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
@@ -536,7 +549,13 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       if (controllerDisabledResetButtonStyle) {
         buttonStyle.push(controllerDisabledResetButtonStyle);
       }
+
+      if (controllerDisabledResetButtonElement) {
+        resetButtonElement = controllerDisabledResetButtonElement;
+      }
     }
+
+    const butttonElement = controllerResetButtonElement ? resetButtonElement : (<Text style={textStyles}>{controllerResetText}</Text>);
 
     return (
       <TouchableOpacity
@@ -545,9 +564,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onPress={this.handleResetPressed}
         style={buttonStyle}
       >
-        <Text style={textStyles}>
-          {controllerResetText}
-        </Text>
+        {butttonElement}
       </TouchableOpacity>
     );
   }
@@ -555,10 +572,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderSkipButton = (): ReactElement<any> => {
     const {status} = this.state;
     const {controllerSkipButtonText, controllerDisabledSkipButtonTextStyle, controllerSkipButtonTextStyle,
-      controllerSkipButtonStyle, controllerDisabledSkipButtonStyle} = this.props;
+      controllerSkipButtonStyle, controllerDisabledSkipButtonStyle, controllerSkipButtonElement, controllerDisabledSkipButtonElement} = this.props;
     const textStyles = [controllerSkipButtonTextStyle];
     const buttonStyle = [controllerSkipButtonStyle];
     const disabled = status === ACTIVITY_STATUS.COMPLETED;
+    const skipButtonElement = controllerSkipButtonElement;
 
     if (disabled) {
       textStyles.push(styles.textDisabled);
@@ -568,7 +586,13 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       if (controllerDisabledSkipButtonStyle) {
         buttonStyle.push(controllerDisabledSkipButtonStyle);
       }
+
+      if (controllerDisabledSkipButtonElement) {
+        skipButtonElement.push(controllerDisabledSkipButtonElement);
+      }
     }
+
+    const butttonElement = controllerSkipButtonElement ? skipButtonElement : ( <Text style={textStyles}>{`${controllerSkipButtonText}`}</Text>);
 
     return (
       <TouchableOpacity
@@ -577,9 +601,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         onPress={this.handleSkipPressed}
         style={buttonStyle}
       >
-        <Text style={textStyles}>
-          {controllerSkipButtonText}
-        </Text>
+        {butttonElement}
       </TouchableOpacity>
     );
   }
@@ -734,12 +756,11 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const timertextStyle = [timerStatusTextStyle];
     let timerText = counterTimerDefaultStatusText;
 
-    const timerStatus = counterTimerStatusTextVisible ? (<Text style={timertextStyle}>{timerText}</Text>) : null;
-
     switch (status) {
     case ACTIVITY_STATUS.NOT_STARTED:
       gradientColors = gradientColorsDefault;
       counter = this.renderTimerContent();
+      timerText = counterTimerDefaultStatusText;
       break;
     case ACTIVITY_STATUS.IN_PROGRESS:
       gradientColors = gradientColorsRepsActive;
@@ -759,6 +780,8 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
       counter = this.renderTimerContent();
       break;
     }
+
+    const timerStatus = counterTimerStatusTextVisible ? (<Text style={timertextStyle}>{timerText}</Text>) : null;
 
     return (
       <LinearGradient
@@ -817,6 +840,7 @@ CustomCounterTimerContainer.propTypes = {
   controllerDisabledSkipButtonStyle: PropTypes.any,
   controllerDisabledSkipButtonTextStyle: PropTypes.any,
   controllerMainPrimaryActionButtonStyle: PropTypes.any,
+  controllerMainPrimaryActionButtonTextStyle: PropTypes.any,
   controllerMainPrimaryActionDisabledButtonStyle: PropTypes.any,
   controllerPosition: PropTypes.string,
   controllerResetButtonStyle: PropTypes.any,
@@ -960,12 +984,14 @@ CustomCounterTimerContainer.defaultProps = {
     fontSize: 20,
     color: colors.background.black,
   },
-  counterTimer: [HOURS, MINUITES, SECONDS],
+  counterTimer: [MINUITES, SECONDS],
   timerStatusTextStyle: {
     color: colors.background.black,
   },
 
   counterTimerStatusTextVisible: null,
+
+  controllerMainPrimaryActionButtonTextStyle: null,
 };
 
 export default CustomCounterTimerContainer;
