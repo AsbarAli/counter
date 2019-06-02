@@ -130,9 +130,9 @@ export const containerStyleProps = {
 
 export const gradientColorsRepsDefault = [colors.activity.white, colors.activity.white];
 export const gradientColorsDefault = gradientColorsRepsDefault;
-export const gradientColorsRepsActive = [colors.activity.backgroundGreen, colors.activity.white];
-export const gradientColorsRestInactive = [colors.activity.backgroundOrange, colors.activity.white];
-export const gradientColorsRestActive = [colors.activity.backgroundOrange, colors.activity.white];
+// export const gradientColorsRepsActive = [colors.activity.white, colors.activity.white];
+// export const gradientColorsRestInactive = [colors.activity.backgroundOrange, colors.activity.white];
+// export const gradientColorsRestActive = [colors.activity.white, colors.activity.white];
 
 export const progressColorRest = colors.activity.borderOrange;
-export const progressColorTimer = colors.activity.borderGreen;
+export const progressColorTimer = colors.activity.borderBlue;

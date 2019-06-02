@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, Alert, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, Dimensions, Alert, Image, View, TouchableOpacity, Text} from 'react-native';
 import {CustomCounterTimerContainer} from './src/containers';
 import colors from '@RNCounterTimer:theme/colors';
 
@@ -49,23 +49,23 @@ export default class App extends Component<Props> {
     Alert.alert('handleResetButtonPressed');
   }
 
-  handleStartRestPressed = () => {
+  handleSecondaryModeStartPressed = () => {
     Alert.alert('handleStartRestPressed');
   }
 
-  handlePauseRestPressed = () => {
+  handleSecondaryModePausePressed = () => {
     Alert.alert('handlePauseRestPressed');
   }
 
-  handleContinueTimerPressed = () => {
+  handlePrimaryModeStartPressed = () => {
     Alert.alert('handleContinueTimerPressed');
   }
 
-  handleRestTimeEnd = () => {
+  handleSecondaryModeEnd = () => {
     Alert.alert('handleRestTimeEnd');
   }
 
-  handleTimerPressed = () => {
+  handlePrimaryModePausePressed = () => {
     Alert.alert('handleTimerPressed');
   }
 
@@ -81,79 +81,146 @@ export default class App extends Component<Props> {
     Alert.alert('handleUnMuteTogglePressed');
   }
 
+  renderResetButtonElement = () => {
+    return (
+      <Image
+        source={{uri: 'https://previews.123rf.com/images/trankvilizator/trankvilizator1605/trankvilizator160500179/56141854-icon-the-button-with-the-restart-symbol.jpg'}}
+        style={{width: 40, height: 40}}
+      />
+    );
+  }
+
+  renderDisabledResetButtonElement = () => {
+    return (
+      <Image
+        source={{uri: 'https://banner2.kisspng.com/20180404/cfe/kisspng-computer-icons-reset-button-restart-5ac475ab2b43b6.6521509415228246191772.jpg'}}
+        style={{width: 40, height: 40}}
+      />
+    );
+  }
+
+  renderSkipButtonElement = () => {
+    return (
+      <Image
+        source={{uri: 'http://www.iconarchive.com/download/i7928/hopstarter/soft-scraps/Button-Forward.ico'}}
+        style={{width: 40, height: 40}}
+      />
+    );
+  }
+
+  renderMainPrimaryActionButtonElement = () => {
+    return (
+      <Image
+        source={{uri: 'http://images.clipartlogo.com/files/images/12/122831/windows-media-player-play-button-updated_p'}}
+        style={{width: 40, height: 40}}
+      />
+    );
+  }
+
+  renderSecondPrimaryActionButtonElement = () => {
+    return (
+      <Image
+        source={{uri: 'https://thewellofshelby.com/wp-content/uploads/2015/06/Pause-Queue.png'}}
+        style={{width: 40, height: 40}}
+      />
+    );
+  }
+
   render() {
     const timer = {id: 1,
       name: 'DF',
-      restTimeHours: 1,
+      restTimeHours: 0,
       restTimeMinutes: 0,
-      restTimeSeconds: 4,
+      restTimeSeconds: 7,
       activiTimeHours: 0,
-      activeTimeMinutes: 3,
-      activeTimeSeconds: 15,
-      sets: 2,
+      activeTimeMinutes: 0,
+      activeTimeSeconds: 8,
+      sets: 7,
       createdDate: null,
       modifiedDate: null};
 
     return (
       <View style={styles.container}>
         <CustomCounterTimerContainer
-          // ===========Gradients==========
-          // gradientColorsDefault={['red', 'blue']}
-          // gradientColorsRepsActive={['red', 'blue']}
-          // gradientColorsRestActive={['red', 'blue']}
-
-          // onActivityCompleted={this.handleActivityCompleted}
-          // onContinueTimerPressed={this.handleContinueTimerPressed}
-          // onMuteToggle={this.handleMuteToggle}
-          // onPauseRestPressed={this.handlePauseRestPressed}
-          // onPauseTimerPressed={this.handleTimerPressed}
-          // onResetButtonPressed={this.handleResetButtonPressed}
-          // onRestTimeEnd={this.handleRestTimeEnd}
-          // onSkipPressed={this.handleSkipPressed}
-          // onStartRestPressed={this.handleStartRestPressed}
-          // onStartTimerPressed={this.handleStartTimePressed}
-          // onUnMuteToggle={this.handleUnMuteTogglePressed}
-          // progressColorActive="red"
-          // progressColorRestTime="blue"
-          // leftUpperElement={this.renderUpperElement()}
-          // middleUpperElement={this.renderMiddleElement()}
-          // showMuteElement={false}
-          // showCounterTimer={false}
 
           // =========Controllers==========
-          // controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
+          controllerButtons={[ 'RESET','PRIMARY_ACTION', 'SKIP']}
           // controllerDisabledResetButtonStyle={{backgroundColor: 'yellow'}}
           // controllerDisabledResetButtonTextStyle={{color: 'red'}}
           // controllerDisabledSkipButtonStyle={{backgroundColor: 'green'}}
           // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
-          // controllerMainPrimaryActionButtonStyle={{backgroundColor: 'red'}}
-          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'black'}}
-          // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
+          controllerDisabledResetButtonElement={this.renderDisabledResetButtonElement()}
+          controllerMainPrimaryActionButtonElement={this.renderMainPrimaryActionButtonElement()}
+          controllerMainPrimaryActionButtonStyle={{ paddingTop: 10,
+            alignItems: 'center',
+            flex: 1,backgroundColor: 'white', borderColor: 'white'}}
+          // controllerPosition="TOP"
+          controllerMainPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
+          controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'white', borderColor: 'white'}}
+          controllerPrimaryActionButtonStyle={{backgroundColor: 'red', borderColor: 'red'}}
+          controllerResetButtonElement={this.renderResetButtonElement()}
+          controllerSecondPrimaryActionButtonStyle={{ paddingTop: 10,
+            alignItems: 'center',
+            flex: 1,backgroundColor: 'white', borderColor: 'white'}}
+          // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}          
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
-          // controllerSecondPrimaryActionButtonStyle={{backgroundColor: 'yellow'}}
+          controllerSecondPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonText="skipText"
-          // controllerPosition="TOP"
           // controlsWrapperStyle={{
-          //   flexDirection: 'row',
-          //   justifyContent: 'space-between',
+          //   // flexDirection: 'column',
+          //   // justifyContent: 'space-between',
+          //   alignItems: 'center',
           //   padding: 10,
           // }}
+          controllerSkipButtonElement={this.renderSkipButtonElement()}
 
+          controlleSecondPrimaryActionButtonElement={this.renderSecondPrimaryActionButtonElement()}
           // counterSetSeperatorText="-"
           // counterSetText="Setss"
           // counterSetTextWrapperStyle={{color: 'blue'}}
-          // counterTexts={['MAX_TIME', 'TIMER', 'SET']}
-          // counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
+          counterTexts={['SET', 'TIMER', 'MAX_TIME']}
+          // onStartTimerPressed={this.handleStartTimePressed}
+          // TODO: counterTimerDefaultStatusText, counterTimerPrimaryStatusText,counterTimerSecondaryStatusText
+          counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
+          counterTimerDefaultStatusText="START"
+          counterTimerPrimaryStatusText="PLAYING"
+          counterTimerSecondaryStatusText="RESTING"
+
+          counterTimerStatusTextVisible
+
+          // ===========Gradients==========
+          gradientColorsDefault={['white', 'white']}
+          gradientColorsRepsActive={['#FFDC00', 'white']}
+          gradientColorsRestActive={['#FFC0CB', 'white']}
+
+          // ========== Events =======================
+          // onActivityCompleted={this.handleActivityCompleted}
+          // onPrimaryModeStartPressed={this.handlePrimaryModeStartPressed}
+          // onSecondaryModePausePressed={this.handleSecondaryModePausePressed}
+          // onPrimaryModePausePressed={this.handlePrimaryModePausePressed}
+          // onSecondaryModeEnd={this.handleSecondaryModeEnd}
+          // onSecondaryModeStartPressed={this.handleSecondaryModeStartPressed}
+          // onMuteToggle={this.handleMuteToggle}
+          // onResetButtonPressed={this.handleResetButtonPressed}
+          // onSkipPressed={this.handleSkipPressed}
+          // onUnMuteToggle={this.handleUnMuteTogglePressed}
+
+          // leftUpperElement={this.renderUpperElement()}
+          // middleUpperElement={this.renderMiddleElement()}
+          // showMuteElement={false}
+          // showCounterTimer={false} // TODO: remove this
 
           // =========== Progress================
           // progressAnimation={false}
           // progressBorderWidth={5}
-          // progressDirection="clockwise"
-          progressSize={188}
+          progressDirection="clockwise"
+          // progressPrimaryStatusColor="red"
+          // progressSecondaryStatusColor="blue"
+          progressSize={200}
           // progressStyle={{backgroundColor: 'red'}}
-          // progressThickness={23}
+          progressThickness={10}
           // progressVisible={false}
           // progressWrapper={{paddingTop: 0, backgroundColor: 'blue'}}
 
@@ -167,32 +234,35 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    // height: 320,
-    marginTop: 32,
-    // paddingHorizontal: 16,
-    // paddingLeft: 12,
-    // alignItems: 'flex-start',
+    paddingTop: 50,
+    // flex: 1,
     // flexDirection: 'row',
-    // justifyContent: 'flex-start',
-    width: screen.width - 13,
-    // paddingVertical: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    // flexDirection: 'column',
-    // justifyContent: 'flex-start',
-    borderWidth: 2,
-    borderColor: colors.activity.borderDefault,
-    // borderColor: colors.activity.borderGreen,
-    backgroundColor: colors.activity.white,
-    // marginRight: 20,
-    shadowColor: colors.activity.black,
-    shadowRadius: 4,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    borderRadius: 8,
+    // height: 320,
+    // marginTop: 32,
+    // // paddingHorizontal: 16,
+    // // paddingLeft: 12,
+    // alignItems: 'flex-start',
+    // // flexDirection: 'row',
+    // // justifyContent: 'flex-start',
+    // width: screen.width - 13,
+    // // paddingVertical: 10,
+    // marginLeft: 'auto',
+    // marginRight: 'auto',
+    // // flexDirection: 'column',
+    // // justifyContent: 'flex-start',
+    // borderWidth: 2,
+    // borderColor: colors.activity.borderDefault,
+    // // borderColor: colors.activity.borderGreen,
+    // backgroundColor: colors.activity.white,
+    // // marginRight: 20,
+    // shadowColor: colors.activity.black,
+    // shadowRadius: 4,
+    // shadowOffset: {
+    //   height: 0,
+    //   width: 0,
+    // },
+    // shadowOpacity: 0.25,
+    // borderRadius: 8,
   },
   settingsIconWrapper: {
     // position: 'absolute',

@@ -23,3 +23,5 @@ export const SET = 'SET';
 export const HOURS = 'HOURS';
 export const MINUITES = 'MINUITES';
 export const SECONDS = 'SECONDS';
+export const PRIMARY = 'PRIMARY'
+;

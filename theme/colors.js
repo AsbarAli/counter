@@ -74,6 +74,8 @@ export default {
     transparent: 'rgba(255, 255, 255, 0)',
     transparentWhite: '#ffffff95',
     appGray: '#E0E0E0',
+    greenCrock: '#116466',
+    disbaledGreenCrock: '#649A9B',
   },
 
   tabBar: {
@@ -133,10 +135,11 @@ export default {
 
   activity: {
     borderDefault: '#E0E0E0',
-    borderOrange: '#FF9800',
+    borderOrange: '#E85A4F',
     borderGreen: '#AEEA00',
     backgroundOrange: '#FFF9EC',
     backgroundGreen: '#FDFFF4',
+    borderBlue: '#31708E',
     white,
     black,
 
