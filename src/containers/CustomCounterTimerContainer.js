@@ -46,6 +46,7 @@ import PrimaryButtonComponent from '../shared/components/primaryButton.component
 // import {timerDataActions} from '@crock:app/storage/realm';
 
 import colors from '@RNCounterTimer:theme/colors';
+import {ResetComponent} from '../shared/components';
 
 type CustomCounterTimerProps = {
   timer: TimerModel,
@@ -536,36 +537,20 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {status, currentRunningSet} = this.state;
     const {controllerResetText, controllerResetButtonStyle, controllerDisabledResetButtonTextStyle,
       controllerDisabledResetButtonStyle, controllerResetButtonTextStyle, controllerResetButtonElement, controllerDisabledResetButtonElement} = this.props;
-    const textStyles = [controllerResetButtonTextStyle];
-    const buttonStyle = [controllerResetButtonStyle];
-    const disabled = currentRunningSet === 0 && status === ACTIVITY_STATUS.NOT_STARTED;
-    let resetButtonElement = controllerResetButtonElement;
-
-    if (disabled) {
-      textStyles.push(styles.textDisabled);
-      if (controllerDisabledResetButtonTextStyle) {
-        textStyles.push(controllerDisabledResetButtonTextStyle);
-      }
-      if (controllerDisabledResetButtonStyle) {
-        buttonStyle.push(controllerDisabledResetButtonStyle);
-      }
-
-      if (controllerDisabledResetButtonElement) {
-        resetButtonElement = controllerDisabledResetButtonElement;
-      }
-    }
-
-    const butttonElement = controllerResetButtonElement ? resetButtonElement : (<Text style={textStyles}>{controllerResetText}</Text>);
 
     return (
-      <TouchableOpacity
-        disabled={disabled}
-        // hitSlop={{top: 25, bottom: 25, left: 25, right: 25}}
-        onPress={this.handleResetPressed}
-        style={buttonStyle}
-      >
-        {butttonElement}
-      </TouchableOpacity>
+      <ResetComponent
+        controllerDisabledResetButtonElement={controllerDisabledResetButtonElement}
+        controllerDisabledResetButtonStyle={controllerDisabledResetButtonStyle}
+        controllerDisabledResetButtonTextStyle={controllerDisabledResetButtonTextStyle}
+        controllerResetButtonElement={controllerResetButtonElement}
+        controllerResetButtonStyle={controllerResetButtonStyle}
+        controllerResetButtonTextStyle={controllerResetButtonTextStyle}
+        controllerResetText={controllerResetText}
+        currentRunningSet={currentRunningSet}
+        onResetPressed={this.handleResetPressed}
+        status={status}
+      />
     );
   }
 
@@ -851,6 +836,7 @@ CustomCounterTimerContainer.propTypes = {
   controllerSkipButtonText: PropTypes.string,
   controllerSkipButtonTextStyle: PropTypes.any,
   controlsWrapperStyle: PropTypes.any,
+
   counterSetSeperatorText: PropTypes.string,
   counterSetText: PropTypes.string,
   counterSetTextWrapperStyle: PropTypes.any,
@@ -860,10 +846,13 @@ CustomCounterTimerContainer.propTypes = {
   counterTimerPrimaryStatusText: PropTypes.string,
   counterTimerSecondaryStatusText: PropTypes.string,
   counterTimerStatusTextVisible: PropTypes.bool,
+
   gradientColorsDefault: PropTypes.array,
   gradientColorsRepsActive: PropTypes.array,
   gradientColorsRestActive: PropTypes.array,
+
   leftUpperElement: PropTypes.element,
+
   onActivityCompleted: PropTypes.func,
   onMuteToggle: PropTypes.func,
   onPrimaryModePausePressed: PropTypes.func,
@@ -875,6 +864,7 @@ CustomCounterTimerContainer.propTypes = {
   onSkipPressed: PropTypes.func,
   onStartTimerPressed: PropTypes.func,
   onUnMuteToggle: PropTypes.func,
+
   progressAnimation: PropTypes.bool,
   progressBorderWidth: PropTypes.number,
   progressDirection: PropTypes.string,
@@ -885,7 +875,9 @@ CustomCounterTimerContainer.propTypes = {
   progressThickness: PropTypes.number,
   progressVisible: PropTypes.bool,
   progressWrapper: PropTypes.any,
+
   showMuteElement: PropTypes.bool,
+
   timer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

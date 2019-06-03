@@ -144,28 +144,28 @@ export default class App extends Component<Props> {
         <CustomCounterTimerContainer
 
           // =========Controllers==========
-          controllerButtons={[ 'RESET','PRIMARY_ACTION', 'SKIP']}
+          controllerButtons={['RESET', 'PRIMARY_ACTION', 'SKIP']}
           // controllerDisabledResetButtonStyle={{backgroundColor: 'yellow'}}
           // controllerDisabledResetButtonTextStyle={{color: 'red'}}
           // controllerDisabledSkipButtonStyle={{backgroundColor: 'green'}}
           // controllerDisabledSkipButtonTextStyle={{color: 'green'}}
-          controllerDisabledResetButtonElement={this.renderDisabledResetButtonElement()}
-          controllerMainPrimaryActionButtonElement={this.renderMainPrimaryActionButtonElement()}
-          controllerMainPrimaryActionButtonStyle={{ paddingTop: 10,
-            alignItems: 'center',
-            flex: 1,backgroundColor: 'white', borderColor: 'white'}}
+          // controllerDisabledResetButtonElement={this.renderDisabledResetButtonElement()}
+          // controllerMainPrimaryActionButtonElement={this.renderMainPrimaryActionButtonElement()}
+          // controllerMainPrimaryActionButtonStyle={{paddingTop: 10,
+          //   alignItems: 'center',
+          //   flex: 1, backgroundColor: 'white', borderColor: 'white'}}
           // controllerPosition="TOP"
-          controllerMainPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
-          controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'white', borderColor: 'white'}}
-          controllerPrimaryActionButtonStyle={{backgroundColor: 'red', borderColor: 'red'}}
-          controllerResetButtonElement={this.renderResetButtonElement()}
-          controllerSecondPrimaryActionButtonStyle={{ paddingTop: 10,
-            alignItems: 'center',
-            flex: 1,backgroundColor: 'white', borderColor: 'white'}}
-          // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}          
+          // controllerMainPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
+          // controllerMainPrimaryActionDisabledButtonStyle={{backgroundColor: 'white', borderColor: 'white'}}
+          // controllerPrimaryActionButtonStyle={{backgroundColor: 'red', borderColor: 'red'}}
+          // controllerResetButtonElement={this.renderResetButtonElement()}
+          // controllerSecondPrimaryActionButtonStyle={{paddingTop: 10,
+          //   alignItems: 'center',
+          //   flex: 1, backgroundColor: 'white', borderColor: 'white'}}
+          // controllerResetButtonStyle={{paddingTop: 10, backgroundColor: 'blue', flex: 1, alignItems: 'center'}}
           // controllerResetButtonTextStyle={{color: 'red'}}
           // controllerResetText="RESET"
-          controllerSecondPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
+          // controllerSecondPrimaryActionButtonTextStyle={{color: colors.background.greenCrock}}
           // controllerSkipButtonStyle={{backgroundColor: 'yellow'}}
           // controllerSkipButtonText="skipText"
           // controlsWrapperStyle={{
@@ -174,26 +174,26 @@ export default class App extends Component<Props> {
           //   alignItems: 'center',
           //   padding: 10,
           // }}
-          controllerSkipButtonElement={this.renderSkipButtonElement()}
+          // controllerSkipButtonElement={this.renderSkipButtonElement()}
 
-          controlleSecondPrimaryActionButtonElement={this.renderSecondPrimaryActionButtonElement()}
+          // controlleSecondPrimaryActionButtonElement={this.renderSecondPrimaryActionButtonElement()}
           // counterSetSeperatorText="-"
           // counterSetText="Setss"
           // counterSetTextWrapperStyle={{color: 'blue'}}
-          counterTexts={['SET', 'TIMER', 'MAX_TIME']}
+          // counterTexts={['SET', 'TIMER', 'MAX_TIME']}
           // onStartTimerPressed={this.handleStartTimePressed}
           // TODO: counterTimerDefaultStatusText, counterTimerPrimaryStatusText,counterTimerSecondaryStatusText
-          counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
-          counterTimerDefaultStatusText="START"
-          counterTimerPrimaryStatusText="PLAYING"
-          counterTimerSecondaryStatusText="RESTING"
+          // counterTimer={['HOURS', 'MINUITES', 'SECONDS']}
+          // counterTimerDefaultStatusText="START"
+          // counterTimerPrimaryStatusText="PLAYING"
+          // counterTimerSecondaryStatusText="RESTING"
 
-          counterTimerStatusTextVisible
+          // counterTimerStatusTextVisible
 
           // ===========Gradients==========
-          gradientColorsDefault={['white', 'white']}
-          gradientColorsRepsActive={['#FFDC00', 'white']}
-          gradientColorsRestActive={['#FFC0CB', 'white']}
+          // gradientColorsDefault={['white', 'white']}
+          // gradientColorsRepsActive={['#FFDC00', 'white']}
+          // gradientColorsRestActive={['#FFC0CB', 'white']}
 
           // ========== Events =======================
           // onActivityCompleted={this.handleActivityCompleted}
@@ -215,12 +215,12 @@ export default class App extends Component<Props> {
           // =========== Progress================
           // progressAnimation={false}
           // progressBorderWidth={5}
-          progressDirection="clockwise"
+          // progressDirection="clockwise"
           // progressPrimaryStatusColor="red"
           // progressSecondaryStatusColor="blue"
-          progressSize={200}
+          // progressSize={200}
           // progressStyle={{backgroundColor: 'red'}}
-          progressThickness={10}
+          // progressThickness={10}
           // progressVisible={false}
           // progressWrapper={{paddingTop: 0, backgroundColor: 'blue'}}
 
