@@ -2,37 +2,27 @@
 import React from 'react';
 import {
   View,
-  // Image,
   Text,
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
-// import PubSub from 'pubsub-js';
 
-// import ActivityTimerComponent from '@RNCounterTimer:shared/components/ActivityTimerComponent';
 import ActivityTimerComponent from '../shared/components/ActivityTimerComponent';
-// import type {TimerModel} from '@crock:storage/realm/models/Timer';
 
-// import {PUB_SUB_TOPICS, ACTIVE} from '@crock:shared/constants';
 import {
   SKIP,
-  START,
   REST,
-  PAUSE,
   RESET,
-  COMPLETED,
   PRIMARY_ACTION,
   TOP,
   BOTTOM,
   MAX_TIME,
   TIMER,
   SET,
-  HOURS,
   MINUITES,
   SECONDS,
-  PRIMARY,
 } from '@RNCounterTimer:shared/strings';
 import styles, {
   containerStyleProps,
@@ -41,9 +31,6 @@ import styles, {
   progressColorRest,
   progressColorTimer,
 } from './CustomCounterTimer.styles';
-import PrimaryButtonComponent from '../shared/components/primaryButton.component';
-// const soundPlayer = require('react-native-sound');
-// import {timerDataActions} from '@crock:app/storage/realm';
 
 import colors from '@RNCounterTimer:theme/colors';
 import {ResetComponent, PrimaryActionComponent} from '../shared/components';
@@ -53,14 +40,11 @@ type CustomCounterTimerProps = {
 };
 type CustomCounterTimerState = {
   currentRunningSet: number,
-  // status: ACTIVITY_STATUS.NOT_STARTED | ACTIVITY_STATUS.IN_PROGRESS | ACTIVITY_STATUS.RESTING | ACTIVITY_STATUS.COMPLETED,
+  status: ACTIVITY_STATUS.NOT_STARTED | ACTIVITY_STATUS.IN_PROGRESS | ACTIVITY_STATUS.RESTING | ACTIVITY_STATUS.COMPLETED,
   timerRunning: bool,
   restTimerRunning: bool,
 };
 
-// const mutedIcon = require('@crock:assets/icons/cf_volume_off_black_24.png');
-// const muteIcon = require('@crock:assets/icons/cf_volume_on_black_24.png');
-// const settingsIcon = require('@crock:assets/icons/cf_settings_black_24.png');
 const ACTIVITY_STATUS = {
   NOT_STARTED: 10001,
   IN_PROGRESS: 10002,
@@ -100,7 +84,6 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
         sets: timer.sets,
       };
       this.setState({
-        // maxTime: timerData,
         name: timerData.name,
       });
     }
@@ -470,7 +453,7 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
   renderPrimaryActionButton = (): ReactElement<any> => {
     const {status, restTimerRunning, timerRunning} = this.state;
     const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerMainPrimaryActionButtonElement,
-      controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle, controlleSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
+      controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
 
     return (
       <View style={{flex: 1}}>
@@ -479,9 +462,9 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
           controllerMainPrimaryActionButtonStyle={controllerMainPrimaryActionButtonStyle}
           controllerMainPrimaryActionButtonTextStyle={controllerMainPrimaryActionButtonTextStyle}
           controllerMainPrimaryActionDisabledButtonStyle={controllerMainPrimaryActionDisabledButtonStyle}
+          controllerSecondPrimaryActionButtonElement={controllerSecondPrimaryActionButtonElement}
           controllerSecondPrimaryActionButtonStyle={controllerSecondPrimaryActionButtonStyle}
           controllerSecondPrimaryActionButtonTextStyle={controllerSecondPrimaryActionButtonTextStyle}
-          controlleSecondPrimaryActionButtonElement={controlleSecondPrimaryActionButtonElement}
           onActivityCompleted={this.handleActivityCompleted}
           onPrimaryModePausePressed={this.handlePrimaryModePausePressed}
           onPrimaryModeStartPressed={this.handlePrimaryModeStartPressed}
@@ -783,18 +766,25 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
 
 CustomCounterTimerContainer.propTypes = {
   controllerButtons: PropTypes.any,
+  controllerDisabledResetButtonElement: PropTypes.any,
   controllerDisabledResetButtonStyle: PropTypes.any,
   controllerDisabledResetButtonTextStyle: PropTypes.any,
+  controllerDisabledSkipButtonElement: PropTypes.any,
   controllerDisabledSkipButtonStyle: PropTypes.any,
   controllerDisabledSkipButtonTextStyle: PropTypes.any,
+  controllerMainPrimaryActionButtonElement: PropTypes.any,
   controllerMainPrimaryActionButtonStyle: PropTypes.any,
   controllerMainPrimaryActionButtonTextStyle: PropTypes.any,
   controllerMainPrimaryActionDisabledButtonStyle: PropTypes.any,
   controllerPosition: PropTypes.string,
+  controllerResetButtonElement: PropTypes.any,
   controllerResetButtonStyle: PropTypes.any,
   controllerResetButtonTextStyle: PropTypes.any,
   controllerResetText: PropTypes.string,
+  controllerSecondPrimaryActionButtonElement: PropTypes.any,
   controllerSecondPrimaryActionButtonStyle: PropTypes.any,
+  controllerSecondPrimaryActionButtonTextStyle: PropTypes.any,
+  controllerSkipButtonElement: PropTypes.any,
   controllerSkipButtonStyle: PropTypes.any,
   controllerSkipButtonText: PropTypes.string,
   controllerSkipButtonTextStyle: PropTypes.any,
@@ -923,6 +913,9 @@ CustomCounterTimerContainer.defaultProps = {
   counterTimerDefaultStatusText: 'Default',
   counterTimerPrimaryStatusText: 'primary',
   counterTimerSecondaryStatusText: 'secondary',
+  controllerMainPrimaryActionButtonElement: null,
+  controllerSecondPrimaryActionButtonTextStyle: null,
+  controllerSecondPrimaryActionButtonElement: null,
 
   progressBorderWidth: 0,
   progressSize: 140,
@@ -947,6 +940,10 @@ CustomCounterTimerContainer.defaultProps = {
   counterTimerStatusTextVisible: null,
 
   controllerMainPrimaryActionButtonTextStyle: null,
+  controllerResetButtonElement: null,
+  controllerDisabledResetButtonElement: null,
+  controllerSkipButtonElement: null,
+  controllerDisabledSkipButtonElement: null,
 };
 
 export default CustomCounterTimerContainer;

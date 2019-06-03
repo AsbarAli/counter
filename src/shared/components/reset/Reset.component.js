@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
 
@@ -15,6 +15,11 @@ const ACTIVITY_STATUS = {
   REST: 10003,
   COMPLETED: 10004,
 };
+
+import {
+  RESET,
+} from '@RNCounterTimer:shared/strings';
+import colors from '@RNCounterTimer:theme/colors';
 
 class ResetComponent extends React.PureComponent<ResetProps, ResetState> {
   static defaultProps: any
@@ -70,9 +75,35 @@ class ResetComponent extends React.PureComponent<ResetProps, ResetState> {
   }
 }
 
-ResetComponent.propTypes = {};
+ResetComponent.propTypes = {
+  controllerDisabledResetButtonElement: PropTypes.any,
+  controllerDisabledResetButtonStyle: PropTypes.any,
+  controllerDisabledResetButtonTextStyle: PropTypes.any,
+  controllerResetButtonElement: PropTypes.any,
+  controllerResetButtonStyle: PropTypes.any,
+  controllerResetButtonTextStyle: PropTypes.any,
+  controllerResetText: PropTypes.string,
+  currentRunningSet: PropTypes.number.isRequired,
+  onResetPressed: PropTypes.func.isRequired,
+  status: PropTypes.number.isRequired,
+};
 
-ResetComponent.defaultProps = {};
+ResetComponent.defaultProps = {
+  controllerResetButtonStyle: {
+    paddingTop: 10,
+    alignItems: 'center',
+    flex: 1,
+  },
+  controllerResetText: RESET,
+  controllerDisabledResetButtonTextStyle: null,
+  controllerDisabledResetButtonStyle: null,
+  controllerResetButtonTextStyle: {
+    color: colors.background.greenCrock,
+    fontSize: 16,
+  },
+  controllerResetButtonElement: null,
+  controllerDisabledResetButtonElement: null,
+};
 
 export default ResetComponent;
 

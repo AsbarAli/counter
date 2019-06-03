@@ -1,10 +1,8 @@
 // @flow
 import React from 'react';
-import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import type {Element as ReactElement} from 'react';
 
-import styles from './PrimaryAction.styles';
 import PrimaryButtonComponent from '../primaryButton.component';
 
 import {
@@ -55,8 +53,9 @@ class PrimaryActionComponent extends React.PureComponent<PrimaryActionProps, Pri
   }
 
   renderContent = (): ReactElement<any> => {
-    const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerMainPrimaryActionButtonElement, status, restTimerRunning, timerRunning,
-      controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle, controlleSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
+    const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerMainPrimaryActionButtonElement,
+      status, restTimerRunning, timerRunning, controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle,
+      controllerSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
 
     let buttonText = null;
     let buttonType = null;
@@ -82,7 +81,7 @@ class PrimaryActionComponent extends React.PureComponent<PrimaryActionProps, Pri
       onButtonPress = timerRunning ? this.handlePrimaryModePausePressed : this.handlePrimaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
-      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
+      renderActionElement = timerRunning ? controllerSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
       break;
 
     case ACTIVITY_STATUS.REST:
@@ -91,7 +90,7 @@ class PrimaryActionComponent extends React.PureComponent<PrimaryActionProps, Pri
       onButtonPress = restTimerRunning ? this.handleSecondaryModePausePressed : this.handleSecondaryModeStartPressed;
       userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
       userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
-      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
+      renderActionElement = timerRunning ? controllerSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
       break;
 
     case ACTIVITY_STATUS.COMPLETED:
@@ -125,15 +124,32 @@ class PrimaryActionComponent extends React.PureComponent<PrimaryActionProps, Pri
 }
 
 PrimaryActionComponent.propTypes = {
+  controllerMainPrimaryActionButtonElement: PropTypes.any,
   controllerMainPrimaryActionButtonStyle: PropTypes.any,
+  controllerMainPrimaryActionButtonTextStyle: PropTypes.any,
   controllerMainPrimaryActionDisabledButtonStyle: PropTypes.any,
+  controllerSecondPrimaryActionButtonElement: PropTypes.any,
   controllerSecondPrimaryActionButtonStyle: PropTypes.any,
+  controllerSecondPrimaryActionButtonTextStyle: PropTypes.any,
+  onActivityCompleted: PropTypes.func.isRequired,
+  onPrimaryModePausePressed: PropTypes.func.isRequired,
+  onPrimaryModeStartPressed: PropTypes.func.isRequired,
+  onSecondaryModePausePressed: PropTypes.func.isRequired,
+  onSecondaryModeStartPressed: PropTypes.func.isRequired,
+  onStartTimerPressed: PropTypes.func.isRequired,
+  restTimerRunning: PropTypes.bool.isRequired,
+  status: PropTypes.number.isRequired,
+  timerRunning: PropTypes.bool.isRequired,
 };
 
 PrimaryActionComponent.defaultProps = {
   controllerMainPrimaryActionButtonStyle: null,
   controllerMainPrimaryActionDisabledButtonStyle: null,
   controllerSecondPrimaryActionButtonStyle: null,
+  controllerMainPrimaryActionButtonTextStyle: null,
+  controllerMainPrimaryActionButtonElement: null,
+  controllerSecondPrimaryActionButtonTextStyle: null,
+  controllerSecondPrimaryActionButtonElement: null,
 };
 
 export default PrimaryActionComponent;
