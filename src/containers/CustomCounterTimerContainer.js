@@ -46,7 +46,7 @@ import PrimaryButtonComponent from '../shared/components/primaryButton.component
 // import {timerDataActions} from '@crock:app/storage/realm';
 
 import colors from '@RNCounterTimer:theme/colors';
-import {ResetComponent} from '../shared/components';
+import {ResetComponent, PrimaryActionComponent} from '../shared/components';
 
 type CustomCounterTimerProps = {
   timer: TimerModel,
@@ -472,62 +472,25 @@ class CustomCounterTimerContainer extends React.PureComponent<CustomCounterTimer
     const {controllerMainPrimaryActionButtonStyle, controllerMainPrimaryActionDisabledButtonStyle, controllerMainPrimaryActionButtonElement,
       controllerMainPrimaryActionButtonTextStyle, controllerSecondPrimaryActionButtonTextStyle, controlleSecondPrimaryActionButtonElement, controllerSecondPrimaryActionButtonStyle} = this.props;
 
-    let buttonText = null;
-    let buttonType = null;
-    let onButtonPress = null;
-    let isCompleted = false;
-    let userDefinedButtonStyle = null;
-    let userDefinedTextStyle = null;
-    let renderActionElement = null;
-
-    switch (status) {
-    case ACTIVITY_STATUS.NOT_STARTED:
-      buttonText = START;
-      buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = this.handleStartTimerPressed;
-      userDefinedButtonStyle = controllerMainPrimaryActionButtonStyle;
-      userDefinedTextStyle = controllerMainPrimaryActionButtonTextStyle;
-      renderActionElement = controllerMainPrimaryActionButtonElement;
-      break;
-
-    case ACTIVITY_STATUS.IN_PROGRESS:
-      buttonText = timerRunning ? PAUSE : START;
-      buttonType = timerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = timerRunning ? this.handlePrimaryModePausePressed : this.handlePrimaryModeStartPressed;
-      userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
-      userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
-      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
-      break;
-
-    case ACTIVITY_STATUS.REST:
-      buttonText = restTimerRunning ? PAUSE : START;
-      buttonType = restTimerRunning ? PrimaryButtonComponent.TYPE.SECONDARY : PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = restTimerRunning ? this.handleSecondaryModePausePressed : this.handleSecondaryModeStartPressed;
-      userDefinedButtonStyle = timerRunning ? controllerSecondPrimaryActionButtonStyle : controllerMainPrimaryActionButtonStyle;
-      userDefinedTextStyle = timerRunning ? controllerSecondPrimaryActionButtonTextStyle : controllerMainPrimaryActionButtonTextStyle;
-      renderActionElement = timerRunning ? controlleSecondPrimaryActionButtonElement : controllerMainPrimaryActionButtonElement;
-      break;
-
-    case ACTIVITY_STATUS.COMPLETED:
-      buttonText = COMPLETED;
-      buttonType = PrimaryButtonComponent.TYPE.PRIMARY;
-      onButtonPress = this.handleActivityCompleted;
-      isCompleted = true;
-      userDefinedButtonStyle = controllerMainPrimaryActionDisabledButtonStyle;
-      userDefinedTextStyle = controllerMainPrimaryActionButtonTextStyle;
-      break;
-    }
-
     return (
       <View style={{flex: 1}}>
-        <PrimaryButtonComponent
-          disabled={isCompleted}
-          onPress={onButtonPress}
-          renderActionElement={renderActionElement}
-          text={buttonText}
-          type={buttonType}
-          userDefinedButtonStyle={userDefinedButtonStyle}
-          userDefinedTextStyle={userDefinedTextStyle}
+        <PrimaryActionComponent
+          controllerMainPrimaryActionButtonElement={controllerMainPrimaryActionButtonElement}
+          controllerMainPrimaryActionButtonStyle={controllerMainPrimaryActionButtonStyle}
+          controllerMainPrimaryActionButtonTextStyle={controllerMainPrimaryActionButtonTextStyle}
+          controllerMainPrimaryActionDisabledButtonStyle={controllerMainPrimaryActionDisabledButtonStyle}
+          controllerSecondPrimaryActionButtonStyle={controllerSecondPrimaryActionButtonStyle}
+          controllerSecondPrimaryActionButtonTextStyle={controllerSecondPrimaryActionButtonTextStyle}
+          controlleSecondPrimaryActionButtonElement={controlleSecondPrimaryActionButtonElement}
+          onActivityCompleted={this.handleActivityCompleted}
+          onPrimaryModePausePressed={this.handlePrimaryModePausePressed}
+          onPrimaryModeStartPressed={this.handlePrimaryModeStartPressed}
+          onSecondaryModePausePressed={this.handleSecondaryModePausePressed}
+          onSecondaryModeStartPressed={this.handleSecondaryModeStartPressed}
+          onStartTimerPressed={this.handleStartTimerPressed}
+          restTimerRunning={restTimerRunning}
+          status={status}
+          timerRunning={timerRunning}
         />
       </View>
     );
